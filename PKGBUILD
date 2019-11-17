@@ -11,11 +11,11 @@ pkgname=('linux54' 'linux54-headers')
 _kernelname=-MANJARO
 _basekernel=5.4
 _basever=54
-_aufs=20191014
+_aufs=20191021
 _sub=0
 _rc=rc7
-_commit=31f4f5b495a62c9a8b15b1c3581acd5efeb9af8c
-_shortcommit=${_rc}.d1110.g${_commit:0:7}
+_commit=1d4c79ed324ad780cfc3ad38364ba1fd585dd2a8
+_shortcommit=${_rc}.d1117.g${_commit:0:7}
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -61,13 +61,13 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('276e68128d4d3a0af1adaf23b0c53dc591284d0f2f40b60c9158b0706c875b50'
-            '120cd07da46f0b07a29a53cd7f9cae88ce3231f127b6254233461fa10366b77b'
+sha256sums=('35c74c1290ba194bfab2e8045a596ff42897755d8c812a3b5e842dff30d19772'
+            '232d81eb30c65fc5160dd41e4bdac643695548f9eb78a7cc1c5a361609236da4'
             'f5903377d29fc538af98077b81982efdc091a8c628cb85566e88e1b5018f12bf'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
-            '0470163b186b8a9e71bd96a0a29091c78a7551b6574363023ed462110d00831d'
+            'bf9480b92c5feaf8583785c2f4332df3bfa4fa2eeac8ebd85da24c6a88dac58c'
             '7ff57fd146dc4c8f5fd37062e44cbf7e70164df5a684d3b4bb3e8a787c060503'
-            '92787f126e40069f7179e63f9949cc8848f595afbe89208bc9d6285ee76f590b'
+            '789a933080a85120dbeb12de2f243498b5e454128f2cf77dd16d47a27b235f79'
             '16e981ac6beedd3bc264e03c1e8d25681d8ad9e5ad469e3630b3e2e6ba76e8ec'
             'a44fb19196c2e63e2733a210358afb309f598d8155488424a8620ec7f309de08'
             '1060cceb84a7d178d4a0e1946d06055ddab0b5b110d385e9d087557143c6659f'
