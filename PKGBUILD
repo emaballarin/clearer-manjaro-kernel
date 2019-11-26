@@ -14,7 +14,7 @@ _basever=54
 _aufs=20191021
 _commit=219d54332a09e8d8741c1e1982f5eae56099de85
 pkgver=5.4.0
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -43,6 +43,12 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.
         '0002-apparmor-af_unix-mediation.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/7a291673471aa583694ee760aa33e5a3f5ae9a9e.patch'
         '0003-apparmor-fix-use-after-free-in-sk_peer_label.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/9ae046ed7b54b01078e33227fa266282c41f981d.patch'
         '0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/b6a5dfbaa728854457570bf72b693a89550cc1f8.patch'
+        '0001-v5-xps13-sparc64-implement-ioremap_uc.patch'
+        '0002-v5-xps13-lib-devres-add-a-helper-function-for-ioremap_uc.patch'
+        '0003-v5-xps13-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch'
+        '0004-v5-xps13-docs-driver-model-add-devm_ioremap_uc.patch'
+        '0001-nonupstream-navi10-vfio-reset.patch'
+        '0001-drm-amdgpu-Add-DC-feature-mask-to-disable-fractional-pwm.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -74,6 +80,12 @@ sha256sums=('9c0d0de6fc1f2590d6d8be58e05d28115d6944ac75f01bb63283d6de1e4e6be6'
             'ac2cff4d3b04dde98bafc67e1a898fa8628f3bacba08531ce473edc43ddcccff'
             '749ac28edc2cd2ac3a4406becc13327a1ece3445196ca41cbfca460454fa01bf'
             'e55e88fe22256f079f5ac7b015c2d510912cae6f48a27a0f768b8f5f6acfc11b'
+            'f196cf64384cc4c35f9b82615bd62aca538653fa1e8d2ee82cd021697daa27b2'
+            '62539558ec5b5f87f1740f5e4e84a3740528afb8bec6335d2de721a3c8b93531'
+            '267a28e932095238604e4e23062d142fa1e2836b629190e673614159968dbec7'
+            'e82c72cd391261e79ae25330848877c451b4fa60cabed9c16898983eab269c89'
+            '7a2758f86dd1339f0f1801de2dbea059b55bf3648e240878b11e6d6890d3089c'
+            '1fd4518cb0518d68f8db879f16ce16455fdc2200ed232f9e27fb5f1f3b5e4906'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -109,6 +121,23 @@ prepare() {
   patch -Np1 -i "${srcdir}/0002-apparmor-af_unix-mediation.patch"
   patch -Np1 -i "${srcdir}/0003-apparmor-fix-use-after-free-in-sk_peer_label.patch"
   patch -Np1 -i "${srcdir}/0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch"
+
+  # fix dell xps 13 2-in-1 issue
+  # https://lkml.org/lkml/2019/10/16/1230
+  patch -Np1 -i "${srcdir}/0001-v5-xps13-sparc64-implement-ioremap_uc.patch"
+  patch -Np1 -i "${srcdir}/0002-v5-xps13-lib-devres-add-a-helper-function-for-ioremap_uc.patch"
+  patch -Np1 -i "${srcdir}/0003-v5-xps13-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch"
+  patch -Np1 -i "${srcdir}/0004-v5-xps13-docs-driver-model-add-devm_ioremap_uc.patch"
+
+  # https://bugzilla.kernel.org/show_bug.cgi?id=204957
+echo "something"
+  patch -Np1 -i "${srcdir}/0001-drm-amdgpu-Add-DC-feature-mask-to-disable-fractional-pwm.patch"
+
+  # TODO: remove when AMD properly fixes it!
+  # INFO: this is a hack and won't be upstreamed
+  # https://forum.level1techs.com/t/145666/86
+  # https://forum.manjaro.org/t/107820/11
+  patch -Np1 -i "${srcdir}/0001-nonupstream-navi10-vfio-reset.patch"
 
   # Add bootsplash - http://lkml.iu.edu/hypermail/linux/kernel/1710.3/01542.html
   patch -Np1 -i "${srcdir}/0001-bootsplash.patch"
