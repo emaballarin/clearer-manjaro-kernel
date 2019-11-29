@@ -12,19 +12,15 @@ _kernelname=-MANJARO
 _basekernel=5.4
 _basever=54
 _aufs=20191021
-_commit=219d54332a09e8d8741c1e1982f5eae56099de85
-pkgver=5.4.0
-pkgrel=2
+pkgver=5.4.1
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
-source=(#"https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.xz"
-        #"https://www.kernel.org/pub/linux/kernel/v5.x/patch-${pkgver}.xz"
-        #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
-        #"linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
-        "linux-${pkgver}.zip::https://codeload.github.com/torvalds/linux/zip/$_commit"
+source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.xz"
+        "https://www.kernel.org/pub/linux/kernel/v5.x/patch-${pkgver}.xz"
         # the main kernel config files
         'config.x86_64' 'config' 'config.aufs'
         # AUFS Patches
@@ -63,7 +59,8 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('9c0d0de6fc1f2590d6d8be58e05d28115d6944ac75f01bb63283d6de1e4e6be6'
+sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
+            '78f08a9d16bc88f1478c560bd9a3a71be6e2af1bbd5f6ff60771fa1e14b74705'
             '4c34e038fe4613700c5656ac37b8cf7780f4b18bc988dd2304a9979e4d15c83f'
             'f5903377d29fc538af98077b81982efdc091a8c628cb85566e88e1b5018f12bf'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -100,12 +97,10 @@ sha256sums=('9c0d0de6fc1f2590d6d8be58e05d28115d6944ac75f01bb63283d6de1e4e6be6'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef')
 prepare() {
-  #mv "${srcdir}/linux-stable-rc-${_commit}" "${srcdir}/linux-${_basekernel}"
-  mv "${srcdir}/linux-${_commit}" "${srcdir}/linux-${_basekernel}"
   cd "${srcdir}/linux-${_basekernel}"
 
   # add upstream patch
-  #patch -p1 -i "${srcdir}/patch-${pkgver}"
+  patch -p1 -i "${srcdir}/patch-${pkgver}"
 
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
