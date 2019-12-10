@@ -1,0 +1,12 @@
+diff --git a/Documentation/driver-api/driver-model/devres.rst b/Documentation/driver-api/driver-model/devres.rst
+index a100bef54952..92628fdc2f11 100644
+--- a/Documentation/driver-api/driver-model/devres.rst
++++ b/Documentation/driver-api/driver-model/devres.rst
+@@ -314,6 +314,7 @@ IOMAP
+   devm_ioport_unmap()
+   devm_ioremap()
+   devm_ioremap_nocache()
++  devm_ioremap_uc()
+   devm_ioremap_wc()
+   devm_ioremap_resource() : checks resource, requests memory region, ioremaps
+   devm_iounmap()
