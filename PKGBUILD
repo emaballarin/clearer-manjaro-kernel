@@ -18,7 +18,7 @@ _commit=e42617b825f8073569da76dc4510bfa019b1c35a
 _shortcommit=${_rc}.d1208.g${_commit:0:7}
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -228,8 +228,8 @@ prepare() {
     sed -i "s|CONFIG_LOCALVERSION_AUTO=.*|CONFIG_LOCALVERSION_AUTO=n|" ./.config
   fi
 
-  # set patchlevel to 4
-  sed -ri "s|^(PATCHLEVEL =).*|\1 4|" Makefile
+  # set patchlevel to 5
+  sed -ri "s|^(PATCHLEVEL =).*|\1 5|" Makefile
 
   # set extraversion to pkgrel
   sed -ri "s|^(EXTRAVERSION =).*|\1 -${pkgrel}|" Makefile
