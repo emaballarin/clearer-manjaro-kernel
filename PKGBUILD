@@ -323,3 +323,5 @@ package_linux54-headers() {
     /usr/bin/strip ${_strip} "${_binary}"
   done < <(find "${_builddir}/scripts" -type f -perm -u+w -print0 2>/dev/null)
 }
+
+_server=cx51
