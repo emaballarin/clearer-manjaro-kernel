@@ -46,6 +46,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0002-apparmor-af_unix-mediation.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/7a291673471aa583694ee760aa33e5a3f5ae9a9e.diff'
         '0003-apparmor-fix-use-after-free-in-sk_peer_label.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/9ae046ed7b54b01078e33227fa266282c41f981d.diff'
         '0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/b6a5dfbaa728854457570bf72b693a89550cc1f8.diff'
+        '0001-v5-xps13-docs-driver-model-add-devm_ioremap_uc.patch'
         '0001-nonupstream-navi10-vfio-reset.patch'
         '0001-drm-amdgpu-Add-DC-feature-mask-to-disable-fractional-pwm.patch'
         # Bootsplash
@@ -87,6 +88,7 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '5cbbf3db9ea3205e9b89fe3049bea6dd626181db0cb0dc461e4cf5a400c68dd6'
             'c7dbec875d0c1d6782c037a1dcefff2e5bdb5fc9dffac1beea07dd8c1bdef1d7'
             '77746aea71ffb06c685e7769b49c78e29af9b2e28209cd245e95d9cbb0dba3c9'
+            'e82c72cd391261e79ae25330848877c451b4fa60cabed9c16898983eab269c89'
             '7a2758f86dd1339f0f1801de2dbea059b55bf3648e240878b11e6d6890d3089c'
             '1fd4518cb0518d68f8db879f16ce16455fdc2200ed232f9e27fb5f1f3b5e4906'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
@@ -130,6 +132,10 @@ prepare() {
   patch -Np1 -i "${srcdir}/0002-apparmor-af_unix-mediation.patch"
   patch -Np1 -i "${srcdir}/0003-apparmor-fix-use-after-free-in-sk_peer_label.patch"
   patch -Np1 -i "${srcdir}/0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch"
+
+  # fix dell xps 13 2-in-1 issue
+  # https://lkml.org/lkml/2019/10/16/1230
+  patch -Np1 -i "${srcdir}/0001-v5-xps13-docs-driver-model-add-devm_ioremap_uc.patch"
 
   # https://bugzilla.kernel.org/show_bug.cgi?id=204957
   patch -Np1 -i "${srcdir}/0001-drm-amdgpu-Add-DC-feature-mask-to-disable-fractional-pwm.patch"
