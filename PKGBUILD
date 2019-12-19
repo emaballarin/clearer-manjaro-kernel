@@ -33,14 +33,14 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         'tmpfs-idr.patch'
         'vfs-ino.patch'
         # ARCH Patches
-        0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
-        0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch
-        0003-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch
-        0004-PCI-pciehp-dont-disable-interrupt-twice-on-suspend.patch
-        0005-PCI-pciehp-prevent-deadlock-on-disconnect.patch
-        0006-ACPI-PM-s2idle-rework-ACPI-events-sync.patch
-        0007-ALSA-hda-fix-regression-by-strip-mask-fix.patch
-        0008-drm-i915-fbc-disable-fbc-by-default-on-all-glk.patch
+        '0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch'
+        '0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch'
+        '0003-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch'
+        '0004-PCI-pciehp-dont-disable-interrupt-twice-on-suspend.patch'
+        '0005-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
+        '0006-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
+        '0007-ALSA-hda-fix-regression-by-strip-mask-fix.patch'
+        '0008-drm-i915-fbc-disable-fbc-by-default-on-all-glk.patch'
         # MANJARO Patches
         '0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/6408dbde30855bb9a2af44c9053ba2329db57c7f.diff'
         '0002-apparmor-af_unix-mediation.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/7a291673471aa583694ee760aa33e5a3f5ae9a9e.diff'
@@ -118,15 +118,14 @@ prepare() {
 
   # fix dell xps 13 2-in-1 issue
   # https://lkml.org/lkml/2019/10/16/1230
-  patch -Np1 -i ../0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch
-  patch -Np1 -i ../0003-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch
+  patch -Np1 -i '../0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch'
+  patch -Np1 -i '../0003-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch'
 
   # other fixes by Arch
-  patch -Np1 -i ../0004-PCI-pciehp-dont-disable-interrupt-twice-on-suspend.patch
-  patch -Np1 -i ../0005-PCI-pciehp-prevent-deadlock-on-disconnect.patch
-  patch -Np1 -i ../0006-ACPI-PM-s2idle-rework-ACPI-events-sync.patch
-  patch -Np1 -i ../0007-ALSA-hda-fix-regression-by-strip-mask-fix.patch
-  patch -Np1 -i ../0008-drm-i915-fbc-disable-fbc-by-default-on-all-glk.patch
+  patch -Np1 -i '../0004-PCI-pciehp-dont-disable-interrupt-twice-on-suspend.patch'
+  patch -Np1 -i '../0005-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
+  patch -Np1 -i '../0006-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
+  patch -Np1 -i '../0007-ALSA-hda-fix-regression-by-strip-mask-fix.patch'
 
   # add patches for snapd
   # https://gitlab.com/apparmor/apparmor-kernel/tree/5.2-outoftree
@@ -325,7 +324,7 @@ package_linux54-headers() {
   # strip scripts directory
   local _binary _strip
   while read -rd '' _binary; do
-    case "$(file -bi "${_binary}")" in
+    case "$(file -bi ${_binary})" in
       *application/x-sharedlib*)  _strip="${STRIP_SHARED}"   ;; # Libraries (.so)
       *application/x-archive*)    _strip="${STRIP_STATIC}"   ;; # Libraries (.a)
       *application/x-executable*) _strip="${STRIP_BINARIES}" ;; # Binaries
