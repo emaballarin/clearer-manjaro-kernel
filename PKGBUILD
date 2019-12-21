@@ -12,7 +12,7 @@ _kernelname=-MANJARO
 _basekernel=5.4
 _basever=54
 _aufs=20191021
-pkgver=5.4.5
+pkgver=5.4.6
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
@@ -39,8 +39,6 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0004-PCI-pciehp-dont-disable-interrupt-twice-on-suspend.patch'
         '0005-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
         '0006-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
-        '0007-ALSA-hda-fix-regression-by-strip-mask-fix.patch'
-        '0008-drm-i915-fbc-disable-fbc-by-default-on-all-glk.patch'
         # MANJARO Patches
         '0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/6408dbde30855bb9a2af44c9053ba2329db57c7f.diff'
         '0002-apparmor-af_unix-mediation.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/7a291673471aa583694ee760aa33e5a3f5ae9a9e.diff'
@@ -63,7 +61,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
 sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
-            '7ac5c8967fb99aa379148c1edd7bc98689972fecf916e77954cd36328f85b260'
+            '80853920a753762e058e35b754d3e0d16ec2fb485dfb84cc40fbdba383a8da17'
             '02d7e00581c4592841ac121f451f39eaf901052ea44177d8c18eba5d994c3a80'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -81,8 +79,6 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '3e8ed640a8853a038e89b4cd9b17e6a9c3f8bfb19c5efa3ca65224c6aabb8e83'
             '2431629465ca508a203df31ee14f614c061f6efc128ec858cecb4a3a2ee5f1d0'
             '25d72c2c88088d78afa1658fc16c8d4ad98f4140ec69fa0ade49abfe27e8f722'
-            '4e8a9a6757d7ebea8352b8f7b26f007d6c370ea83f67b83f1f49fa54cc52b4c9'
-            '739eb4dfefbc01d57419be4dcb6331b219c52185df36907fd82cfdcb036d927f'
             '98202b8ad70d02d86603294bae967874fa7b18704b5c7b867568b0fd33a08921'
             '5cbbf3db9ea3205e9b89fe3049bea6dd626181db0cb0dc461e4cf5a400c68dd6'
             'c7dbec875d0c1d6782c037a1dcefff2e5bdb5fc9dffac1beea07dd8c1bdef1d7'
@@ -125,7 +121,6 @@ prepare() {
   patch -Np1 -i '../0004-PCI-pciehp-dont-disable-interrupt-twice-on-suspend.patch'
   patch -Np1 -i '../0005-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
   patch -Np1 -i '../0006-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
-  patch -Np1 -i '../0007-ALSA-hda-fix-regression-by-strip-mask-fix.patch'
 
   # add patches for snapd
   # https://gitlab.com/apparmor/apparmor-kernel/tree/5.2-outoftree
