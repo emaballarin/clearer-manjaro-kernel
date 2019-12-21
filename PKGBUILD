@@ -13,7 +13,7 @@ _basekernel=5.4
 _basever=54
 _aufs=20191021
 pkgver=5.4.6
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -67,10 +67,10 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             'bf9480b92c5feaf8583785c2f4332df3bfa4fa2eeac8ebd85da24c6a88dac58c'
             '7ff57fd146dc4c8f5fd37062e44cbf7e70164df5a684d3b4bb3e8a787c060503'
-            '789a933080a85120dbeb12de2f243498b5e454128f2cf77dd16d47a27b235f79'
+            '9df40db35678487d13b27a5e4ad4d7aac4d78cd8c778fb9cd5d23549e0747002'
             '16e981ac6beedd3bc264e03c1e8d25681d8ad9e5ad469e3630b3e2e6ba76e8ec'
             'a44fb19196c2e63e2733a210358afb309f598d8155488424a8620ec7f309de08'
-            '1060cceb84a7d178d4a0e1946d06055ddab0b5b110d385e9d087557143c6659f'
+            'def89310169a70e4be5f9e67f85e03ff6113844c104357026670a6362900efcb'
             '55dc8df3a3d3e248eb93f5878f567428f77acb72f6243934bd6980cfede3b6ca'
             'e2d75e11a2c220e5d3a450bb226e7e19d62a871764da5f76034fbc135fe6c749'
             '7685d526bbdbfa795986591a70071c960ff572f56d3501774861728a9df8664c'
@@ -155,12 +155,12 @@ prepare() {
   git apply -p1 < "${srcdir}/0013-bootsplash.patch"
 
   # add aufs5 support
-#  patch -Np1 -i "${srcdir}/aufs5.x-rcN-${_aufs}.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-base.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-kbuild.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-loopback.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-mmap.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-standalone.patch"
+  patch -Np1 -i "${srcdir}/aufs5.x-rcN-${_aufs}.patch"
+  patch -Np1 -i "${srcdir}/aufs5-base.patch"
+  patch -Np1 -i "${srcdir}/aufs5-kbuild.patch"
+  patch -Np1 -i "${srcdir}/aufs5-loopback.patch"
+  patch -Np1 -i "${srcdir}/aufs5-mmap.patch"
+  patch -Np1 -i "${srcdir}/aufs5-standalone.patch"
 #  patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
 #  patch -Np1 -i "${srcdir}/vfs-ino.patch"
 
@@ -170,7 +170,7 @@ prepare() {
     cat "${srcdir}/config" > ./.config
   fi
 
-#  cat "${srcdir}/config.aufs" >> ./.config
+  cat "${srcdir}/config.aufs" >> ./.config
 
   if [ "${_kernelname}" != "" ]; then
     sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"${_kernelname}\"|g" ./.config
