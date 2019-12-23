@@ -13,12 +13,12 @@ _basekernel=5.5
 _basever=55
 _aufs=20191021
 _sub=0
-_rc=rc2
-_commit=d1eef1c619749b2a57e514a3fa67d9a516ffa919
-_shortcommit=${_rc}.d1215.g${_commit:0:7}
+_rc=rc3
+_commit=46cf053efec6a3a5f343fead837777efe8252a46
+_shortcommit=${_rc}.d1222.g${_commit:0:7}
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
-pkgrel=2
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -67,7 +67,7 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('0bd5bfd7324a93d4385d3afb7ee522d2b6fd1954a874848904c801b15fe40c54'
+sha256sums=('75c642de637dfac61d1e5cab19868df40c9e25396b5c34e688e7b76a348fccd5'
             '91eae1a0f9217f9d9e417b92cc682180de8b025ce371626d7bfdf4ee0a1716a6'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -80,10 +80,10 @@ sha256sums=('0bd5bfd7324a93d4385d3afb7ee522d2b6fd1954a874848904c801b15fe40c54'
             '55dc8df3a3d3e248eb93f5878f567428f77acb72f6243934bd6980cfede3b6ca'
             'e2d75e11a2c220e5d3a450bb226e7e19d62a871764da5f76034fbc135fe6c749'
             '7685d526bbdbfa795986591a70071c960ff572f56d3501774861728a9df8664c'
-            '3890385993aa449398e0f9feb9de7fbb3ce48b0022e4f76911912a5d117b657c'
-            'e37b55517920a2a08738d269dc10a06dc09dac89ef9971da4e8186c3897111c4'
-            '54c394622f77a21605c702e24867692677d1a24429e204b97dc0e9884cad88c4'
-            'dc77afe76314818d84c9293da6073fab67fa961e5e55d6f285fdd8cf447c19ad'
+            'af4876533afa8b2b76e7a040cf4028c5fe16f9eda0a6d62a3a66ecf9fdfec812'
+            'd2b06218c5365cf401caba8f295e2b5b408f09608c7a02edc5d158f48378f660'
+            '167b975175be23a03b184a28ce088e18fd31e2ac0f627a7b1d1d975b013f7ce3'
+            '2d3d30ef8d4a2868082fe5af75b6ce832b353c156751812dd96e64ce41bfc520'
             'f196cf64384cc4c35f9b82615bd62aca538653fa1e8d2ee82cd021697daa27b2'
             '62539558ec5b5f87f1740f5e4e84a3740528afb8bec6335d2de721a3c8b93531'
             '267a28e932095238604e4e23062d142fa1e2836b629190e673614159968dbec7'
