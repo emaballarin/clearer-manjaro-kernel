@@ -59,7 +59,11 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0010-bootsplash.patch'
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
-        '0013-bootsplash.patch')
+        '0013-bootsplash.patch'
+        # iwlwifi fixes
+        '0001-iwfwifi-revert-06eb547.patch::https://lkml.org/lkml/diff/2019/12/13/671/1'
+        '0002-iwfwifi-revert-968dcfb.patch::https://github.com/torvalds/linux/commit/db5cce1afc8d2475d2c1c37c2a8267dd0e151526.patch'
+        '0003-iwfwifi-move-power-gating-workaround-earlier-in-the-flow.patch::https://github.com/torvalds/linux/commit/0df36b90c47d93295b7e393da2d961b2f3b6cde4.patch')
 sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '80853920a753762e058e35b754d3e0d16ec2fb485dfb84cc40fbdba383a8da17'
             '02d7e00581c4592841ac121f451f39eaf901052ea44177d8c18eba5d994c3a80'
@@ -97,7 +101,10 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             'e9f22cbb542591087d2d66dc6dc912b1434330ba3cd13d2df741d869a2c31e89'
             '27471eee564ca3149dd271b0817719b5565a9594dc4d884fe3dc51a5f03832bc'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
-            '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef')
+            '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
+            'dfe4434865d5493fc3aa80fc1390e0fdff044b5b9c1b2237df90e88ec28d48ae'
+            'f28154d389c715b4ce72d67836df6edc878b327ec6ca8dc42dfd2298f9f7509f'
+            '62f4ea45f0a98bd0fc8c4bd32aca43841c16d0dedffebc3aee3211998a12be0b')
 prepare() {
   cd "${srcdir}/linux-${_basekernel}"
 
@@ -116,6 +123,11 @@ prepare() {
   # https://lkml.org/lkml/2019/10/16/1230
   patch -Np1 -i '../0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch'
   patch -Np1 -i '../0003-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch'
+
+  # https://lkml.org/lkml/2019/12/23/249
+  patch -Np1 -i '../0001-iwfwifi-revert-06eb547.patch'
+  patch -Np1 -i '../0002-iwfwifi-revert-968dcfb.patch'
+  patch -Np1 -i '../0003-iwfwifi-move-power-gating-workaround-earlier-in-the-flow.patch'
 
   # other fixes by Arch
   patch -Np1 -i '../0004-PCI-pciehp-dont-disable-interrupt-twice-on-suspend.patch'
