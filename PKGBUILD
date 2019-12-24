@@ -363,7 +363,7 @@ prepare() {
   patch -Np1 -i ../0114-init-wait-for-partition-and-retry-scan.patch
   patch -Np1 -i ../0118-Migrate-some-systemd-defaults-to-the-kernel-defaults.patch
   patch -Np1 -i ../0119-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
-  patch -Np1 -i ../0120-add-scheduler-turbo3-patch.patch
+  #patch -Np1 -i ../0120-add-scheduler-turbo3-patch.patch # Incompatible
   patch -Np1 -i ../0121-use-lfence-instead-of-rep-and-nop.patch
   patch -Np1 -i ../0122-do-accept-in-LIFO-order-for-cache-efficiency.patch
   patch -Np1 -i ../0124-locking-rwsem-spin-faster.patch
@@ -415,7 +415,7 @@ prepare() {
   sed -i '2iexit 0' scripts/depmod.sh
 
   # get kernel version
-  make prepare
+  make prepare -j12
 
   # load configuration
   # Configure the kernel. Replace the line below with one of your choice.
@@ -426,14 +426,14 @@ prepare() {
   # ... or manually edit .config
 
   # rewrite configuration
-  yes "" | make config >/dev/null
+  yes "" | make config -j12 >/dev/null
 }
 
 build() {
   cd "${srcdir}/linux-${_basekernel}"
 
   # build!
-  make ${MAKEFLAGS} LOCALVERSION= bzImage modules
+  make ${MAKEFLAGS} -j12 LOCALVERSION= bzImage modules
 }
 
 package_linux54-clearer() {
@@ -447,10 +447,10 @@ package_linux54-clearer() {
   KARCH=x86
 
   # get kernel version
-  _kernver="$(make LOCALVERSION= kernelrelease)"
+  _kernver="$(make -j12 LOCALVERSION= kernelrelease)"
 
   mkdir -p "${pkgdir}"/{boot,usr/lib/modules}
-  make LOCALVERSION= INSTALL_MOD_PATH="${pkgdir}/usr" modules_install
+  make -j12 LOCALVERSION= INSTALL_MOD_PATH="${pkgdir}/usr" modules_install
 
   # systemd expects to find the kernel here to allow hibernation
   # https://github.com/systemd/systemd/commit/edda44605f06a41fb86b7ab8128dcf99161d2344
