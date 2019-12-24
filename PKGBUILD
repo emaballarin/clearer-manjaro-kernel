@@ -1,17 +1,23 @@
+# Based on the file created for Manjaro Linux by:
+# Philip Müller (x86_64) <philm@manjaro.org>
+# Jonathon Fernyhough (i686) <jonathon@manjaro.org>
+# Helmut Stult <helmut[at]manjaro[dot]org>
+
 # Based on the file created for Arch Linux by:
 # Tobias Powalowski <tpowa@archlinux.org>
 # Thomas Baechler <thomas@archlinux.org>
 
-# Maintainer: Philip Müller (x86_64) <philm@manjaro.org>
-# Maintainer: Jonathon Fernyhough (i686) <jonathon@manjaro.org>
-# Contributor: Helmut Stult <helmut[at]manjaro[dot]org>
+# Maintainer: Emanuele Ballarin (Clearer Manjaro x86_64) <emanuele@ballarin.cc>
+# And many other contributors (patches, suggestions, development, testing, ...)
 
-pkgbase=linux54
-pkgname=('linux54' 'linux54-headers')
-_kernelname=-MANJARO
+
+pkgbase=linux54-clearer
+pkgname=('linux54-clearer' 'linux54-headers-clearer')
+_kernelname=-clearer
 _basekernel=5.4
 _basever=54
 _aufs=20191021
+_wireguard=0.0.20191219
 pkgver=5.4.6
 pkgrel=2
 arch=('i686' 'x86_64')
@@ -59,10 +65,68 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0010-bootsplash.patch'
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
-        '0013-bootsplash.patch')
+        '0013-bootsplash.patch'
+        ## CUSTOM PATCHES - PIECES OF XANMOD
+        "https://ballarin.cc/patchwork/pieces_of_xanmod.patch"
+        ## CUSTOM PATCHES - STUN
+        "https://ballarin.cc/patchwork/00004-manjaro-stun-tickat600.patch"
+        "https://ballarin.cc/patchwork/00005-manjaro-stun-tcpcake.patch"
+        ## BFQ Lucjan
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/bfq-paolo-patches/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/bfq-dev-lucjan/5.4-bfq-dev-lucjan-v11-r2K191206.patch"
+        ## CLEAR CVEs
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-12379.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19043.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19046.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19053.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19054.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19056.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19057.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19063.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19064.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19066.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19068.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19070.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19078.patch"
+        ## CLEAR SERIES
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0051-Revert-iwlwifi-assign-directly-to-iwl_trans-cfg-in-Q.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0052-rcu-nocb-Fix-dump_tree-hierarchy-print-always-active.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0101-i8042-decrease-debug-message-level-to-info.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0102-Increase-the-ext4-default-commit-age.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0103-silence-rapl.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0104-pci-pme-wakeups.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0105-ksm-wakeups.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0106-intel_idle-tweak-cpuidle-cstates.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0108-smpboot-reuse-timer-calibration.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0109-raid6-add-Kconfig-option-to-skip-raid6-benchmarking.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0110-Initialize-ata-before-graphics.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0111-give-rdrand-some-credit.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0112-ipv4-tcp-allow-the-memory-tuning-for-tcp-to-go-a-lit.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0113-kernel-time-reduce-ntp-wakeups.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0114-init-wait-for-partition-and-retry-scan.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0118-Migrate-some-systemd-defaults-to-the-kernel-defaults.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0119-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0120-add-scheduler-turbo3-patch.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0121-use-lfence-instead-of-rep-and-nop.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0122-do-accept-in-LIFO-order-for-cache-efficiency.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0124-locking-rwsem-spin-faster.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0125-ata-libahci-ignore-staggered-spin-up.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0127-x86-microcode-Force-update-a-uCode-even-if-the-rev-i.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0128-x86-microcode-echo-2-reload-to-force-load-ucode.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0129-fix-bug-in-ucode-force-reload-revision-check.patch"
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0130-add-workaround-for-binutils-optimization.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0131-nvme-workaround.patch"
+        ## SCHEDULER - BMQ
+        "https://gitlab.com/alfredchen/bmq/raw/master/5.4/bmq_v5.4-r1.patch"
+        ## GRAYSKY2 GCC OPTIMIZATIONS
+        "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v9.1%2B_kernel_v4.13%2B.patch"
+        ## Wireguard - Kernel autopatcher
+        "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${_wireguard}.tar.xz")
+
 sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '80853920a753762e058e35b754d3e0d16ec2fb485dfb84cc40fbdba383a8da17'
-            '02d7e00581c4592841ac121f451f39eaf901052ea44177d8c18eba5d994c3a80'
+            # x86_64 config -->
+            'SKIP'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             'bf9480b92c5feaf8583785c2f4332df3bfa4fa2eeac8ebd85da24c6a88dac58c'
@@ -97,9 +161,60 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             'e9f22cbb542591087d2d66dc6dc912b1434330ba3cd13d2df741d869a2c31e89'
             '27471eee564ca3149dd271b0817719b5565a9594dc4d884fe3dc51a5f03832bc'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
-            '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef')
+            '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
+            ##
+            #'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP')
 prepare() {
   cd "${srcdir}/linux-${_basekernel}"
+
+  ### START OF PATCHES ###
 
   # add upstream patch
   patch -p1 -i "${srcdir}/patch-${pkgver}"
@@ -108,6 +223,17 @@ prepare() {
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
   # enable only if you have "gen-stable-queue-patch.sh" executed before
   #patch -Np1 -i "${srcdir}/prepatch-${_basekernel}`date +%Y%m%d`"
+
+  ## CLEARER MANJARO: PIECES OF XANMOD
+  patch -Np1 -i ../pieces_of_xanmod.patch
+
+  ## CLEARER MANJARO: STUN PATCHES
+  patch -Np1 -i ../00004-manjaro-stun-tickat600.patch
+  patch -Np1 -i ../00005-manjaro-stun-tcpcake.patch
+
+  ## CLEARER MANJARO: BFQ PATCHES
+  patch -Np1 -i ../0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
+  patch -Np1 -i ../5.4-bfq-dev-lucjan-v11-r2K191206.patch
 
   # disable USER_NS for non-root users by default
   patch -Np1 -i ../0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
@@ -164,6 +290,68 @@ prepare() {
 #  patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
 #  patch -Np1 -i "${srcdir}/vfs-ino.patch"
 
+  ## CLEARER MANJARO: CLEAR CVE FIXES
+  patch -Np1 -i ../CVE-2019-12379.patch
+  patch -Np1 -i ../CVE-2019-19043.patch
+  patch -Np1 -i ../CVE-2019-19046.patch
+  patch -Np1 -i ../CVE-2019-19053.patch
+  patch -Np1 -i ../CVE-2019-19054.patch
+  patch -Np1 -i ../CVE-2019-19056.patch
+  patch -Np1 -i ../CVE-2019-19057.patch
+  patch -Np1 -i ../CVE-2019-19063.patch
+  patch -Np1 -i ../CVE-2019-19064.patch
+  patch -Np1 -i ../CVE-2019-19066.patch
+  patch -Np1 -i ../CVE-2019-19068.patch
+  patch -Np1 -i ../CVE-2019-19070.patch
+  patch -Np1 -i ../CVE-2019-19078.patch
+
+  ## CLEARER MANJARO: CLEAR SERIES PATCHES
+  patch -Np1 -i ../0051-Revert-iwlwifi-assign-directly-to-iwl_trans-cfg-in-Q.patch
+  patch -Np1 -i ../0052-rcu-nocb-Fix-dump_tree-hierarchy-print-always-active.patch
+  patch -Np1 -i ../0101-i8042-decrease-debug-message-level-to-info.patch
+  patch -Np1 -i ../0102-Increase-the-ext4-default-commit-age.patch
+  patch -Np1 -i ../0103-silence-rapl.patch
+  patch -Np1 -i ../0104-pci-pme-wakeups.patch
+  patch -Np1 -i ../0105-ksm-wakeups.patch
+  patch -Np1 -i ../0106-intel_idle-tweak-cpuidle-cstates.patch
+  patch -Np1 -i ../0108-smpboot-reuse-timer-calibration.patch
+  patch -Np1 -i ../0109-raid6-add-Kconfig-option-to-skip-raid6-benchmarking.patch
+  patch -Np1 -i ../0110-Initialize-ata-before-graphics.patch
+  patch -Np1 -i ../0111-give-rdrand-some-credit.patch
+  patch -Np1 -i ../0112-ipv4-tcp-allow-the-memory-tuning-for-tcp-to-go-a-lit.patch
+  patch -Np1 -i ../0113-kernel-time-reduce-ntp-wakeups.patch
+  patch -Np1 -i ../0114-init-wait-for-partition-and-retry-scan.patch
+  patch -Np1 -i ../0118-Migrate-some-systemd-defaults-to-the-kernel-defaults.patch
+  patch -Np1 -i ../0119-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
+  patch -Np1 -i ../0120-add-scheduler-turbo3-patch.patch
+  patch -Np1 -i ../0121-use-lfence-instead-of-rep-and-nop.patch
+  patch -Np1 -i ../0122-do-accept-in-LIFO-order-for-cache-efficiency.patch
+  patch -Np1 -i ../0124-locking-rwsem-spin-faster.patch
+  patch -Np1 -i ../0125-ata-libahci-ignore-staggered-spin-up.patch
+  patch -Np1 -i ../0127-x86-microcode-Force-update-a-uCode-even-if-the-rev-i.patch
+  patch -Np1 -i ../0128-x86-microcode-echo-2-reload-to-force-load-ucode.patch
+  patch -Np1 -i ../0129-fix-bug-in-ucode-force-reload-revision-check.patch
+  #patch -Np1 -i ../0130-add-workaround-for-binutils-optimization.patch
+  patch -Np1 -i ../0131-nvme-workaround.patch
+
+  # WireGuard AutoPatcher
+  _prewg_curdir="$(pwd)"
+  cd "${srcdir}/WireGuard-${_wireguard}/contrib/kernel-tree/"
+  _wg_ker_calldir="$(pwd)"
+  cd "${srcdir}/linux-${_basekernel}/"
+  "$_wg_ker_calldir/create-patch.sh" > ./wgpatch.patch
+  patch -p1 -i ./wgpatch.patch
+  rm ./wgpatch.patch
+  cd "$_prewg_curdir"
+
+  ## CLEARER MANJARO: BMQ SCHEDULER
+  patch -Np1 -i ../bmq_v5.4-r1.patch
+
+  ## CLEARER MANJARO: GRAYSKY2 GCC OPTIMIZATIONS
+  patch -Np1 -i ../grayskygcc.patch
+
+  ### END OF PATCHES ###
+
   if [ "${CARCH}" = "x86_64" ]; then
     cat "${srcdir}/config.x86_64" > ./.config
   else
@@ -208,11 +396,11 @@ build() {
   make ${MAKEFLAGS} LOCALVERSION= bzImage modules
 }
 
-package_linux54() {
+package_linux54-clearer() {
   pkgdesc="The ${pkgbase/linux/Linux} kernel and modules"
   depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=27')
-  optdepends=('crda: to set the correct wireless channels of your country')
-  provides=("linux=${pkgver}")
+  optdepends=('crda: to set the correct wireless channels of your country' 'wireguard-tools: to use the Wireguard module included')
+  provides=("linux=${pkgver}" "WIREGUARD-MODULE")
 
   cd "${srcdir}/linux-${_basekernel}"
 
@@ -234,13 +422,13 @@ package_linux54() {
 
   # add kernel version
   if [ "${CARCH}" = "x86_64" ]; then
-     echo "${pkgver}-${pkgrel}-MANJARO x64" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
+     echo "${pkgver}-${pkgrel}-clearer x64" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
   else
-     echo "${pkgver}-${pkgrel}-MANJARO x32" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
+     echo "${pkgver}-${pkgrel}-clearer x32" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
   fi
 
   # make room for external modules
-  local _extramodules="extramodules-${_basekernel}${_kernelname:--MANJARO}"
+  local _extramodules="extramodules-${_basekernel}${_kernelname:--clearer}"
   ln -s "../${_extramodules}" "${pkgdir}/usr/lib/modules/${_kernver}/extramodules"
 
   # add real version for building modules and running depmod from hook
@@ -257,7 +445,7 @@ package_linux54() {
   install -Dt "${pkgdir}/usr/lib/modules/${_kernver}/build" -m644 vmlinux
 }
 
-package_linux54-headers() {
+package_linux54-headers-clearer() {
   pkgdesc="Header files and scripts for building modules for ${pkgbase/linux/Linux} kernel"
   provides=("linux-headers=$pkgver")
 
