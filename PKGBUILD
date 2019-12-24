@@ -66,6 +66,10 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch'
+        # iwlwifi fixes
+        '0001-iwfwifi-revert-06eb547.patch::https://lkml.org/lkml/diff/2019/12/13/671/1'
+        '0002-iwfwifi-revert-968dcfb.patch::https://github.com/torvalds/linux/commit/db5cce1afc8d2475d2c1c37c2a8267dd0e151526.patch'
+        '0003-iwfwifi-move-power-gating-workaround-earlier-in-the-flow.patch::https://github.com/torvalds/linux/commit/0df36b90c47d93295b7e393da2d961b2f3b6cde4.patch'
         ## CUSTOM PATCHES - PIECES OF XANMOD
         "https://ballarin.cc/patchwork/pieces_of_xanmod.patch"
         ## CUSTOM PATCHES - STUN
@@ -162,6 +166,9 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '27471eee564ca3149dd271b0817719b5565a9594dc4d884fe3dc51a5f03832bc'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
+            'dfe4434865d5493fc3aa80fc1390e0fdff044b5b9c1b2237df90e88ec28d48ae'
+            'f28154d389c715b4ce72d67836df6edc878b327ec6ca8dc42dfd2298f9f7509f'
+            '62f4ea45f0a98bd0fc8c4bd32aca43841c16d0dedffebc3aee3211998a12be0b'
             ##
             #'SKIP'
             'SKIP'
@@ -243,6 +250,11 @@ prepare() {
   patch -Np1 -i '../0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch'
   patch -Np1 -i '../0003-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch'
 
+  # https://lkml.org/lkml/2019/12/23/249
+  patch -Np1 -i '../0001-iwfwifi-revert-06eb547.patch'
+  patch -Np1 -i '../0002-iwfwifi-revert-968dcfb.patch'
+  patch -Np1 -i '../0003-iwfwifi-move-power-gating-workaround-earlier-in-the-flow.patch'
+
   # other fixes by Arch
   patch -Np1 -i '../0004-PCI-pciehp-dont-disable-interrupt-twice-on-suspend.patch'
   patch -Np1 -i '../0005-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
@@ -281,12 +293,12 @@ prepare() {
   git apply -p1 < "${srcdir}/0013-bootsplash.patch"
 
   # add aufs5 support
-  patch -Np1 -i "${srcdir}/aufs5.x-rcN-${_aufs}.patch"
-  patch -Np1 -i "${srcdir}/aufs5-base.patch"
-  patch -Np1 -i "${srcdir}/aufs5-kbuild.patch"
-  patch -Np1 -i "${srcdir}/aufs5-loopback.patch"
-  patch -Np1 -i "${srcdir}/aufs5-mmap.patch"
-  patch -Np1 -i "${srcdir}/aufs5-standalone.patch"
+#  patch -Np1 -i "${srcdir}/aufs5.x-rcN-${_aufs}.patch"
+#  patch -Np1 -i "${srcdir}/aufs5-base.patch"
+#  patch -Np1 -i "${srcdir}/aufs5-kbuild.patch"
+#  patch -Np1 -i "${srcdir}/aufs5-loopback.patch"
+#  patch -Np1 -i "${srcdir}/aufs5-mmap.patch"
+#  patch -Np1 -i "${srcdir}/aufs5-standalone.patch"
 #  patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
 #  patch -Np1 -i "${srcdir}/vfs-ino.patch"
 
@@ -358,7 +370,7 @@ prepare() {
     cat "${srcdir}/config" > ./.config
   fi
 
-  cat "${srcdir}/config.aufs" >> ./.config
+#  cat "${srcdir}/config.aufs" >> ./.config
 
   if [ "${_kernelname}" != "" ]; then
     sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"${_kernelname}\"|g" ./.config
