@@ -167,12 +167,12 @@ prepare() {
   git apply -p1 < "${srcdir}/0013-bootsplash.patch"
 
   # add aufs5 support
-  patch -Np1 -i "${srcdir}/aufs5.x-rcN-${_aufs}.patch"
-  patch -Np1 -i "${srcdir}/aufs5-base.patch"
-  patch -Np1 -i "${srcdir}/aufs5-kbuild.patch"
-  patch -Np1 -i "${srcdir}/aufs5-loopback.patch"
-  patch -Np1 -i "${srcdir}/aufs5-mmap.patch"
-  patch -Np1 -i "${srcdir}/aufs5-standalone.patch"
+#  patch -Np1 -i "${srcdir}/aufs5.x-rcN-${_aufs}.patch"
+#  patch -Np1 -i "${srcdir}/aufs5-base.patch"
+#  patch -Np1 -i "${srcdir}/aufs5-kbuild.patch"
+#  patch -Np1 -i "${srcdir}/aufs5-loopback.patch"
+#  patch -Np1 -i "${srcdir}/aufs5-mmap.patch"
+#  patch -Np1 -i "${srcdir}/aufs5-standalone.patch"
 #  patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
 #  patch -Np1 -i "${srcdir}/vfs-ino.patch"
 
@@ -182,7 +182,7 @@ prepare() {
     cat "${srcdir}/config" > ./.config
   fi
 
-  cat "${srcdir}/config.aufs" >> ./.config
+#  cat "${srcdir}/config.aufs" >> ./.config
 
   if [ "${_kernelname}" != "" ]; then
     sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"${_kernelname}\"|g" ./.config
