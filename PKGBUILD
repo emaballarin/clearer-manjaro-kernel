@@ -18,6 +18,7 @@ _basekernel=5.4
 _basever=54
 _aufs=20191021
 _wireguard=0.0.20191219
+_ALREADYMERGED=1
 pkgver=5.4.6
 pkgrel=2
 arch=('i686' 'x86_64')
