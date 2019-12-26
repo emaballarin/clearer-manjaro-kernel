@@ -36,32 +36,32 @@ git clone --recursive https://gitlab.manjaro.org/packages/extra/linux54-extramod
 # acpi_call
 cd "$CLEARERMANJARO_TMPDIR/acpi_call"
 mv ./acpi_call.install ./acpi_call-clearer.install
-sed -i "s/_linuxprefix=.*/_linuxprefix=linux54-clearer/g" ./PKGBUILD
-sed -i "s/_extramodules=.*/_extramodules=extramodules-5.4-clearer/g" ./PKGBUILD
+#sed -i "s/_linuxprefix=.*/_linuxprefix=linux54-clearer/g" ./PKGBUILD
+sed -i "s/_extramodules=.*/_extramodules=extramodules-5.4-CLEARER/g" ./PKGBUILD
 sed -i "s/install=\$_pkgname\.install.*/install=acpi_call-clearer\.install/g" ./PKGBUILD
 sed -i "s/acpi_call\.install\"/acpi_call-clearer\.install\"/g" ./PKGBUILD
 # Tweak dependencies (-clearer inversion)
-sed -i "s/\$_linuxprefix-headers/linux54-headers-clearer/g" ./PKGBUILD
+#sed -i "s/\$_linuxprefix-headers/linux54-headers-clearer/g" ./PKGBUILD
 
 
 # SPL/ZFS
 cd "$CLEARERMANJARO_TMPDIR/spl_zfs"
 mv ./install ./spl_zfs-clearer.install
-sed -i "s/_linuxprefix=.*/_linuxprefix=linux54-clearer/g" ./PKGBUILD
-sed -i "s/_extramodules=.*/_extramodules=extramodules-5.4-clearer/g" ./PKGBUILD
+#sed -i "s/_linuxprefix=.*/_linuxprefix=linux54-clearer/g" ./PKGBUILD
+sed -i "s/_extramodules=.*/_extramodules=extramodules-5.4-CLEARER/g" ./PKGBUILD
 sed -i "s/install=install.*/install=spl_zfs-clearer\.install/g" ./PKGBUILD
 sed -i "s/install\"/spl_zfs-clearer\.install\"/g" ./PKGBUILD
 sed -i "s/package_linux54-spl/package_linux54-clearer-spl/g" ./PKGBUILD
 sed -i "s/package_linux54-zfs/package_linux54-clearer-zfs/g" ./PKGBUILD
 # Tweak dependencies (-clearer inversion)
-sed -i "s/\$_linuxprefix-headers/linux54-headers-clearer/g" ./PKGBUILD
+#sed -i "s/\$_linuxprefix-headers/linux54-headers-clearer/g" ./PKGBUILD
 
 # virtualbox-modules
 cd "$CLEARERMANJARO_TMPDIR/virtualbox-modules"
 mv ./virtualbox-host-modules.install ./virtualbox-host-modules-clearer.install
 mv ./virtualbox-guest-modules.install ./virtualbox-guest-modules-clearer.install
-sed -i "s/_linuxprefix=.*/_linuxprefix=linux54-clearer/g" ./PKGBUILD
-sed -i "s/_extramodules=.*/_extramodules=extramodules-5.4-clearer/g" ./PKGBUILD
+#sed -i "s/_linuxprefix=.*/_linuxprefix=linux54-clearer/g" ./PKGBUILD
+sed -i "s/_extramodules=.*/_extramodules=extramodules-5.4-CLEARER/g" ./PKGBUILD
 sed -i "s/install=virtualbox-host-modules\.install.*/install=virtualbox-host-modules-clearer\.install/g" ./PKGBUILD
 sed -i "s/install=virtualbox-guest-modules\.install.*/install=virtualbox-guest-modules-clearer\.install/g" ./PKGBUILD
 sed -i "s/virtualbox-host-modules\.install\"/virtualbox-host-modules-clearer\.install\"/g" ./PKGBUILD
@@ -69,7 +69,7 @@ sed -i "s/virtualbox-guest-modules\.install\"/virtualbox-guest-modules-clearer\.
 sed -i "s/package_linux54-virtualbox-host-modules/package_linux54-clearer-virtualbox-host-modules/g" ./PKGBUILD
 sed -i "s/package_linux54-virtualbox-guest-modules/package_linux54-clearer-virtualbox-guest-modules/g" ./PKGBUILD
 # Tweak dependencies (-clearer inversion)
-sed -i "s/\$_linuxprefix-headers/linux54-headers-clearer/g" ./PKGBUILD
+#sed -i "s/\$_linuxprefix-headers/linux54-headers-clearer/g" ./PKGBUILD
 
 ####################
 ## Build packages ##
@@ -94,9 +94,10 @@ cd "$CLEARERMANJARO_TMPDIR/virtualbox-modules"
 makepkg -Csf --noconfirm
 
 # Remove (now useless) MAKE-dependencies previously installed
+#echo "The following TWO lines MAY return an error. If so, it's expected."
+sudo pacman -R virtualbox-guest-dkms virtualbox-host-dkms --noconfirm
+sudo pacman -R virtualbox-guest-dkms virtualbox-host-dkms --noconfirm
 echo "The following TWO lines MAY return an error. If so, it's expected."
-sudo pacman -R virtualbox-guest-dkms virtualbox-host-dkms --noconfirm
-sudo pacman -R virtualbox-guest-dkms virtualbox-host-dkms --noconfirm
 
 #####################
 ## Deploy packages ##

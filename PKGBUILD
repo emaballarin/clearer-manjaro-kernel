@@ -12,13 +12,14 @@
 
 
 pkgbase=linux54-clearer
-pkgname=('linux54-clearer' 'linux54-headers-clearer')
-_kernelname=-clearer
+pkgname=('linux54-clearer' 'linux54-clearer-headers')
+_kernelname=-CLEARER
 _basekernel=5.4
 _basever=54
 _aufs=20191021
 _wireguard=0.0.20191219
-_ALREADYMERGED=1
+_ALREADYMERGED=0
+_clearerrel=1
 pkgver=5.4.6
 pkgrel=2
 arch=('i686' 'x86_64')
@@ -440,7 +441,8 @@ package_linux54-clearer() {
   pkgdesc="The ${pkgbase/linux/Linux} kernel and modules"
   depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=27')
   optdepends=('crda: to set the correct wireless channels of your country' 'wireguard-tools: to use the Wireguard module included')
-  provides=("linux=${pkgver}" "WIREGUARD-MODULE")
+  provides=("linux54" "linux=${pkgver}" "WIREGUARD-MODULE")
+  conflicts=("linux54")
 
   cd "${srcdir}/linux-${_basekernel}"
 
@@ -462,13 +464,13 @@ package_linux54-clearer() {
 
   # add kernel version
   if [ "${CARCH}" = "x86_64" ]; then
-     echo "${pkgver}-${pkgrel}-clearer x64" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
+     echo "${pkgver}-${pkgrel}-CLEARER x64" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
   else
-     echo "${pkgver}-${pkgrel}-clearer x32" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
+     echo "${pkgver}-${pkgrel}-CLEARER x32" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
   fi
 
   # make room for external modules
-  local _extramodules="extramodules-${_basekernel}${_kernelname:--clearer}"
+  local _extramodules="extramodules-${_basekernel}${_kernelname:--CLEARER}"
   ln -s "../${_extramodules}" "${pkgdir}/usr/lib/modules/${_kernver}/extramodules"
 
   # add real version for building modules and running depmod from hook
@@ -487,7 +489,8 @@ package_linux54-clearer() {
 
 package_linux54-headers-clearer() {
   pkgdesc="Header files and scripts for building modules for ${pkgbase/linux/Linux} kernel"
-  provides=("linux-headers=$pkgver")
+  provides=("linux54-headers" "linux-headers=$pkgver")
+  conflicts=("linux54-headers")
 
   cd "${srcdir}/linux-${_basekernel}"
   local _builddir="${pkgdir}/usr/lib/modules/${_kernver}/build"
