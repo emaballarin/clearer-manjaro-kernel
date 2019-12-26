@@ -487,7 +487,7 @@ package_linux54-clearer() {
   install -Dt "${pkgdir}/usr/lib/modules/${_kernver}/build" -m644 vmlinux
 }
 
-package_linux54-headers-clearer() {
+package_linux54-clearer-headers() {
   pkgdesc="Header files and scripts for building modules for ${pkgbase/linux/Linux} kernel"
   provides=("linux54-headers" "linux-headers=$pkgver")
   conflicts=("linux54-headers")
