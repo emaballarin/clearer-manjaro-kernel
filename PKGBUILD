@@ -19,7 +19,7 @@ _basever=54
 _aufs=20191021
 _wireguard=0.0.20191219
 _ALREADYMERGED=0
-_clearerrel=1
+_clearerrel=2
 pkgver=5.4.6
 pkgrel=2
 arch=('i686' 'x86_64')
@@ -85,7 +85,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://ballarin.cc/patchwork/pieces_of_xanmod.patch"
         ## POSTFACTUM - O3 ALWAYS ON
         "postfactumothree.patch::https://gitlab.com/post-factum/pf-kernel/commit/cf7a8ad26e0bd6ca8afba89f53d2e9dc43ee2598.patch"
-        ## VALVE - MULTIPLE FLUTEX
+        ## VALVE - MULTIPLE FUTEX
         "futex-wait-multiple.patch::https://aur.archlinux.org/cgit/aur.git/plain/futex-wait-multiple-5.2.1.patch?h=linux-fsync"
         ## CUSTOM PATCHES - STUN
         "https://ballarin.cc/patchwork/00004-manjaro-stun-tickat600.patch"
@@ -268,8 +268,8 @@ prepare() {
   ## CLEARER MANJARO: POSTFACTUM O3 ALWAYS ON
   patch -Np1 -i ../postfactumothree.patch
 
-  ## CLEARER MANJARO: FLUTEX WAIT MULTIPLE (VALVE)
-  patch -Np1 -i ../futex-wait-multiple.patch
+  ## CLEARER MANJARO: FUTEX WAIT MULTIPLE (VALVE)
+  #patch -Np1 -i ../futex-wait-multiple.patch # Useless and performance-costly
 
   ## CLEARER MANJARO: BFQ PATCHES
   patch -Np1 -i ../0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
