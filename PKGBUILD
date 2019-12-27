@@ -81,12 +81,16 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch'
+        ## NVIDIA MEMORY COMPACTION PATCH (11/2019)
+        'mmgupta.patch'
+        ## POSTFACTUM - EXPOSE KSM INTERFACE
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/ksm-patches/0001-ksm-patches.patch"
         ## CUSTOM PATCHES - PIECES OF XANMOD
         "https://ballarin.cc/patchwork/pieces_of_xanmod.patch"
         ## POSTFACTUM - O3 ALWAYS ON
         "postfactumothree.patch::https://gitlab.com/post-factum/pf-kernel/commit/cf7a8ad26e0bd6ca8afba89f53d2e9dc43ee2598.patch"
         ## VALVE - MULTIPLE FUTEX
-        "futex-wait-multiple.patch::https://aur.archlinux.org/cgit/aur.git/plain/futex-wait-multiple-5.2.1.patch?h=linux-fsync"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/futex-patches/0001-futex-patches.patch"
         ## CUSTOM PATCHES - STUN
         "https://ballarin.cc/patchwork/00004-manjaro-stun-tickat600.patch"
         "https://ballarin.cc/patchwork/00005-manjaro-stun-tcpcake.patch"
@@ -244,6 +248,8 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             'SKIP'
             'SKIP'
             'SKIP'
+            'SKIP'
+            'SKIP'
             'SKIP')
 prepare() {
   cd "${srcdir}/linux-${_basekernel}"
@@ -265,11 +271,17 @@ prepare() {
   patch -Np1 -i ../00004-manjaro-stun-tickat600.patch
   patch -Np1 -i ../00005-manjaro-stun-tcpcake.patch
 
+  ## CLEARER MANJARO - MMGUPTA MEMORY MERGING
+  patch -Np1 -i ../mmgupta.patch
+
+  ## CLEARER MANJARO - KSM (NATALENKO)
+  patch -Np1 -i ../0001-ksm-patches.patch
+
   ## CLEARER MANJARO: POSTFACTUM O3 ALWAYS ON
   patch -Np1 -i ../postfactumothree.patch
 
   ## CLEARER MANJARO: FUTEX WAIT MULTIPLE (VALVE)
-  #patch -Np1 -i ../futex-wait-multiple.patch # Useless and performance-costly
+  patch -Np1 -i ../0001-futex-patches.patch
 
   ## CLEARER MANJARO: BFQ PATCHES
   patch -Np1 -i ../0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
