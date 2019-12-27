@@ -1,8 +1,14 @@
 #!/bin/zsh
 
+##
 ## Install (0) the 'Clearer Manjaro' Kernel and the related (1) nvidia,
 ## (2) acpi_call, (3) virtualbox_host, (4) SPL/ZFS, kernel extramodules.
-## WARNING: This "all in one" script is experimental!
+## Note that this script is meant to REPLACE currently-installed "linux54"
+## packages.
+##
+## (C) 2019-* Emanuele Ballarin
+## MIT License
+##
 
 ##################
 ## Get packages ##
