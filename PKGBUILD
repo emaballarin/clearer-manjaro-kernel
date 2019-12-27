@@ -83,6 +83,10 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0013-bootsplash.patch'
         ## CUSTOM PATCHES - PIECES OF XANMOD
         "https://ballarin.cc/patchwork/pieces_of_xanmod.patch"
+        ## POSTFACTUM - O3 ALWAYS ON
+        "postfactumothree.patch::https://gitlab.com/post-factum/pf-kernel/commit/cf7a8ad26e0bd6ca8afba89f53d2e9dc43ee2598.patch"
+        ## VALVE - MULTIPLE FLUTEX
+        "futex-wait-multiple.patch::https://aur.archlinux.org/cgit/aur.git/plain/futex-wait-multiple-5.2.1.patch?h=linux-fsync"
         ## CUSTOM PATCHES - STUN
         "https://ballarin.cc/patchwork/00004-manjaro-stun-tickat600.patch"
         "https://ballarin.cc/patchwork/00005-manjaro-stun-tcpcake.patch"
@@ -238,6 +242,8 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             'SKIP'
             'SKIP'
             'SKIP'
+            'SKIP'
+            'SKIP'
             'SKIP')
 prepare() {
   cd "${srcdir}/linux-${_basekernel}"
@@ -258,6 +264,12 @@ prepare() {
   ## CLEARER MANJARO: STUN PATCHES
   patch -Np1 -i ../00004-manjaro-stun-tickat600.patch
   patch -Np1 -i ../00005-manjaro-stun-tcpcake.patch
+
+  ## CLEARER MANJARO: POSTFACTUM O3 ALWAYS ON
+  patch -Np1 -i ../postfactumothree.patch
+
+  ## CLEARER MANJARO: FLUTEX WAIT MULTIPLE (VALVE)
+  patch -Np1 -i ../futex-wait-multiple.patch
 
   ## CLEARER MANJARO: BFQ PATCHES
   patch -Np1 -i ../0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
