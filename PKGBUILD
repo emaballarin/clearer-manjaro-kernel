@@ -144,7 +144,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         ## GRAYSKY2 GCC OPTIMIZATIONS
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v9.1%2B_kernel_v4.13%2B.patch"
         ## Wireguard - Kernel autopatcher
-        "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${_wireguard}.tar.xz")
+        "https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat-${_wireguard}.tar.xz")
 
 sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '80853920a753762e058e35b754d3e0d16ec2fb485dfb84cc40fbdba383a8da17'
@@ -401,7 +401,7 @@ prepare() {
 
   # WireGuard AutoPatcher
   _prewg_curdir="$(pwd)"
-  cd "${srcdir}/WireGuard-${_wireguard}/contrib/kernel-tree/"
+  cd "${srcdir}/wireguard-linux-compat-${_wireguard}/kernel-tree-scripts/"
   _wg_ker_calldir="$(pwd)"
   cd "${srcdir}/linux-${_basekernel}/"
   "$_wg_ker_calldir/create-patch.sh" > ./wgpatch.patch
