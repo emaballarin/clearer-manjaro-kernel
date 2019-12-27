@@ -51,8 +51,8 @@ mv ./install ./spl_zfs-clearer.install
 sed -i "s/_extramodules=.*/_extramodules=extramodules-5.4-CLEARER/g" ./PKGBUILD
 sed -i "s/install=install.*/install=spl_zfs-clearer\.install/g" ./PKGBUILD
 sed -i "s/install\"/spl_zfs-clearer\.install\"/g" ./PKGBUILD
-sed -i "s/package_linux54-spl/package_linux54-clearer-spl/g" ./PKGBUILD
-sed -i "s/package_linux54-zfs/package_linux54-clearer-zfs/g" ./PKGBUILD
+#sed -i "s/package_linux54-spl/package_linux54-clearer-spl/g" ./PKGBUILD
+#sed -i "s/package_linux54-zfs/package_linux54-clearer-zfs/g" ./PKGBUILD
 # Tweak dependencies (-clearer inversion)
 #sed -i "s/\$_linuxprefix-headers/linux54-headers-clearer/g" ./PKGBUILD
 
@@ -66,8 +66,8 @@ sed -i "s/install=virtualbox-host-modules\.install.*/install=virtualbox-host-mod
 sed -i "s/install=virtualbox-guest-modules\.install.*/install=virtualbox-guest-modules-clearer\.install/g" ./PKGBUILD
 sed -i "s/virtualbox-host-modules\.install\"/virtualbox-host-modules-clearer\.install\"/g" ./PKGBUILD
 sed -i "s/virtualbox-guest-modules\.install\"/virtualbox-guest-modules-clearer\.install\"/g" ./PKGBUILD
-sed -i "s/package_linux54-virtualbox-host-modules/package_linux54-clearer-virtualbox-host-modules/g" ./PKGBUILD
-sed -i "s/package_linux54-virtualbox-guest-modules/package_linux54-clearer-virtualbox-guest-modules/g" ./PKGBUILD
+#sed -i "s/package_linux54-virtualbox-host-modules/package_linux54-clearer-virtualbox-host-modules/g" ./PKGBUILD
+#sed -i "s/package_linux54-virtualbox-guest-modules/package_linux54-clearer-virtualbox-guest-modules/g" ./PKGBUILD
 # Tweak dependencies (-clearer inversion)
 #sed -i "s/\$_linuxprefix-headers/linux54-headers-clearer/g" ./PKGBUILD
 
@@ -97,7 +97,7 @@ makepkg -Csf --noconfirm
 #echo "The following TWO lines MAY return an error. If so, it's expected."
 sudo pacman -R virtualbox-guest-dkms virtualbox-host-dkms --noconfirm
 sudo pacman -R virtualbox-guest-dkms virtualbox-host-dkms --noconfirm
-echo "The following TWO lines MAY return an error. If so, it's expected."
+echo "The PREVIOUS TWO lines MIGHT have returned an error. If so, it's expected."
 
 #####################
 ## Deploy packages ##
