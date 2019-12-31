@@ -83,6 +83,20 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0013-bootsplash.patch'
         ## NVIDIA MEMORY COMPACTION PATCH (11/2019)
         'mmgupta.patch'
+        ## Samsung exFAT
+        'v8-01-13-exfat-add-in-memory-and-on-disk-structures-and-headers.patch'
+        'v8-02-13-exfat-add-super-block-operations.patch'
+        'v8-03-13-exfat-add-inode-operations.patch'
+        'v8-04-13-exfat-add-directory-operations.patch'
+        'v8-05-13-exfat-add-file-operations.patch'
+        'v8-06-13-exfat-add-exfat-entry-operations.patch'
+        'v8-07-13-exfat-add-bitmap-operations.patch'
+        'v8-08-13-exfat-add-exfat-cache.patch'
+        'v8-09-13-exfat-add-misc-operations.patch'
+        'v8-10-13-exfat-add-nls-operations.patch'
+        'v8-11-13-exfat-add-Kconfig-and-Makefile.patch'
+        'v8-12-13-exfat-add-exfat-in-fs-Kconfig-and-fs-Makefile.patch'
+        'v8-13-13-MAINTAINERS-add-exfat-filesystem.patch'
         ## POSTFACTUM - EXPOSE KSM INTERFACE
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/ksm-patches/0001-ksm-patches.patch"
         ## CUSTOM PATCHES - PIECES OF XANMOD
@@ -250,6 +264,19 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             'SKIP'
             'SKIP'
             'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
             'SKIP')
 prepare() {
   cd "${srcdir}/linux-${_basekernel}"
@@ -263,6 +290,21 @@ prepare() {
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
   # enable only if you have "gen-stable-queue-patch.sh" executed before
   #patch -Np1 -i "${srcdir}/prepatch-${_basekernel}`date +%Y%m%d`"
+
+  ## CLEARER MANJARO: New exFAT drivers by Samsung
+  patch -Np1 -i ../v8-01-13-exfat-add-in-memory-and-on-disk-structures-and-headers.patch
+  patch -Np1 -i ../v8-02-13-exfat-add-super-block-operations.patch
+  patch -Np1 -i ../v8-03-13-exfat-add-inode-operations.patch
+  patch -Np1 -i ../v8-04-13-exfat-add-directory-operations.patch
+  patch -Np1 -i ../v8-05-13-exfat-add-file-operations.patch
+  patch -Np1 -i ../v8-06-13-exfat-add-exfat-entry-operations.patch
+  patch -Np1 -i ../v8-07-13-exfat-add-bitmap-operations.patch
+  patch -Np1 -i ../v8-08-13-exfat-add-exfat-cache.patch
+  patch -Np1 -i ../v8-09-13-exfat-add-misc-operations.patch
+  patch -Np1 -i ../v8-10-13-exfat-add-nls-operations.patch
+  patch -Np1 -i ../v8-11-13-exfat-add-Kconfig-and-Makefile.patch
+  patch -Np1 -i ../v8-12-13-exfat-add-exfat-in-fs-Kconfig-and-fs-Makefile.patch
+  patch -Np1 -i ../v8-13-13-MAINTAINERS-add-exfat-filesystem.patch
 
   ## CLEARER MANJARO: PIECES OF XANMOD
   patch -Np1 -i ../pieces_of_xanmod.patch
