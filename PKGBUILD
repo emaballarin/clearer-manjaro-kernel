@@ -90,7 +90,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         'v8-10-13-exfat-add-nls-operations.patch'
         'v8-11-13-exfat-add-Kconfig-and-Makefile.patch'
         'v8-12-13-exfat-add-exfat-in-fs-Kconfig-and-fs-Makefile.patch'
-        'v8-13-13-MAINTAINERS-add-exfat-filesystem.patch'
+        'v8-13-13-MAINTAINERS-add-exfat-filesystem-edited.patch'
         ## POSTFACTUM - EXPOSE KSM INTERFACE
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/ksm-patches/0001-ksm-patches.patch"
         ## CUSTOM PATCHES - PIECES OF XANMOD
@@ -111,13 +111,13 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19046.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19053.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19054.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19056.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19057.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19063.patch"
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19056.patch"  #Already applied
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19057.patch"  #Already applied
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19063.patch"  #Already applied
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19064.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19066.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19068.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19070.patch"
+        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19070.patch"  #Already applied
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19078.patch"
         ## CLEAR SERIES
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0051-Revert-iwlwifi-assign-directly-to-iwl_trans-cfg-in-Q.patch"
@@ -202,10 +202,10 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
             ##
             #'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
+            #'SKIP'
+            #'SKIP'
+            #'SKIP'
+            #'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -292,7 +292,7 @@ prepare() {
   patch -Np1 -i ../v8-10-13-exfat-add-nls-operations.patch
   patch -Np1 -i ../v8-11-13-exfat-add-Kconfig-and-Makefile.patch
   patch -Np1 -i ../v8-12-13-exfat-add-exfat-in-fs-Kconfig-and-fs-Makefile.patch
-  patch -Np1 -i ../v8-13-13-MAINTAINERS-add-exfat-filesystem.patch
+  patch -Np1 -i ../v8-13-13-MAINTAINERS-add-exfat-filesystem-edited.patch
 
   ## CLEARER MANJARO: PIECES OF XANMOD
   patch -Np1 -i ../pieces_of_xanmod.patch
@@ -385,13 +385,13 @@ prepare() {
   patch -Np1 -i ../CVE-2019-19046.patch
   patch -Np1 -i ../CVE-2019-19053.patch
   patch -Np1 -i ../CVE-2019-19054.patch
-  patch -Np1 -i ../CVE-2019-19056.patch
-  patch -Np1 -i ../CVE-2019-19057.patch
-  patch -Np1 -i ../CVE-2019-19063.patch
+  #patch -Np1 -i ../CVE-2019-19056.patch
+  #patch -Np1 -i ../CVE-2019-19057.patch
+  #patch -Np1 -i ../CVE-2019-19063.patch
   patch -Np1 -i ../CVE-2019-19064.patch
   patch -Np1 -i ../CVE-2019-19066.patch
   patch -Np1 -i ../CVE-2019-19068.patch
-  patch -Np1 -i ../CVE-2019-19070.patch
+  #patch -Np1 -i ../CVE-2019-19070.patch
   patch -Np1 -i ../CVE-2019-19078.patch
 
   ## CLEARER MANJARO: CLEAR SERIES PATCHES
