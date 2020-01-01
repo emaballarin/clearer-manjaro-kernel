@@ -20,8 +20,8 @@ _aufs=20191021
 _wireguard=0.0.20191226
 _ALREADYMERGED=0
 _clearerrel=3
-pkgver=5.4.6
-pkgrel=2
+pkgver=5.4.7
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -47,19 +47,13 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0004-PCI-pciehp-dont-disable-interrupt-twice-on-suspend.patch'
         '0005-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
         '0006-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
-        '0007-x86-MCE-AMD-Do-not-use-rdmsr_safe_on_cpu-in-smca_configure.patch'
-        '0008-x86-MCE-AMD-Allow-Reserved-types-to-be-overwritten-in-smca_banks.patch'
-        '0009-x86-mce-Fix-possibly-incorrect-severity-calculation-on-AMD.patch'
-        '0010-iwfwifi-revert-968dcfb.patch'
-        '0011-iwfwifi-move-power-gating-workaround-earlier-in-the-flow.patch'
-        '0012-x86-intel-Disable-HPET-on-Intel-Coffee-Lake-H-platforms.patch'
-        '0013-x86-intel-Disable-HPET-on-Intel-Ice-Lake-platforms.patch'
-        '0014-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
-        '0015-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
-        '0016-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
-        '0017-ASoC-SOF-enable-sync_write-in-hdac_bus.patch'
-        '0018-xhci-pci-Allow-host-runtime-PM-as-default-also-for-Intel-Ice-Lake-xHCI.patch'
-        '0019-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
+        '0007-iwfwifi-revert-968dcfb.patch'
+        '0008-x86-intel-Disable-HPET-on-Intel-Ice-Lake-platforms.patch'
+        '0009-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
+        '0010-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
+        '0011-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
+        '0012-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
+        '0013-drm-i915-gt-detect-if-we-miss-WaIdleLiteRestore.patch'
         # MANJARO Patches
         '0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch'
         '0002-apparmor-af_unix-mediation.patch'
@@ -161,7 +155,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat-${_wireguard}.tar.xz")
 
 sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
-            '80853920a753762e058e35b754d3e0d16ec2fb485dfb84cc40fbdba383a8da17'
+            '7d99e8136518db0601abb7b59388c07838125901f540084d4575e87602544fd1'
             # x86_64 config -->
             'SKIP'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
@@ -180,19 +174,13 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '3e8ed640a8853a038e89b4cd9b17e6a9c3f8bfb19c5efa3ca65224c6aabb8e83'
             '2431629465ca508a203df31ee14f614c061f6efc128ec858cecb4a3a2ee5f1d0'
             '25d72c2c88088d78afa1658fc16c8d4ad98f4140ec69fa0ade49abfe27e8f722'
-            'a2e1db6e523c7dcec894279650b9bc289df0eb938465aea301e1abd929916da6'
-            'cd402b412aee8e6406859ff85da12b796b89f35ef96fa3931fcda9105e314026'
-            '77f208ab5c1d6163f4f914dfe8087a3cd6a482df60fcfb9ec14201f8d24fc16b'
             'f28154d389c715b4ce72d67836df6edc878b327ec6ca8dc42dfd2298f9f7509f'
-            '62f4ea45f0a98bd0fc8c4bd32aca43841c16d0dedffebc3aee3211998a12be0b'
-            'ee6fabf26cb8f79e59756cfca2f5ba687cf219079b2c67e808ff8bc58074b02e'
             '1bcec07561c785e22ca43a140b07b586bc7717ea3c08e7549ec7a3bdfa39b7e2'
             'e2084feabc3abeed37579ff515c367014356a652b85794b1612fea4daabe85d3'
             '988ffbb96d85564a9d96145e5973339a8f78ae95d919efb2ee7bb50f7a8e8fc9'
             '5257159e20a5fcb102a3b3ee6de33882a9e132e7f1d4345b8730effdd0240bb6'
-            '9e79411a264e4d469a254f4152cd3d90f77db7027e2fd967bd666c1deed608a6'
-            'a99491d413f25af14c7b2c6f0daeb45670191772e3ae96424cd11eff268a4715'
             '2516be40fe063f7a448c69f170d628dbf549c3e084c2c7eb6910fd4782a6e73f'
+            '8830109e3cfc380eb8c20bca676fcdd80ea91bb60f356d0482c4cf6647e1048b'
             '98202b8ad70d02d86603294bae967874fa7b18704b5c7b867568b0fd33a08921'
             '5cbbf3db9ea3205e9b89fe3049bea6dd626181db0cb0dc461e4cf5a400c68dd6'
             'c7dbec875d0c1d6782c037a1dcefff2e5bdb5fc9dffac1beea07dd8c1bdef1d7'
@@ -341,19 +329,13 @@ prepare() {
   patch -Np1 -i '../0004-PCI-pciehp-dont-disable-interrupt-twice-on-suspend.patch'
   patch -Np1 -i '../0005-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
   patch -Np1 -i '../0006-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
-  patch -Np1 -i '../0007-x86-MCE-AMD-Do-not-use-rdmsr_safe_on_cpu-in-smca_configure.patch'
-  patch -Np1 -i '../0008-x86-MCE-AMD-Allow-Reserved-types-to-be-overwritten-in-smca_banks.patch'
-  patch -Np1 -i '../0009-x86-mce-Fix-possibly-incorrect-severity-calculation-on-AMD.patch'
-  patch -Np1 -i '../0010-iwfwifi-revert-968dcfb.patch'
-  patch -Np1 -i '../0011-iwfwifi-move-power-gating-workaround-earlier-in-the-flow.patch'
-  patch -Np1 -i '../0012-x86-intel-Disable-HPET-on-Intel-Coffee-Lake-H-platforms.patch'
-  patch -Np1 -i '../0013-x86-intel-Disable-HPET-on-Intel-Ice-Lake-platforms.patch'
-  patch -Np1 -i '../0014-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
-  patch -Np1 -i '../0015-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
-  patch -Np1 -i '../0016-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
-  patch -Np1 -i '../0017-ASoC-SOF-enable-sync_write-in-hdac_bus.patch'
-  patch -Np1 -i '../0018-xhci-pci-Allow-host-runtime-PM-as-default-also-for-Intel-Ice-Lake-xHCI.patch'
-  patch -Np1 -i '../0019-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
+  patch -Np1 -i '../0007-iwfwifi-revert-968dcfb.patch'
+  patch -Np1 -i '../0008-x86-intel-Disable-HPET-on-Intel-Ice-Lake-platforms.patch'
+  patch -Np1 -i '../0009-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
+  patch -Np1 -i '../0010-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
+  patch -Np1 -i '../0011-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
+  patch -Np1 -i '../0012-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
+  patch -Np1 -i '../0013-drm-i915-gt-detect-if-we-miss-WaIdleLiteRestore.patch'
 
   # add patches for snapd
   # https://gitlab.com/apparmor/apparmor-kernel/tree/5.2-outoftree
