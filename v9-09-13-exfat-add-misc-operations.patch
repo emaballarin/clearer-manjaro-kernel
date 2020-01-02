@@ -1,119 +1,120 @@
-From patchwork Fri Dec 20 06:24:15 2019
+From patchwork Thu Jan  2 08:20:32 2020
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 X-Patchwork-Submitter: Namjae Jeon <namjae.jeon@samsung.com>
-X-Patchwork-Id: 11304869
-Return-Path: <SRS0=mtMO=2K=vger.kernel.org=linux-fsdevel-owner@kernel.org>
+X-Patchwork-Id: 11315471
+Return-Path: <SRS0=gSOW=2X=vger.kernel.org=linux-fsdevel-owner@kernel.org>
 Received: from mail.kernel.org (pdx-korg-mail-1.web.codeaurora.org
  [172.30.200.123])
-	by pdx-korg-patchwork-2.web.codeaurora.org (Postfix) with ESMTP id F40CA139A
+	by pdx-korg-patchwork-2.web.codeaurora.org (Postfix) with ESMTP id 1BBA7138D
 	for <patchwork-linux-fsdevel@patchwork.kernel.org>;
- Fri, 20 Dec 2019 06:28:28 +0000 (UTC)
+ Thu,  2 Jan 2020 08:24:32 +0000 (UTC)
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.kernel.org (Postfix) with ESMTP id C7BB824680
+	by mail.kernel.org (Postfix) with ESMTP id E381B21734
 	for <patchwork-linux-fsdevel@patchwork.kernel.org>;
- Fri, 20 Dec 2019 06:28:28 +0000 (UTC)
+ Thu,  2 Jan 2020 08:24:31 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
 	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com
- header.b="jJ5AYm17"
+ header.b="Yt+4hJIS"
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727506AbfLTG2X (ORCPT
+        id S1727901AbgABIYO (ORCPT
         <rfc822;patchwork-linux-fsdevel@patchwork.kernel.org>);
-        Fri, 20 Dec 2019 01:28:23 -0500
-Received: from mailout3.samsung.com ([203.254.224.33]:38343 "EHLO
+        Thu, 2 Jan 2020 03:24:14 -0500
+Received: from mailout3.samsung.com ([203.254.224.33]:52890 "EHLO
         mailout3.samsung.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727276AbfLTG1l (ORCPT
+        with ESMTP id S1727756AbgABIYM (ORCPT
         <rfc822;linux-fsdevel@vger.kernel.org>);
-        Fri, 20 Dec 2019 01:27:41 -0500
-Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
+        Thu, 2 Jan 2020 03:24:12 -0500
+Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
         by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20191220062738epoutp030fd47c3d8406c230987fd7ac5605325d~iAGY-lSXK1157711577epoutp03s
+ 20200102082408epoutp03e95525e3b2014473e9864cedf38a8d77~mBE0mtXPi0070300703epoutp03M
         for <linux-fsdevel@vger.kernel.org>;
- Fri, 20 Dec 2019 06:27:38 +0000 (GMT)
+ Thu,  2 Jan 2020 08:24:08 +0000 (GMT)
 DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20191220062738epoutp030fd47c3d8406c230987fd7ac5605325d~iAGY-lSXK1157711577epoutp03s
+ 20200102082408epoutp03e95525e3b2014473e9864cedf38a8d77~mBE0mtXPi0070300703epoutp03M
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-        s=mail20170921; t=1576823258;
-        bh=J+4PwgH3TYBRzu+LcldYsRc/UZd2ZS/N3Ib9SXjcw4I=;
+        s=mail20170921; t=1577953448;
+        bh=lxkFqc0ygThCmwF5n0ai/z3zixLCrXftHW3rR5k+E7s=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=jJ5AYm173CUBvQIepPs8X9J8CzJHeuDgPugv3CvoE8CB7dEe5tSCr4yCCu+gE158t
-         yP19rha9grefHid5RJ4rzeD0fMGGIJg87Cm8V1EesR6N/lrwkiYV9C8hbSfrrDRlFJ
-         0iU7e8zdrvx4mf0eHyqVq9wYQfOZfnoRka3542Gk=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
-        epcas1p4.samsung.com (KnoxPortal) with ESMTP id
-        20191220062738epcas1p41e117ccc94996172ea6d24ba1a509dcb~iAGYsi4_C0237302373epcas1p4U;
-        Fri, 20 Dec 2019 06:27:38 +0000 (GMT)
-Received: from epsmges1p2.samsung.com (unknown [182.195.40.162]) by
-        epsnrtp4.localdomain (Postfix) with ESMTP id 47fJh93NJ1zMqYkp;
- Fri, 20 Dec
-        2019 06:27:37 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
-        epsmges1p2.samsung.com (Symantec Messaging Gateway) with SMTP id
-        AA.DB.48498.9D96CFD5; Fri, 20 Dec 2019 15:27:37 +0900 (KST)
+        b=Yt+4hJIShFMATTV59Ms7SEqpP2XfQ0kxr3a50Cnaw4Grd8rcRLCOMqnyrx3F5zGQ4
+         g3JZHkVds/p3KC5QXTldTRJMO3WC/hn9cnqA3fCGAh9HSigm5fJwi1gKsY2LUxSwbe
+         vhwS3lid6HqKMhWgiL8NJFGNUQz1nZZNKwU/qj8U=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+        epcas1p2.samsung.com (KnoxPortal) with ESMTP id
+        20200102082408epcas1p270c325b5a8c444b498675378ad05faee~mBE0MMgLy1717417174epcas1p29;
+        Thu,  2 Jan 2020 08:24:08 +0000 (GMT)
+Received: from epsmges1p4.samsung.com (unknown [182.195.40.159]) by
+        epsnrtp3.localdomain (Postfix) with ESMTP id 47pLfZ6VFSzMqYkY;
+ Thu,  2 Jan
+        2020 08:24:06 +0000 (GMT)
+Received: from epcas1p1.samsung.com ( [182.195.41.45]) by
+        epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
+        50.2F.48019.6A8AD0E5; Thu,  2 Jan 2020 17:24:06 +0900 (KST)
 Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
-        epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
-        20191220062737epcas1p3c0f9e408640148c9186b84efc6d6658b~iAGXkgjy-2863528635epcas1p3O;
-        Fri, 20 Dec 2019 06:27:37 +0000 (GMT)
+        epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
+        20200102082406epcas1p268f260d90213bdaabee25a7518f86625~mBEyfWriF0996409964epcas1p2v;
+        Thu,  2 Jan 2020 08:24:06 +0000 (GMT)
 Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
         epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
-        20191220062737epsmtrp1fdec2a4a7f5b515760652a235af29014~iAGXj15UA2110821108epsmtrp1P;
-        Fri, 20 Dec 2019 06:27:37 +0000 (GMT)
-X-AuditID: b6c32a36-a55ff7000001bd72-ce-5dfc69d95fcf
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+        20200102082406epsmtrp1bc34cfd727213cf6768f05cd635103de~mBEyetmAv2232622326epsmtrp1a;
+        Thu,  2 Jan 2020 08:24:06 +0000 (GMT)
+X-AuditID: b6c32a38-257ff7000001bb93-1b-5e0da8a66ee1
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
         epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
-        4B.BA.06569.9D96CFD5; Fri, 20 Dec 2019 15:27:37 +0900 (KST)
+        EB.88.06569.6A8AD0E5; Thu,  2 Jan 2020 17:24:06 +0900 (KST)
 Received: from localhost.localdomain (unknown [10.88.103.87]) by
-        epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
-        20191220062736epsmtip131a10380db700abdff934267cc1d00f4~iAGXQbHcr2572925729epsmtip1F;
-        Fri, 20 Dec 2019 06:27:36 +0000 (GMT)
+        epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+        20200102082406epsmtip26852754a0c70b2c1a847cb9a5e2f8b64~mBEyV3bkk2215622156epsmtip2Y;
+        Thu,  2 Jan 2020 08:24:06 +0000 (GMT)
 From: Namjae Jeon <namjae.jeon@samsung.com>
 To: linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
 Cc: gregkh@linuxfoundation.org, valdis.kletnieks@vt.edu, hch@lst.de,
-        sj1557.seo@samsung.com, linkinjeon@gmail.com,
+        sj1557.seo@samsung.com, linkinjeon@gmail.com, pali.rohar@gmail.com,
         Namjae Jeon <namjae.jeon@samsung.com>
-Subject: [PATCH v8 09/13] exfat: add misc operations
-Date: Fri, 20 Dec 2019 01:24:15 -0500
-Message-Id: <20191220062419.23516-10-namjae.jeon@samsung.com>
+Subject: [PATCH v9 09/13] exfat: add misc operations
+Date: Thu,  2 Jan 2020 16:20:32 +0800
+Message-Id: <20200102082036.29643-10-namjae.jeon@samsung.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191220062419.23516-1-namjae.jeon@samsung.com>
+In-Reply-To: <20200102082036.29643-1-namjae.jeon@samsung.com>
 X-Brightmail-Tracker: 
- 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
+ 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
+        NnCIAwAA
 X-Brightmail-Tracker: 
- H4sIAAAAAAAAA+NgFlrJLMWRmVeSWpSXmKPExsWy7bCSnO7NzD+xBl1b2S2aF69ns1i5+iiT
-        xfW7t5gt9uw9yWJxedccNosf0+sttvw7wmpx6f0HFgcOj52z7rJ77J+7ht1j980GNo++LasY
-        PT5vkvM4tP0NWwBbFJdNSmpOZllqkb5dAlfGr333WAqeWlR8+x/dwPhVu4uRg0NCwESi5WdM
-        FyMXh5DAbkaJs3c+sXQxcgLFpSWOnTjDDFEjLHH4cDFEzQdGifsPt7KDxNkEtCX+bBEFKRcR
-        cJTo3XWYBaSGWWARo8S7j5NZQWqEgebPeyoJUsMioCrxacU0dhCbV8BW4uPpLmaIVfISqzcc
-        ALM5geK/vz5nArGFBGwkGretYZzAyLeAkWEVo2RqQXFuem6xYYFRXmq5XnFibnFpXrpecn7u
-        JkZwAGpp7WA8cSL+EKMAB6MSD69D2u9YIdbEsuLK3EOMEhzMSiK8tzt+xgrxpiRWVqUW5ccX
-        leakFh9ilOZgURLnlc8/FikkkJ5YkpqdmlqQWgSTZeLglGpgLDva1qJRdfRvyKn7J1IWHwuY
-        /8TalvFGhdjBF8ElZ1WvfN9+UXGO9Brlfc53j2raBnxgnPpyodviKeq5fEe81jdvXPK5uNFP
-        8US3wxPmHSzPNc8trrf61xD0OfHuteCzuwJaV0s+uTK7Zbm3UnPiIl87niNck80ydn3rZjTb
-        eSbv3XfRZme5lUosxRmJhlrMRcWJAP/g3rU8AgAA
-X-CMS-MailID: 20191220062737epcas1p3c0f9e408640148c9186b84efc6d6658b
+ H4sIAAAAAAAAA+NgFlrPLMWRmVeSWpSXmKPExsWy7bCSvO6yFbxxBk2f5S2aF69ns1i5+iiT
+        xfW7t5gt9uw9yWJxedccNosf0+stJp7+zWSx5d8RVotL7z+wOHB67Jx1l91j/9w17B67bzaw
+        efRtWcXo8XmTnMeh7W/YAtiiuGxSUnMyy1KL9O0SuDIOvE8reGNTse9wXgPjfP0uRk4OCQET
+        if/b2hm7GLk4hAR2M0rcmf+FDSIhLXHsxBnmLkYOIFtY4vDhYoiaD4wS0/5/YwSJswloS/zZ
+        IgpSLiLgKNG76zALSA2zwC5GiROnTzOCJISBFsy/OpEFxGYRUJX4tHAZO4jNK2Ar8avpMRPE
+        LnmJ1RsOMIPYnEDxme9bwW4QErCRePXvMdsERr4FjAyrGCVTC4pz03OLDQuM8lLL9YoTc4tL
+        89L1kvNzNzGCg1FLawfjiRPxhxgFOBiVeHhvzOOJE2JNLCuuzD3EKMHBrCTCWx7IGyfEm5JY
+        WZValB9fVJqTWnyIUZqDRUmcVz7/WKSQQHpiSWp2ampBahFMlomDU6qBMeHqhS35K/+Hm7nM
+        svEvEHxyypHziNSeWwweHbn7FydZXd9/+H/90UDDf0tv6B48uPIdxyEzWb8gjgOZ1k66+fu3
+        m+csDVGpnfxbcabVpGMyEh6uTTzzOI+pd7/KWWu5Yt+0wzucmne1svivm2/LO2/Zb9Oj10wu
+        93lpJR/kPF80/YPXnW/+s5VYijMSDbWYi4oTAd+AihtCAgAA
+X-CMS-MailID: 20200102082406epcas1p268f260d90213bdaabee25a7518f86625
 X-Msg-Generator: CA
 X-Sendblock-Type: SVC_REQ_APPROVE
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20191220062737epcas1p3c0f9e408640148c9186b84efc6d6658b
-References: <20191220062419.23516-1-namjae.jeon@samsung.com>
-        <CGME20191220062737epcas1p3c0f9e408640148c9186b84efc6d6658b@epcas1p3.samsung.com>
+X-CMS-RootMailID: 20200102082406epcas1p268f260d90213bdaabee25a7518f86625
+References: <20200102082036.29643-1-namjae.jeon@samsung.com>
+        <CGME20200102082406epcas1p268f260d90213bdaabee25a7518f86625@epcas1p2.samsung.com>
 Sender: linux-fsdevel-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-fsdevel.vger.kernel.org>
@@ -124,16 +125,16 @@ This adds the implementation of misc operations for exfat.
 Signed-off-by: Namjae Jeon <namjae.jeon@samsung.com>
 Signed-off-by: Sungjong Seo <sj1557.seo@samsung.com>
 ---
- fs/exfat/misc.c | 240 ++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 240 insertions(+)
+ fs/exfat/misc.c | 253 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 253 insertions(+)
  create mode 100644 fs/exfat/misc.c
 
 diff --git a/fs/exfat/misc.c b/fs/exfat/misc.c
 new file mode 100644
-index 000000000000..2fa182cd4ff2
+index 000000000000..7f533bcb3b3f
 --- /dev/null
 +++ b/fs/exfat/misc.c
-@@ -0,0 +1,240 @@
+@@ -0,0 +1,253 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
 + *  Written 1992,1993 by Werner Almesberger
@@ -232,6 +233,7 @@ index 000000000000..2fa182cd4ff2
 +	0, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 0, 0, 0,
 +};
 +
++#define TIMEZONE_SEC(x)	((x) * 15 * SECS_PER_MIN)
 +/* Convert a FAT time/date pair to a UNIX date (seconds since 1 1 70). */
 +void exfat_time_fat2unix(struct exfat_sb_info *sbi, struct timespec64 *ts,
 +		struct exfat_date_time *tp)
@@ -244,17 +246,27 @@ index 000000000000..2fa182cd4ff2
 +	if (IS_LEAP_YEAR(year) && (tp->month) > 2)
 +		ld++;
 +
-+	ts->tv_sec =  tp->second  + tp->minute * SECS_PER_MIN
-+			+ tp->hour * SECS_PER_HOUR
-+			+ (year * 365 + ld + accum_days_in_year[tp->month]
-+			+ (tp->day - 1) + DAYS_DELTA_DECADE) * SECS_PER_DAY;
-+
-+	if (!sbi->options.tz_utc)
-+		ts->tv_sec += sys_tz.tz_minuteswest * SECS_PER_MIN;
++	ts->tv_sec =  tp->second  + tp->minute * SECS_PER_MIN +
++		tp->hour * SECS_PER_HOUR +
++		(year * 365 + ld + accum_days_in_year[tp->month] +
++		(tp->day - 1) + DAYS_DELTA_DECADE) * SECS_PER_DAY;
 +
 +	ts->tv_nsec = 0;
++
++	/* Treat as local time */
++	if (!tp->timezone.valid) {
++		ts->tv_sec += sys_tz.tz_minuteswest * SECS_PER_MIN;
++		return;
++	}
++
++	/* Treat as UTC time, but need to adjust timezone to UTC0 */
++	if (tp->timezone.off <= 0x3F)
++		ts->tv_sec -= TIMEZONE_SEC(tp->timezone.off);
++	else /* 0x40 <= (tp->timezone & 0x7F) <=0x7F */
++		ts->tv_sec += TIMEZONE_SEC(0x80 - tp->timezone.off);
 +}
 +
++#define TIMEZONE_CUR_OFFSET()	((sys_tz.tz_minuteswest / (-15)) & 0x7F)
 +/* Convert linear UNIX date to a FAT time/date pair. */
 +void exfat_time_unix2fat(struct exfat_sb_info *sbi, struct timespec64 *ts,
 +		struct exfat_date_time *tp)
@@ -263,8 +275,10 @@ index 000000000000..2fa182cd4ff2
 +	time_t day, month, year;
 +	time_t ld; /* leap day */
 +
-+	if (!sbi->options.tz_utc)
-+		second -= sys_tz.tz_minuteswest * SECS_PER_MIN;
++	/* Treats as local time with proper time */
++	second -= sys_tz.tz_minuteswest * SECS_PER_MIN;
++	tp->timezone.valid = 1;
++	tp->timezone.off = TIMEZONE_CUR_OFFSET();
 +
 +	/* Jan 1 GMT 00:00:00 1980. But what about another time zone? */
 +	if (second < UNIX_SECS_1980) {
@@ -276,7 +290,7 @@ index 000000000000..2fa182cd4ff2
 +		tp->year = 0;
 +		return;
 +	}
-+#if (BITS_PER_LONG == 64)
++
 +	if (second >= UNIX_SECS_2108) {
 +		tp->second  = 59;
 +		tp->minute  = 59;
@@ -286,7 +300,6 @@ index 000000000000..2fa182cd4ff2
 +		tp->year = 127;
 +		return;
 +	}
-+#endif
 +
 +	day = second / SECS_PER_DAY - DAYS_DELTA_DECADE;
 +	year = day / 365;
@@ -333,6 +346,7 @@ index 000000000000..2fa182cd4ff2
 +	tp->hour = dt.hour;
 +	tp->min = dt.minute;
 +	tp->sec = dt.second;
++	tp->tz.value = dt.timezone.value;
 +
 +	return tp;
 +}

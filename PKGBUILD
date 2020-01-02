@@ -19,7 +19,7 @@ _basever=54
 _aufs=20191021
 _wireguard=0.0.20191226
 _ALREADYMERGED=0
-_clearerrel=3
+_clearerrel=4
 pkgver=5.4.7
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -78,19 +78,19 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         ## NVIDIA MEMORY COMPACTION PATCH (11/2019)
         'mmgupta.patch'
         ## Samsung exFAT
-        'v8-01-13-exfat-add-in-memory-and-on-disk-structures-and-headers.patch'
-        'v8-02-13-exfat-add-super-block-operations.patch'
-        'v8-03-13-exfat-add-inode-operations.patch'
-        'v8-04-13-exfat-add-directory-operations.patch'
-        'v8-05-13-exfat-add-file-operations.patch'
-        'v8-06-13-exfat-add-exfat-entry-operations.patch'
-        'v8-07-13-exfat-add-bitmap-operations.patch'
-        'v8-08-13-exfat-add-exfat-cache.patch'
-        'v8-09-13-exfat-add-misc-operations.patch'
-        'v8-10-13-exfat-add-nls-operations.patch'
-        'v8-11-13-exfat-add-Kconfig-and-Makefile.patch'
-        'v8-12-13-exfat-add-exfat-in-fs-Kconfig-and-fs-Makefile.patch'
-        'v8-13-13-MAINTAINERS-add-exfat-filesystem-edited.patch'
+        'v9-01-13-exfat-add-in-memory-and-on-disk-structures-and-headers.patch'
+        'v9-02-13-exfat-add-super-block-operations.patch'
+        'v9-03-13-exfat-add-inode-operations.patch'
+        'v9-04-13-exfat-add-directory-operations.patch'
+        'v9-05-13-exfat-add-file-operations.patch'
+        'v9-06-13-exfat-add-exfat-entry-operations.patch'
+        'v9-07-13-exfat-add-bitmap-operations.patch'
+        'v9-08-13-exfat-add-exfat-cache.patch'
+        'v9-09-13-exfat-add-misc-operations.patch'
+        'v9-10-13-exfat-add-nls-operations.patch'
+        'v9-11-13-exfat-add-Kconfig-and-Makefile.patch'
+        'v9-12-13-exfat-add-exfat-in-fs-Kconfig-and-fs-Makefile.patch'
+        'v9-13-13-MAINTAINERS-add-exfat-filesystem-edited.patch'
         ## POSTFACTUM - EXPOSE KSM INTERFACE
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/ksm-patches/0001-ksm-patches.patch"
         ## CUSTOM PATCHES - PIECES OF XANMOD
@@ -280,19 +280,19 @@ prepare() {
   #patch -Np1 -i "${srcdir}/prepatch-${_basekernel}`date +%Y%m%d`"
 
   ## CLEARER MANJARO: New exFAT drivers by Samsung
-  patch -Np1 -i ../v8-01-13-exfat-add-in-memory-and-on-disk-structures-and-headers.patch
-  patch -Np1 -i ../v8-02-13-exfat-add-super-block-operations.patch
-  patch -Np1 -i ../v8-03-13-exfat-add-inode-operations.patch
-  patch -Np1 -i ../v8-04-13-exfat-add-directory-operations.patch
-  patch -Np1 -i ../v8-05-13-exfat-add-file-operations.patch
-  patch -Np1 -i ../v8-06-13-exfat-add-exfat-entry-operations.patch
-  patch -Np1 -i ../v8-07-13-exfat-add-bitmap-operations.patch
-  patch -Np1 -i ../v8-08-13-exfat-add-exfat-cache.patch
-  patch -Np1 -i ../v8-09-13-exfat-add-misc-operations.patch
-  patch -Np1 -i ../v8-10-13-exfat-add-nls-operations.patch
-  patch -Np1 -i ../v8-11-13-exfat-add-Kconfig-and-Makefile.patch
-  patch -Np1 -i ../v8-12-13-exfat-add-exfat-in-fs-Kconfig-and-fs-Makefile.patch
-  patch -Np1 -i ../v8-13-13-MAINTAINERS-add-exfat-filesystem-edited.patch
+  patch -Np1 -i ../v9-01-13-exfat-add-in-memory-and-on-disk-structures-and-headers.patch
+  patch -Np1 -i ../v9-02-13-exfat-add-super-block-operations.patch
+  patch -Np1 -i ../v9-03-13-exfat-add-inode-operations.patch
+  patch -Np1 -i ../v9-04-13-exfat-add-directory-operations.patch
+  patch -Np1 -i ../v9-05-13-exfat-add-file-operations.patch
+  patch -Np1 -i ../v9-06-13-exfat-add-exfat-entry-operations.patch
+  patch -Np1 -i ../v9-07-13-exfat-add-bitmap-operations.patch
+  patch -Np1 -i ../v9-08-13-exfat-add-exfat-cache.patch
+  patch -Np1 -i ../v9-09-13-exfat-add-misc-operations.patch
+  patch -Np1 -i ../v9-10-13-exfat-add-nls-operations.patch
+  patch -Np1 -i ../v9-11-13-exfat-add-Kconfig-and-Makefile.patch
+  patch -Np1 -i ../v9-12-13-exfat-add-exfat-in-fs-Kconfig-and-fs-Makefile.patch
+  patch -Np1 -i ../v9-13-13-MAINTAINERS-add-exfat-filesystem-edited.patch
 
   ## CLEARER MANJARO: PIECES OF XANMOD
   patch -Np1 -i ../pieces_of_xanmod.patch
