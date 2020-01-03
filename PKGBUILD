@@ -11,15 +11,15 @@
 # And many other contributors (patches, suggestions, development, testing, ...)
 
 
-pkgbase=linux54-clearer
-pkgname=('linux54-clearer' 'linux54-clearer-headers')
+pkgbase=linux54-CLEARER
+pkgname=('linux54-CLEARER' 'linux54-CLEARER-headers')
 _kernelname=-CLEARER
 _basekernel=5.4
 _basever=54
 _aufs=20191021
 _wireguard=0.0.20191226
 _ALREADYMERGED=0
-_clearerrel=4
+_CLEARERrel=5
 pkgver=5.4.7
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -485,7 +485,7 @@ build() {
   make ${MAKEFLAGS} -j12 LOCALVERSION= bzImage modules
 }
 
-package_linux54-clearer() {
+package_linux54-CLEARER() {
   pkgdesc="The ${pkgbase/linux/Linux} kernel and modules"
   depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=27')
   optdepends=('crda: to set the correct wireless channels of your country' 'wireguard-tools: to use the Wireguard module included')
@@ -535,7 +535,7 @@ package_linux54-clearer() {
   install -Dt "${pkgdir}/usr/lib/modules/${_kernver}/build" -m644 vmlinux
 }
 
-package_linux54-clearer-headers() {
+package_linux54-CLEARER-headers() {
   pkgdesc="Header files and scripts for building modules for ${pkgbase/linux/Linux} kernel"
   provides=("linux54-headers" "linux-headers=$pkgver")
   conflicts=("linux54-headers")

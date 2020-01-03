@@ -41,41 +41,35 @@ git clone --recursive https://gitlab.manjaro.org/packages/extra/linux54-extramod
 
 # acpi_call
 cd "$CLEARERMANJARO_TMPDIR/acpi_call"
-mv ./acpi_call.install ./acpi_call-clearer.install
-#sed -i "s/_linuxprefix=.*/_linuxprefix=linux54-clearer/g" ./PKGBUILD
+mv ./acpi_call.install ./acpi_call-CLEARER.install
+sed -i "s/_linuxprefix=.*/_linuxprefix=linux54-CLEARER/g" ./PKGBUILD
 sed -i "s/_extramodules=.*/_extramodules=extramodules-5.4-CLEARER/g" ./PKGBUILD
-sed -i "s/install=\$_pkgname\.install.*/install=acpi_call-clearer\.install/g" ./PKGBUILD
-sed -i "s/acpi_call\.install\"/acpi_call-clearer\.install\"/g" ./PKGBUILD
-# Tweak dependencies (-clearer inversion)
-#sed -i "s/\$_linuxprefix-headers/linux54-headers-clearer/g" ./PKGBUILD
+sed -i "s/install=\$_pkgname\.install.*/install=acpi_call-CLEARER\.install/g" ./PKGBUILD
+sed -i "s/acpi_call\.install\"/acpi_call-CLEARER\.install\"/g" ./PKGBUILD
 
 
 # SPL/ZFS
 cd "$CLEARERMANJARO_TMPDIR/spl_zfs"
-mv ./install ./spl_zfs-clearer.install
-#sed -i "s/_linuxprefix=.*/_linuxprefix=linux54-clearer/g" ./PKGBUILD
+mv ./install ./spl_zfs-CLEARER.install
+sed -i "s/_linuxprefix=.*/_linuxprefix=linux54-CLEARER/g" ./PKGBUILD
 sed -i "s/_extramodules=.*/_extramodules=extramodules-5.4-CLEARER/g" ./PKGBUILD
-sed -i "s/install=install.*/install=spl_zfs-clearer\.install/g" ./PKGBUILD
-sed -i "s/install\"/spl_zfs-clearer\.install\"/g" ./PKGBUILD
+sed -i "s/install=install.*/install=spl_zfs-CLEARER\.install/g" ./PKGBUILD
+sed -i "s/install\"/spl_zfs-CLEARER\.install\"/g" ./PKGBUILD
 #sed -i "s/package_linux54-spl/package_linux54-clearer-spl/g" ./PKGBUILD
-#sed -i "s/package_linux54-zfs/package_linux54-clearer-zfs/g" ./PKGBUILD
-# Tweak dependencies (-clearer inversion)
-#sed -i "s/\$_linuxprefix-headers/linux54-headers-clearer/g" ./PKGBUILD
+sed -i "s/package_linux54-zfs/package_linux54-CLEARER-zfs/g" ./PKGBUILD
 
 # virtualbox-modules
 cd "$CLEARERMANJARO_TMPDIR/virtualbox-modules"
-mv ./virtualbox-host-modules.install ./virtualbox-host-modules-clearer.install
-mv ./virtualbox-guest-modules.install ./virtualbox-guest-modules-clearer.install
-#sed -i "s/_linuxprefix=.*/_linuxprefix=linux54-clearer/g" ./PKGBUILD
+mv ./virtualbox-host-modules.install ./virtualbox-host-modules-CLEARER.install
+mv ./virtualbox-guest-modules.install ./virtualbox-guest-modules-CLEARER.install
+sed -i "s/_linuxprefix=.*/_linuxprefix=linux54-CLEARER/g" ./PKGBUILD
 sed -i "s/_extramodules=.*/_extramodules=extramodules-5.4-CLEARER/g" ./PKGBUILD
-sed -i "s/install=virtualbox-host-modules\.install.*/install=virtualbox-host-modules-clearer\.install/g" ./PKGBUILD
-sed -i "s/install=virtualbox-guest-modules\.install.*/install=virtualbox-guest-modules-clearer\.install/g" ./PKGBUILD
-sed -i "s/virtualbox-host-modules\.install\"/virtualbox-host-modules-clearer\.install\"/g" ./PKGBUILD
-sed -i "s/virtualbox-guest-modules\.install\"/virtualbox-guest-modules-clearer\.install\"/g" ./PKGBUILD
-#sed -i "s/package_linux54-virtualbox-host-modules/package_linux54-clearer-virtualbox-host-modules/g" ./PKGBUILD
-#sed -i "s/package_linux54-virtualbox-guest-modules/package_linux54-clearer-virtualbox-guest-modules/g" ./PKGBUILD
-# Tweak dependencies (-clearer inversion)
-#sed -i "s/\$_linuxprefix-headers/linux54-headers-clearer/g" ./PKGBUILD
+sed -i "s/install=virtualbox-host-modules\.install.*/install=virtualbox-host-modules-CLEARER\.install/g" ./PKGBUILD
+sed -i "s/install=virtualbox-guest-modules\.install.*/install=virtualbox-guest-modules-CLEARER\.install/g" ./PKGBUILD
+sed -i "s/virtualbox-host-modules\.install\"/virtualbox-host-modules-CLEARER\.install\"/g" ./PKGBUILD
+sed -i "s/virtualbox-guest-modules\.install\"/virtualbox-guest-modules-CLEARER\.install\"/g" ./PKGBUILD
+sed -i "s/package_linux54-virtualbox-host-modules/package_linux54-CLEARER-virtualbox-host-modules/g" ./PKGBUILD
+sed -i "s/package_linux54-virtualbox-guest-modules/package_linux54-CLEARER-virtualbox-guest-modules/g" ./PKGBUILD
 
 ####################
 ## Build packages ##
@@ -138,7 +132,7 @@ cp ./*host*.pkg.tar.xz "$CLEARERMANJARO_PKGS"
 ######################
 cd "$CLEARERMANJARO_PKGS"
 sudo pacman -U ./* --noconfirm
-trizen -S wireguard-tools --noconfirm
+trizen -S wireguard-tools uksmd --noconfirm
 
 # Ask for file cleanup
 #echo ' '
