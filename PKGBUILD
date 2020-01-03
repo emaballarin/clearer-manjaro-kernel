@@ -13,7 +13,7 @@ _basekernel=5.4
 _basever=54
 _aufs=20191021
 pkgver=5.4.7
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -21,6 +21,7 @@ makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.xz"
         "https://www.kernel.org/pub/linux/kernel/v5.x/patch-${pkgver}.xz"
+        "prepatch-${_basekernel}.patch"
         # the main kernel config files
         'config.x86_64' 'config' 'config.aufs'
         # AUFS Patches
@@ -39,13 +40,12 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0004-PCI-pciehp-dont-disable-interrupt-twice-on-suspend.patch'
         '0005-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
         '0006-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
-        '0007-iwfwifi-revert-968dcfb.patch'
-        '0008-x86-intel-Disable-HPET-on-Intel-Ice-Lake-platforms.patch'
-        '0009-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
-        '0010-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
-        '0011-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
-        '0012-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
-        '0013-drm-i915-gt-detect-if-we-miss-WaIdleLiteRestore.patch'
+        '0007-x86-intel-Disable-HPET-on-Intel-Ice-Lake-platforms.patch'
+        '0008-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
+        '0009-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
+        '0010-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
+        '0011-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
+        '0012-drm-i915-gt-detect-if-we-miss-WaIdleLiteRestore.patch'
         # MANJARO Patches
         '0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch'
         '0002-apparmor-af_unix-mediation.patch'
@@ -69,6 +69,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0013-bootsplash.patch')
 sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '7d99e8136518db0601abb7b59388c07838125901f540084d4575e87602544fd1'
+            '31058568cb0ed87e6bd330121ccc19affd33ed0e3109dd01d4c42f8b4de5d3e2'
             '6a49b3f3d08d07bdccc62442a3a5cde0ba647f86c10920236fbad7be59ac47a2'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -86,7 +87,6 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '3e8ed640a8853a038e89b4cd9b17e6a9c3f8bfb19c5efa3ca65224c6aabb8e83'
             '2431629465ca508a203df31ee14f614c061f6efc128ec858cecb4a3a2ee5f1d0'
             '25d72c2c88088d78afa1658fc16c8d4ad98f4140ec69fa0ade49abfe27e8f722'
-            'f28154d389c715b4ce72d67836df6edc878b327ec6ca8dc42dfd2298f9f7509f'
             '1bcec07561c785e22ca43a140b07b586bc7717ea3c08e7549ec7a3bdfa39b7e2'
             'e2084feabc3abeed37579ff515c367014356a652b85794b1612fea4daabe85d3'
             '988ffbb96d85564a9d96145e5973339a8f78ae95d919efb2ee7bb50f7a8e8fc9'
@@ -121,7 +121,7 @@ prepare() {
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
   # enable only if you have "gen-stable-queue-patch.sh" executed before
-  #patch -Np1 -i "${srcdir}/prepatch-${_basekernel}`date +%Y%m%d`"
+  patch -Np1 -i "${srcdir}/prepatch-${_basekernel}.patch"
 
   # disable USER_NS for non-root users by default
   patch -Np1 -i ../0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
@@ -135,13 +135,12 @@ prepare() {
   patch -Np1 -i '../0004-PCI-pciehp-dont-disable-interrupt-twice-on-suspend.patch'
   patch -Np1 -i '../0005-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
   patch -Np1 -i '../0006-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
-  patch -Np1 -i '../0007-iwfwifi-revert-968dcfb.patch'
-  patch -Np1 -i '../0008-x86-intel-Disable-HPET-on-Intel-Ice-Lake-platforms.patch'
-  patch -Np1 -i '../0009-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
-  patch -Np1 -i '../0010-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
-  patch -Np1 -i '../0011-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
-  patch -Np1 -i '../0012-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
-  patch -Np1 -i '../0013-drm-i915-gt-detect-if-we-miss-WaIdleLiteRestore.patch'
+  patch -Np1 -i '../0007-x86-intel-Disable-HPET-on-Intel-Ice-Lake-platforms.patch'
+  patch -Np1 -i '../0008-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
+  patch -Np1 -i '../0009-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
+  patch -Np1 -i '../0010-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
+  patch -Np1 -i '../0011-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
+  patch -Np1 -i '../0012-drm-i915-gt-detect-if-we-miss-WaIdleLiteRestore.patch'
 
   # add patches for snapd
   # https://gitlab.com/apparmor/apparmor-kernel/tree/5.2-outoftree
