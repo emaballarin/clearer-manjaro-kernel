@@ -104,9 +104,9 @@ echo "The PREVIOUS TWO lines MIGHT have returned an error. If so, it's expected.
 #####################
 
 # Ask if deployment/install is really wanted
-#echo ' '
-#bash -c "read -p '[[DIAG]] Was the whole build process successful? Press [ENTER] to deploy and install Manjaro clearer!'"
-#echo ' '
+echo ' '
+bash -c "read -p '[[DIAG]] Was the whole build process successful? Press [ENTER] to deploy and install Manjaro clearer!'"
+echo ' '
 
 # Remove (eventually) previously built packages
 rm -R -f "$CLEARERMANJARO_PKGS/*"
@@ -135,9 +135,9 @@ sudo pacman -U ./* --noconfirm
 trizen -S wireguard-tools uksmd --noconfirm
 
 # Ask for file cleanup
-#echo ' '
-#bash -c "read -p '[[DIAG]] If the installation was successful, press [ENTER] to perform a file cleanup. Hit [CTRL]+[C] to exit without cleanup.'"
-#echo ' '
+echo ' '
+bash -c "read -p '[[DIAG]] If the installation was successful, press [ENTER] to perform a file cleanup. Hit [CTRL]+[C] to exit without cleanup.'"
+echo ' '
 
 rm -R -f "$CLEARERMANJARO_TMPDIR"
 rm -R -f "$CLEARERMANJARO_PKGS"

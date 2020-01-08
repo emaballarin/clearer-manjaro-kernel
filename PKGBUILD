@@ -118,7 +118,6 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19068.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19078.patch"
         ## CLEAR SERIES
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0051-Revert-iwlwifi-assign-directly-to-iwl_trans-cfg-in-Q.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0052-rcu-nocb-Fix-dump_tree-hierarchy-print-always-active.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0101-i8042-decrease-debug-message-level-to-info.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0102-Increase-the-ext4-default-commit-age.patch"
@@ -203,7 +202,7 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             #'SKIP'
             #'SKIP'
             #'SKIP'
-            'SKIP'
+            #'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
