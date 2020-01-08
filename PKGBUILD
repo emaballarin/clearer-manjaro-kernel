@@ -17,9 +17,9 @@ _kernelname=-CLEARER
 _basekernel=5.4
 _basever=54
 _aufs=20191223
-_wireguard=0.0.20191226
-_ALREADYMERGED=0
-_CLEARERrel=5
+_wireguard=0.0.20200105
+_ALREADYMERGED=1
+_CLEARERrel=6
 pkgver=5.4.8
 pkgrel=2
 arch=('i686' 'x86_64')
@@ -112,13 +112,10 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19046.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19053.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19054.patch"
-        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19056.patch"  #Already applied
-        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19057.patch"  #Already applied
-        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19063.patch"  #Already applied
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19056.patch"  #Already applied (?)
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19064.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19066.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19068.patch"
-        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19070.patch"  #Already applied
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19078.patch"
         ## CLEAR SERIES
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0051-Revert-iwlwifi-assign-directly-to-iwl_trans-cfg-in-Q.patch"
@@ -206,7 +203,7 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             #'SKIP'
             #'SKIP'
             #'SKIP'
-            #'SKIP'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -386,17 +383,13 @@ prepare() {
   patch -Np1 -i ../CVE-2019-19046.patch
   patch -Np1 -i ../CVE-2019-19053.patch
   patch -Np1 -i ../CVE-2019-19054.patch
-  #patch -Np1 -i ../CVE-2019-19056.patch
-  #patch -Np1 -i ../CVE-2019-19057.patch
-  #patch -Np1 -i ../CVE-2019-19063.patch
+  patch -Np1 -i ../CVE-2019-19056.patch
   patch -Np1 -i ../CVE-2019-19064.patch
   patch -Np1 -i ../CVE-2019-19066.patch
   patch -Np1 -i ../CVE-2019-19068.patch
-  #patch -Np1 -i ../CVE-2019-19070.patch
   patch -Np1 -i ../CVE-2019-19078.patch
 
   ## CLEARER MANJARO: CLEAR SERIES PATCHES
-  #patch -Np1 -i ../0051-Revert-iwlwifi-assign-directly-to-iwl_trans-cfg-in-Q.patch # Already applied upstream!
   patch -Np1 -i ../0052-rcu-nocb-Fix-dump_tree-hierarchy-print-always-active.patch
   patch -Np1 -i ../0101-i8042-decrease-debug-message-level-to-info.patch
   patch -Np1 -i ../0102-Increase-the-ext4-default-commit-age.patch
