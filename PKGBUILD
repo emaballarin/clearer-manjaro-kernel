@@ -16,11 +16,11 @@ pkgname=('linux54-CLEARER' 'linux54-CLEARER-headers')
 _kernelname=-CLEARER
 _basekernel=5.4
 _basever=54
-_aufs=20191021
+_aufs=20191223
 _wireguard=0.0.20191226
 _ALREADYMERGED=0
 _CLEARERrel=5
-pkgver=5.4.7
+pkgver=5.4.8
 pkgrel=2
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
@@ -29,11 +29,11 @@ makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.xz"
         "https://www.kernel.org/pub/linux/kernel/v5.x/patch-${pkgver}.xz"
-        "prepatch-${_basekernel}.patch"
+        #"prepatch-${_basekernel}.patch"
         # the main kernel config files
         'config.x86_64' 'config' 'config.aufs'
         # AUFS Patches
-        "aufs5.x-rcN-${_aufs}.patch"
+        "aufs5.4-${_aufs}.patch"
         'aufs5-base.patch'
         'aufs5-kbuild.patch'
         'aufs5-loopback.patch'
@@ -54,6 +54,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0010-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
         '0011-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
         '0012-drm-i915-gt-detect-if-we-miss-WaIdleLiteRestore.patch'
+        '0013-pinctrl-sunrisepoint-add-missing-interrupt-status-register-offset.patch'
         # MANJARO Patches
         '0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch'
         '0002-apparmor-af_unix-mediation.patch'
@@ -155,20 +156,19 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat-${_wireguard}.tar.xz")
 
 sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
-            '7d99e8136518db0601abb7b59388c07838125901f540084d4575e87602544fd1'
-            '31058568cb0ed87e6bd330121ccc19affd33ed0e3109dd01d4c42f8b4de5d3e2'
+            '5daea86d29246b5a8e193c097756bc833b33dd6fa6419f9cb52bcbf16a192a1b'
             # x86_64 config -->
             'SKIP'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
-            'bf9480b92c5feaf8583785c2f4332df3bfa4fa2eeac8ebd85da24c6a88dac58c'
-            '7ff57fd146dc4c8f5fd37062e44cbf7e70164df5a684d3b4bb3e8a787c060503'
-            '9df40db35678487d13b27a5e4ad4d7aac4d78cd8c778fb9cd5d23549e0747002'
-            '16e981ac6beedd3bc264e03c1e8d25681d8ad9e5ad469e3630b3e2e6ba76e8ec'
-            'a44fb19196c2e63e2733a210358afb309f598d8155488424a8620ec7f309de08'
-            'def89310169a70e4be5f9e67f85e03ff6113844c104357026670a6362900efcb'
-            '55dc8df3a3d3e248eb93f5878f567428f77acb72f6243934bd6980cfede3b6ca'
-            'e2d75e11a2c220e5d3a450bb226e7e19d62a871764da5f76034fbc135fe6c749'
+            'eb2de93799728d81b288e4d705c2194ed29da5b1316fab2ba01d1fcf6125d740'
+            '452d88811439abbcdf728bc29d637e8f8193b6b65e66877994b944a008cd6483'
+            '5e75a6227bcc67d1d22ab84f897d9b48b600c59530290988f6caa937f08f5c93'
+            'c98e3f0b061c5ce7462f135af999aab4c8808ab02f08d3e7be9ece9bd42cbd8f'
+            'aebc190f80fcc6add48cf6f0db20aba0600d700df9fe03b5ebfadd8359f4730f'
+            '0f650de173629ac0dd0ee0106c77036f8d6a744bdf97999f3a88c57ecb5e37ee'
+            'a5948d35cce73856200493a5e9d801ce2cabcb41f3dd471eef5dbef16ddf4616'
+            '497055144417f07fd074cad7616b75105b9514c6cbfd169b0a3cf7cf21016d05'
             '7685d526bbdbfa795986591a70071c960ff572f56d3501774861728a9df8664c'
             '7baea65989ef0d29ab4eb8296759193b8f93c31248d08e944e1bdf0059ccdfdd'
             'abcf6043c594d5514118124a8f2cf8787557a95338fa0ff7f28a142567bafed0'
@@ -181,6 +181,7 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '5257159e20a5fcb102a3b3ee6de33882a9e132e7f1d4345b8730effdd0240bb6'
             '2516be40fe063f7a448c69f170d628dbf549c3e084c2c7eb6910fd4782a6e73f'
             '8830109e3cfc380eb8c20bca676fcdd80ea91bb60f356d0482c4cf6647e1048b'
+            '33ec2170ace6b4f7dbc1cc751110d325d8619202d0f312587adbc4bef7a045ce'
             '98202b8ad70d02d86603294bae967874fa7b18704b5c7b867568b0fd33a08921'
             '5cbbf3db9ea3205e9b89fe3049bea6dd626181db0cb0dc461e4cf5a400c68dd6'
             'c7dbec875d0c1d6782c037a1dcefff2e5bdb5fc9dffac1beea07dd8c1bdef1d7'
@@ -277,7 +278,7 @@ prepare() {
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
   # enable only if you have "gen-stable-queue-patch.sh" executed before
-  patch -Np1 -i "${srcdir}/prepatch-${_basekernel}.patch"
+  #patch -Np1 -i "${srcdir}/prepatch-${_basekernel}.patch"
 
   ## CLEARER MANJARO: New exFAT drivers by Samsung
   patch -Np1 -i ../v9-01-13-exfat-add-in-memory-and-on-disk-structures-and-headers.patch
@@ -335,6 +336,7 @@ prepare() {
   patch -Np1 -i '../0010-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
   patch -Np1 -i '../0011-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
   patch -Np1 -i '../0012-drm-i915-gt-detect-if-we-miss-WaIdleLiteRestore.patch'
+  patch -Np1 -i '../0013-pinctrl-sunrisepoint-add-missing-interrupt-status-register-offset.patch'
 
   # add patches for snapd
   # https://gitlab.com/apparmor/apparmor-kernel/tree/5.2-outoftree
@@ -369,14 +371,14 @@ prepare() {
   git apply -p1 < "${srcdir}/0013-bootsplash.patch"
 
   # add aufs5 support
-#  patch -Np1 -i "${srcdir}/aufs5.x-rcN-${_aufs}.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-base.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-kbuild.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-loopback.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-mmap.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-standalone.patch"
-#  patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
-#  patch -Np1 -i "${srcdir}/vfs-ino.patch"
+  patch -Np1 -i "${srcdir}/aufs5.4-${_aufs}.patch"
+  patch -Np1 -i "${srcdir}/aufs5-base.patch"
+  patch -Np1 -i "${srcdir}/aufs5-kbuild.patch"
+  patch -Np1 -i "${srcdir}/aufs5-loopback.patch"
+  patch -Np1 -i "${srcdir}/aufs5-mmap.patch"
+  patch -Np1 -i "${srcdir}/aufs5-standalone.patch"
+  patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
+  patch -Np1 -i "${srcdir}/vfs-ino.patch"
 
   ## CLEARER MANJARO: CLEAR CVE FIXES
   patch -Np1 -i ../CVE-2019-12379.patch
@@ -446,7 +448,7 @@ prepare() {
     cat "${srcdir}/config" > ./.config
   fi
 
-#  cat "${srcdir}/config.aufs" >> ./.config
+  cat "${srcdir}/config.aufs" >> ./.config
 
   if [ "${_kernelname}" != "" ]; then
     sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"${_kernelname}\"|g" ./.config
