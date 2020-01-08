@@ -389,7 +389,7 @@ prepare() {
   patch -Np1 -i ../CVE-2019-19078.patch
 
   ## CLEARER MANJARO: CLEAR SERIES PATCHES
-  patch -Np1 -i ../0052-rcu-nocb-Fix-dump_tree-hierarchy-print-always-active.patch
+  patch -Np1 -i ../0051-rcu-nocb-Fix-dump_tree-hierarchy-print-always-active.patch
   patch -Np1 -i ../0101-i8042-decrease-debug-message-level-to-info.patch
   patch -Np1 -i ../0102-Increase-the-ext4-default-commit-age.patch
   patch -Np1 -i ../0103-silence-rapl.patch
