@@ -13,7 +13,7 @@ _basekernel=5.4
 _basever=54
 _aufs=20191223
 pkgver=5.4.8
-pkgrel=2
+pkgrel=3
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -21,7 +21,7 @@ makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
 source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.xz"
         "https://www.kernel.org/pub/linux/kernel/v5.x/patch-${pkgver}.xz"
-        #"prepatch-${_basekernel}.patch"
+        "prepatch-${_basekernel}.patch"
         # the main kernel config files
         'config.x86_64' 'config' 'config.aufs'
         # AUFS Patches
@@ -54,6 +54,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch'
         '0001-nonupstream-navi10-vfio-reset.patch'
         '0001-drm-amdgpu-Add-DC-feature-mask-to-disable-fractional-pwm.patch'
+        '0001-e1000e-Revert-e1000e-Make-watchdog-use-delayed-work.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -70,6 +71,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0013-bootsplash.patch')
 sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '5daea86d29246b5a8e193c097756bc833b33dd6fa6419f9cb52bcbf16a192a1b'
+            'c82005019d999b6b4ffc6d2d23649c4e631dfa92c497e835bc0ac3cf2b4db791'
             '6a49b3f3d08d07bdccc62442a3a5cde0ba647f86c10920236fbad7be59ac47a2'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -100,6 +102,7 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '77746aea71ffb06c685e7769b49c78e29af9b2e28209cd245e95d9cbb0dba3c9'
             '7a2758f86dd1339f0f1801de2dbea059b55bf3648e240878b11e6d6890d3089c'
             '1fd4518cb0518d68f8db879f16ce16455fdc2200ed232f9e27fb5f1f3b5e4906'
+            'fafc8057b502bcfe5aa67cfb9bb97b0094adc2796a9689e32229a97096c5766e'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -131,6 +134,9 @@ prepare() {
   # https://lkml.org/lkml/2019/10/16/1230
   patch -Np1 -i '../0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch'
   patch -Np1 -i '../0003-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch'
+
+  # https://bugs.archlinux.org/task/64018
+  patch -Np1 -i '../0001-e1000e-Revert-e1000e-Make-watchdog-use-delayed-work.patch'
 
   # other fixes by Arch
   patch -Np1 -i '../0004-PCI-pciehp-dont-disable-interrupt-twice-on-suspend.patch'
