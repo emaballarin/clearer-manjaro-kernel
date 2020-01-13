@@ -1,87 +1,7 @@
-From patchwork Sun Jan  5 07:29:22 2020
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Patchwork-Submitter: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
-X-Patchwork-Id: 1217709
-X-Patchwork-Delegate: jeffrey.t.kirsher@intel.com
-Return-Path: <intel-wired-lan-bounces@osuosl.org>
-X-Original-To: incoming@patchwork.ozlabs.org
-Delivered-To: patchwork-incoming@bilbo.ozlabs.org
-Authentication-Results: ozlabs.org; spf=pass (sender SPF authorized)
- smtp.mailfrom=osuosl.org (client-ip=140.211.166.138;
- helo=whitealder.osuosl.org;
- envelope-from=intel-wired-lan-bounces@osuosl.org;
- receiver=<UNKNOWN>)
-Authentication-Results: ozlabs.org;
- dmarc=fail (p=none dis=none) header.from=intel.com
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by ozlabs.org (Postfix) with ESMTPS id 47r9JH35Jnz9sP3
- for <incoming@patchwork.ozlabs.org>;
- Sun,  5 Jan 2020 18:29:34 +1100 (AEDT)
-Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 6F7CB85D5C;
- Sun,  5 Jan 2020 07:29:32 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id E2VKIFs0i3TK; Sun,  5 Jan 2020 07:29:29 +0000 (UTC)
-Received: from ash.osuosl.org (ash.osuosl.org [140.211.166.34])
- by whitealder.osuosl.org (Postfix) with ESMTP id CCEA585D26;
- Sun,  5 Jan 2020 07:29:29 +0000 (UTC)
-X-Original-To: intel-wired-lan@lists.osuosl.org
-Delivered-To: intel-wired-lan@lists.osuosl.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by ash.osuosl.org (Postfix) with ESMTP id 18BBD1BF427
- for <intel-wired-lan@lists.osuosl.org>;
- Sun,  5 Jan 2020 07:29:28 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 1401085247
- for <intel-wired-lan@lists.osuosl.org>;
- Sun,  5 Jan 2020 07:29:28 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ajACN4dcrgln for <intel-wired-lan@lists.osuosl.org>;
- Sun,  5 Jan 2020 07:29:26 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id D020685239
- for <intel-wired-lan@lists.osuosl.org>;
- Sun,  5 Jan 2020 07:29:26 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 04 Jan 2020 23:29:26 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.69,397,1571727600"; d="scan'208";a="420406236"
-Received: from jtkirshe-desk1.jf.intel.com ([134.134.177.74])
- by fmsmga005.fm.intel.com with ESMTP; 04 Jan 2020 23:29:25 -0800
+From ddd410cff71ff21a64d66039f30e197314e18e23 Mon Sep 17 00:00:00 2001
 From: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
-To: intel-wired-lan@lists.osuosl.org
-Date: Sat,  4 Jan 2020 23:29:22 -0800
-Message-Id: <20200105072922.3810260-1-jeffrey.t.kirsher@intel.com>
-X-Mailer: git-send-email 2.24.1
-MIME-Version: 1.0
-Subject: [Intel-wired-lan] [net v2] e1000e: Revert "e1000e: Make watchdog
- use delayed work"
-X-BeenThere: intel-wired-lan@osuosl.org
-X-Mailman-Version: 2.1.29
-Precedence: list
-List-Id: Intel Wired Ethernet Linux Kernel Driver Development
- <intel-wired-lan.osuosl.org>
-List-Unsubscribe: <https://lists.osuosl.org/mailman/options/intel-wired-lan>, 
- <mailto:intel-wired-lan-request@osuosl.org?subject=unsubscribe>
-List-Archive: <http://lists.osuosl.org/pipermail/intel-wired-lan/>
-List-Post: <mailto:intel-wired-lan@osuosl.org>
-List-Help: <mailto:intel-wired-lan-request@osuosl.org?subject=help>
-List-Subscribe: <https://lists.osuosl.org/mailman/listinfo/intel-wired-lan>, 
- <mailto:intel-wired-lan-request@osuosl.org?subject=subscribe>
-Errors-To: intel-wired-lan-bounces@osuosl.org
-Sender: "Intel-wired-lan" <intel-wired-lan-bounces@osuosl.org>
+Date: Sat, 4 Jan 2020 23:29:22 -0800
+Subject: e1000e: Revert "e1000e: Make watchdog use delayed work"
 
 This reverts commit 59653e6497d16f7ac1d9db088f3959f57ee8c3db.
 
@@ -90,11 +10,8 @@ reset unexpectedly.
 
 Signed-off-by: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
 ---
-v2: fix the partial revert of Alex Duyck's patch to remove the use of
-    __E1000_DOWN bit
-
- drivers/net/ethernet/intel/e1000e/e1000.h  |  5 +-
- drivers/net/ethernet/intel/e1000e/netdev.c | 54 ++++++++++------------
+ drivers/net/ethernet/intel/e1000e/e1000.h  |  5 ++-
+ drivers/net/ethernet/intel/e1000e/netdev.c | 54 ++++++++++++++----------------
  2 files changed, 27 insertions(+), 32 deletions(-)
 
 diff --git a/drivers/net/ethernet/intel/e1000e/e1000.h b/drivers/net/ethernet/intel/e1000e/e1000.h
@@ -118,10 +35,10 @@ index 6c51b1bad8c4..37a2314d3e6b 100644
  	const struct e1000_info *ei;
  
 diff --git a/drivers/net/ethernet/intel/e1000e/netdev.c b/drivers/net/ethernet/intel/e1000e/netdev.c
-index fe7997c18a10..7c5b18d87b49 100644
+index d7d56e42a6aa..060daf66bf63 100644
 --- a/drivers/net/ethernet/intel/e1000e/netdev.c
 +++ b/drivers/net/ethernet/intel/e1000e/netdev.c
-@@ -1780,8 +1780,7 @@ static irqreturn_t e1000_intr_msi(int __
+@@ -1780,8 +1780,7 @@ static irqreturn_t e1000_intr_msi(int __always_unused irq, void *data)
  		}
  		/* guard against interrupt when we're going down */
  		if (!test_bit(__E1000_DOWN, &adapter->state))
@@ -131,7 +48,7 @@ index fe7997c18a10..7c5b18d87b49 100644
  	}
  
  	/* Reset on uncorrectable ECC error */
-@@ -1861,8 +1860,7 @@ static irqreturn_t e1000_intr(int __alwa
+@@ -1861,8 +1860,7 @@ static irqreturn_t e1000_intr(int __always_unused irq, void *data)
  		}
  		/* guard against interrupt when we're going down */
  		if (!test_bit(__E1000_DOWN, &adapter->state))
@@ -141,7 +58,7 @@ index fe7997c18a10..7c5b18d87b49 100644
  	}
  
  	/* Reset on uncorrectable ECC error */
-@@ -1907,8 +1905,7 @@ static irqreturn_t e1000_msix_other(int
+@@ -1907,8 +1905,7 @@ static irqreturn_t e1000_msix_other(int __always_unused irq, void *data)
  		hw->mac.get_link_status = true;
  		/* guard against interrupt when we're going down */
  		if (!test_bit(__E1000_DOWN, &adapter->state))
@@ -151,7 +68,7 @@ index fe7997c18a10..7c5b18d87b49 100644
  	}
  
  	if (!test_bit(__E1000_DOWN, &adapter->state))
-@@ -4281,6 +4278,7 @@ void e1000e_down(struct e1000_adapter *a
+@@ -4281,6 +4278,7 @@ void e1000e_down(struct e1000_adapter *adapter, bool reset)
  
  	napi_synchronize(&adapter->napi);
  
@@ -159,7 +76,7 @@ index fe7997c18a10..7c5b18d87b49 100644
  	del_timer_sync(&adapter->phy_info_timer);
  
  	spin_lock(&adapter->stats64_lock);
-@@ -5152,11 +5150,25 @@ static void e1000e_check_82574_phy_worka
+@@ -5152,11 +5150,25 @@ static void e1000e_check_82574_phy_workaround(struct e1000_adapter *adapter)
  	}
  }
  
@@ -198,7 +115,7 @@ index fe7997c18a10..7c5b18d87b49 100644
  }
  
  #define E1000_TX_FLAGS_CSUM		0x00000001
-@@ -7259,21 +7270,11 @@ static int e1000_probe(struct pci_dev *p
+@@ -7259,21 +7270,11 @@ static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
  		goto err_eeprom;
  	}
  
@@ -222,7 +139,7 @@ index fe7997c18a10..7c5b18d87b49 100644
  	INIT_WORK(&adapter->downshift_task, e1000e_downshift_workaround);
  	INIT_WORK(&adapter->update_phy_task, e1000e_update_phy_task);
  	INIT_WORK(&adapter->print_hang_task, e1000_print_hw_hang);
-@@ -7367,9 +7368,6 @@ static int e1000_probe(struct pci_dev *p
+@@ -7367,9 +7368,6 @@ static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
  	return 0;
  
  err_register:
@@ -232,7 +149,7 @@ index fe7997c18a10..7c5b18d87b49 100644
  	if (!(adapter->flags & FLAG_HAS_AMT))
  		e1000e_release_hw_control(adapter);
  err_eeprom:
-@@ -7416,17 +7414,15 @@ static void e1000_remove(struct pci_dev
+@@ -7416,17 +7414,15 @@ static void e1000_remove(struct pci_dev *pdev)
  	 */
  	if (!down)
  		set_bit(__E1000_DOWN, &adapter->state);
@@ -252,3 +169,6 @@ index fe7997c18a10..7c5b18d87b49 100644
  	if (adapter->flags & FLAG_HAS_HW_TIMESTAMP) {
  		cancel_work_sync(&adapter->tx_hwtstamp_work);
  		if (adapter->tx_hwtstamp_skb) {
+-- 
+cgit v1.2.1-1-g437b
+
