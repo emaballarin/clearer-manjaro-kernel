@@ -98,11 +98,11 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         'inteluf_01_edited.patch'
         'inteluf_02.patch'
         ## Intel ISST fixes
-        'isst_01.patch'
-        'isst_02_edited.patch'
-        'isst_03.patch'
-        'isst_04.patch'
-        'isst_05.patch'
+        #'isst_01.patch'
+        #'isst_02_edited.patch'
+        #'isst_03.patch'
+        #'isst_04.patch'
+        #'isst_05.patch'
         ## POSTFACTUM - EXPOSE KSM INTERFACE
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/ksm-patches/0001-ksm-patches.patch"
         ## CUSTOM PATCHES - PIECES OF XANMOD
@@ -272,11 +272,6 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             'SKIP'
             'SKIP'
             'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
             'SKIP')
 prepare() {
   cd "${srcdir}/linux-${_basekernel}"
@@ -307,11 +302,11 @@ prepare() {
 #   patch -Np1 -i ../v9-13-13-MAINTAINERS-add-exfat-filesystem-edited.patch
 
   ## Intel ISST fixes
-  patch -Np1 -i ../isst_01.patch
-  patch -Np1 -i ../isst_02_edited.patch
-  patch -Np1 -i ../isst_03.patch
-  patch -Np1 -i ../isst_04.patch
-  patch -Np1 -i ../isst_05.patch
+  #patch -Np1 -i ../isst_01.patch
+  #patch -Np1 -i ../isst_02_edited.patch
+  #patch -Np1 -i ../isst_03.patch
+  #patch -Np1 -i ../isst_04.patch
+  #patch -Np1 -i ../isst_05.patch
 
   ## Intel Uncore Frequency driver
   patch -Np1 -i ../inteluf_01_edited.patch
