@@ -1,0 +1,32 @@
+From: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+To: andriy.shevchenko@intel.com, prarit@redhat.com
+Cc: platform-driver-x86@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+Subject: [PATCH 5/5] tools/power/x86/intel-speed-select: Update version
+Date: Tue, 14 Jan 2020 11:22:17 -0800
+Message-ID: <20200114192217.580364-6-srinivas.pandruvada@linux.intel.com> (raw)
+In-Reply-To: <20200114192217.580364-1-srinivas.pandruvada@linux.intel.com>
+
+As we added new set of mailbox commands, increment version.
+
+Signed-off-by: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+---
+ tools/power/x86/intel-speed-select/isst-config.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/power/x86/intel-speed-select/isst-config.c b/tools/power/x86/intel-speed-select/isst-config.c
+index 84baba34d311..2b2b8167c65b 100644
+--- a/tools/power/x86/intel-speed-select/isst-config.c
++++ b/tools/power/x86/intel-speed-select/isst-config.c
+@@ -15,7 +15,7 @@ struct process_cmd_struct {
+ 	int arg;
+ };
+
+-static const char *version_str = "v1.1";
++static const char *version_str = "v1.2";
+ static const int supported_api_ver = 1;
+ static struct isst_if_platform_info isst_platform_info;
+ static char *progname;
+--
+2.24.1

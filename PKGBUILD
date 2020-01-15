@@ -18,8 +18,8 @@ _basekernel=5.4
 _basever=54
 _aufs=20191223
 _wireguard=0.0.20200105
-_ALREADYMERGED=1
-_CLEARERrel=6
+_ALREADYMERGED=0
+_CLEARERrel=9
 pkgver=5.4.11
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -94,6 +94,15 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         'v9-11-13-exfat-add-Kconfig-and-Makefile.patch'
         'v9-12-13-exfat-add-exfat-in-fs-Kconfig-and-fs-Makefile.patch'
         'v9-13-13-MAINTAINERS-add-exfat-filesystem-edited.patch'
+        ## Intel Uncore Frequency driver
+        'inteluf_01_edited.patch'
+        'inteluf_02.patch'
+        ## Intel ISST fixes
+        'isst_01.patch'
+        'isst_02.patch'
+        'isst_03.patch'
+        'isst_04.patch'
+        'isst_05.patch'
         ## POSTFACTUM - EXPOSE KSM INTERFACE
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/ksm-patches/0001-ksm-patches.patch"
         ## CUSTOM PATCHES - PIECES OF XANMOD
@@ -202,11 +211,13 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
             ##
-            #'SKIP'
-            #'SKIP'
-            #'SKIP'
-            #'SKIP'
-            #'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -294,6 +305,17 @@ prepare() {
 #   patch -Np1 -i ../v9-11-13-exfat-add-Kconfig-and-Makefile.patch
 #   patch -Np1 -i ../v9-12-13-exfat-add-exfat-in-fs-Kconfig-and-fs-Makefile.patch
 #   patch -Np1 -i ../v9-13-13-MAINTAINERS-add-exfat-filesystem-edited.patch
+
+  ## Intel ISST fixes
+  patch -Np1 -i ../isst_01.patch
+  patch -Np1 -i ../isst_02.patch
+  patch -Np1 -i ../isst_03.patch
+  patch -Np1 -i ../isst_04.patch
+  patch -Np1 -i ../isst_05.patch
+
+  ## Intel Uncore Frequency driver
+  patch -Np1 -i ../inteluf_01_edited.patch
+  patch -Np1 -i ../inteluf_02.patch
 
   ## CLEARER MANJARO: PIECES OF XANMOD
   patch -Np1 -i ../pieces_of_xanmod.patch
