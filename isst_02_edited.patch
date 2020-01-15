@@ -110,7 +110,7 @@ diff --git a/tools/power/x86/intel-speed-select/isst-display.c b/tools/power/x86
 index 040dd09d5eee..1d1439036c12 100644
 --- a/tools/power/x86/intel-speed-select/isst-display.c
 +++ b/tools/power/x86/intel-speed-select/isst-display.c
-@@ -418,6 +418,17 @@ void isst_ctdp_display_information(int cpu, FILE *outf, int tdp_level,
+@@ -418,6 +418,17 @@ 		} else
  			snprintf(value, sizeof(value), "unsupported");
  		format_and_print(outf, base_level + 4, header, value);
 
@@ -125,9 +125,9 @@ index 040dd09d5eee..1d1439036c12 100644
 +			snprintf(value, sizeof(value), "unsupported");
 +		format_and_print(outf, base_level + 4, header, value);
 +
- 		if (is_clx_n_platform()) {
- 			if (ctdp_level->pbf_support)
- 				_isst_pbf_display_information(cpu, outf,
+ 		snprintf(header, sizeof(header),
+ 			 "speed-select-base-freq");
+ 		if (ctdp_level->pbf_support) {
 diff --git a/tools/power/x86/intel-speed-select/isst.h b/tools/power/x86/intel-speed-select/isst.h
 index cdf0f8a6dbbf..ad5aa6341d0f 100644
 --- a/tools/power/x86/intel-speed-select/isst.h
@@ -140,9 +140,9 @@ index cdf0f8a6dbbf..ad5aa6341d0f 100644
 +#define WRITE_PM_CONFIG				0x95
 +#define PM_FEATURE				0x03
 +
- #define DISP_FREQ_MULTIPLIER 100
-
  struct isst_clos_config {
+ 	int pkg_id;
+ 	int die_id;
 @@ -119,6 +123,8 @@ struct isst_pkg_ctdp_level_info {
  	int pbf_support;
  	int fact_enabled;

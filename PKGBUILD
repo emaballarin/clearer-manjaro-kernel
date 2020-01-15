@@ -99,7 +99,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         'inteluf_02.patch'
         ## Intel ISST fixes
         'isst_01.patch'
-        'isst_02.patch'
+        'isst_02_edited.patch'
         'isst_03.patch'
         'isst_04.patch'
         'isst_05.patch'
@@ -308,7 +308,7 @@ prepare() {
 
   ## Intel ISST fixes
   patch -Np1 -i ../isst_01.patch
-  patch -Np1 -i ../isst_02.patch
+  patch -Np1 -i ../isst_02_edited.patch
   patch -Np1 -i ../isst_03.patch
   patch -Np1 -i ../isst_04.patch
   patch -Np1 -i ../isst_05.patch
