@@ -20,7 +20,7 @@ _aufs=20191223
 _wireguard=0.0.20200105
 _ALREADYMERGED=0
 _CLEARERrel=9
-pkgver=5.4.11
+pkgver=5.4.12
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
@@ -163,7 +163,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat-${_wireguard}.tar.xz")
 
 sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
-            '6e675f327db0f7db9dce8791895f9a22f9e5e2ed037f6b656bb414ed6c824d2e'
+            'dff283ff67e7e21bedc49290de630dba6e1e7ca64b16ada306f1298a1b7f53ac'
             # x86_64 config -->
             'SKIP'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
