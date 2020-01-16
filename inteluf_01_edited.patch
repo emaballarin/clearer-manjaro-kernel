@@ -59,6 +59,7 @@ index 27d5b40fb717..6013c3b96cfd 100644
 
 +config INTEL_UNCORE_FREQ_CONTROL
 +	tristate "Intel Uncore frequency control driver"
++	depends on X86_64
 +	help
 +	  This driver allows control of uncore frequency limits on
 +	  supported server platforms.

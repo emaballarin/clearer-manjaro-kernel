@@ -115,8 +115,11 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://ballarin.cc/patchwork/00004-manjaro-stun-tickat600.patch"
         "https://ballarin.cc/patchwork/00005-manjaro-stun-tcpcake.patch"
         ## BFQ Lucjan
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/block-patches-v2-sep/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/bfq-paolo-patches/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/bfq-dev-lucjan/5.4-bfq-dev-lucjan-v11-r2K191206.patch"
+        ## Zen Lucjan
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/zen-patches-v8-sep/0006-ZEN-intel-pstate-Implement-enable-parameter.patch"
         ## CLEAR CVEs
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-12379.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19043.patch"
@@ -267,6 +270,8 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             'SKIP'
             'SKIP'
             'SKIP'
+            'SKIP'
+            'SKIP'
             'SKIP')
 prepare() {
   cd "${srcdir}/linux-${_basekernel}"
@@ -303,6 +308,9 @@ prepare() {
   #patch -Np1 -i ../isst_04.patch
   #patch -Np1 -i ../isst_05.patch
 
+  ## Zen Lucjan
+  patch -Np1 -i ../0006-ZEN-intel-pstate-Implement-enable-parameter.patch
+
   ## Intel Uncore Frequency driver
   patch -Np1 -i ../inteluf_01_edited.patch
   patch -Np1 -i ../inteluf_02.patch
@@ -327,6 +335,7 @@ prepare() {
   patch -Np1 -i ../0001-futex-patches.patch
 
   ## CLEARER MANJARO: BFQ PATCHES
+  patch -Np1 -i ../0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
   patch -Np1 -i ../0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
   patch -Np1 -i ../5.4-bfq-dev-lucjan-v11-r2K191206.patch
 
