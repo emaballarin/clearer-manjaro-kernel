@@ -13,7 +13,7 @@ _basekernel=5.4
 _basever=54
 _aufs=20191223
 pkgver=5.4.13
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -37,24 +37,26 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch'
         '0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch'
         '0003-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch'
-        '0005-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
-        '0006-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
-        '0007-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
-        '0008-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
-        '0009-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
-        '0010-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
-        '0011-drm-i915-gt-detect-if-we-miss-WaIdleLiteRestore.patch'
-        '0012-pinctrl-sunrisepoint-add-missing-interrupt-status-register-offset.patch'
-        '0013-revert-iwlwifi-mvm-fix-scan-config-command-size.patch'
-        '0014-Revert-e1000e-make-watchdog-use-delayed-work.patch'
+        '0004-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
+        '0005-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
+        '0006-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
+        '0007-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
+        '0008-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
+        '0009-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
+        '0010-drm-i915-limit-audio-CDCLK-constraint-back-to-GLK-only.patch'
+        '0011-pinctrl-sunrisepoint-add-missing-interrupt-status-register-offset.patch'
+        '0012-revert-iwlwifi-mvm-fix-scan-config-command-size.patch'
+        '0013-Revert-e1000e-make-watchdog-use-delayed-work.patch'
+        '0014-drm-amdgpu-add-dc-feature-mask-to-disable-fractional-pwm.patch'
+        '0015-ptp-free-ptp-device-pin-descriptors-properly.patch'
         # MANJARO Patches
         '0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch'
         '0002-apparmor-af_unix-mediation.patch'
         '0003-apparmor-fix-use-after-free-in-sk_peer_label.patch'
         '0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch'
         '0001-nonupstream-navi10-vfio-reset.patch'
-        '0001-drm-amdgpu-Add-DC-feature-mask-to-disable-fractional-pwm.patch'
         '0001-i2c-nuvoton-nc677x-hwmon-driver.patch'
+        '0001-revert-drm-i915-cmdparser-use-explicit-goto-for-error-paths.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -71,7 +73,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0013-bootsplash.patch')
 sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '40f429d1a47db11033179f4ac3306d72c72556a6727ead7a29dc0f4412a697d1'
-            '37bed4602ab04f4978c7440d17f1fd8befe494764a08ebd26c8fe6e1ef3be6b8'
+            '8e6dc31f5b76de3c398eef312b5c3423039b4bd1b3e7776542c409fd26d60a3c'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             'eb2de93799728d81b288e4d705c2194ed29da5b1316fab2ba01d1fcf6125d740'
@@ -87,21 +89,23 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             'abcf6043c594d5514118124a8f2cf8787557a95338fa0ff7f28a142567bafed0'
             '2431629465ca508a203df31ee14f614c061f6efc128ec858cecb4a3a2ee5f1d0'
             '25d72c2c88088d78afa1658fc16c8d4ad98f4140ec69fa0ade49abfe27e8f722'
-            '2516be40fe063f7a448c69f170d628dbf549c3e084c2c7eb6910fd4782a6e73f'
+            'fcb9e515bf0816db05446fd8ced7468756bea3cf01b060504bace41b2e7f5f74'
             'e2084feabc3abeed37579ff515c367014356a652b85794b1612fea4daabe85d3'
             '988ffbb96d85564a9d96145e5973339a8f78ae95d919efb2ee7bb50f7a8e8fc9'
             '5257159e20a5fcb102a3b3ee6de33882a9e132e7f1d4345b8730effdd0240bb6'
-            '8830109e3cfc380eb8c20bca676fcdd80ea91bb60f356d0482c4cf6647e1048b'
+            '763cd8e7d5b4a5c24f7a82f24c64ec5503ea5c81dfb42fa74150136c0ca066fd'
             '33ec2170ace6b4f7dbc1cc751110d325d8619202d0f312587adbc4bef7a045ce'
             '11a29c93dad7f0eb54e18e3420b37fb4dc24a4053a982650d014797d6e27c6b1'
             '0f11af2c5c10e029ad5ac3e25dfaf1348cdfa398e8c62938937ee85eeb9d015b'
+            'cba63c224af57d6b9432bb5f507121148d02b313c5f87c55504f49632a3a6062'
+            'b8b878b0bb2c25f3f9e8250e8ecf5d05cd5a0b8c0ffa7ab55fbdbd74042d8878'
             '98202b8ad70d02d86603294bae967874fa7b18704b5c7b867568b0fd33a08921'
             '5cbbf3db9ea3205e9b89fe3049bea6dd626181db0cb0dc461e4cf5a400c68dd6'
             'c7dbec875d0c1d6782c037a1dcefff2e5bdb5fc9dffac1beea07dd8c1bdef1d7'
             '77746aea71ffb06c685e7769b49c78e29af9b2e28209cd245e95d9cbb0dba3c9'
             '7a2758f86dd1339f0f1801de2dbea059b55bf3648e240878b11e6d6890d3089c'
-            '1fd4518cb0518d68f8db879f16ce16455fdc2200ed232f9e27fb5f1f3b5e4906'
             '0556859a8168c8f7da9af8e2059d33216d9e5378d2cac70ca54c5ff843fa5add'
+            '35f351e0b10c0c8ce1e11d98f0d9941593e914fc04c98aaf46ffaf5b285f9368'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -138,16 +142,21 @@ prepare() {
   patch -Np1 -i '../0001-i2c-nuvoton-nc677x-hwmon-driver.patch'
 
   # other fixes by Arch
-  patch -Np1 -i '../0005-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
-  patch -Np1 -i '../0006-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
-  patch -Np1 -i '../0007-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
-  patch -Np1 -i '../0008-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
-  patch -Np1 -i '../0009-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
-  patch -Np1 -i '../0010-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
-  patch -Np1 -i '../0011-drm-i915-gt-detect-if-we-miss-WaIdleLiteRestore.patch'
-  patch -Np1 -i '../0012-pinctrl-sunrisepoint-add-missing-interrupt-status-register-offset.patch'
-  patch -Np1 -i '../0013-revert-iwlwifi-mvm-fix-scan-config-command-size.patch'
-  patch -Np1 -i '../0014-Revert-e1000e-make-watchdog-use-delayed-work.patch'
+  patch -Np1 -i '../0004-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
+  patch -Np1 -i '../0005-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
+  patch -Np1 -i '../0006-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
+  patch -Np1 -i '../0007-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
+  patch -Np1 -i '../0008-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
+  patch -Np1 -i '../0009-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
+  patch -Np1 -i '../0010-drm-i915-limit-audio-CDCLK-constraint-back-to-GLK-only.patch'
+  patch -Np1 -i '../0011-pinctrl-sunrisepoint-add-missing-interrupt-status-register-offset.patch'
+  patch -Np1 -i '../0012-revert-iwlwifi-mvm-fix-scan-config-command-size.patch'
+  patch -Np1 -i '../0013-Revert-e1000e-make-watchdog-use-delayed-work.patch'
+  patch -Np1 -i '../0014-drm-amdgpu-add-dc-feature-mask-to-disable-fractional-pwm.patch'
+  patch -Np1 -i '../0015-ptp-free-ptp-device-pin-descriptors-properly.patch'
+
+  # https://bbs.archlinux.org/viewtopic.php?pid=1883376#p1883376
+  patch -Np1 -i '../0001-revert-drm-i915-cmdparser-use-explicit-goto-for-error-paths.patch'
 
   # add patches for snapd
   # https://gitlab.com/apparmor/apparmor-kernel/tree/5.2-outoftree
@@ -155,9 +164,6 @@ prepare() {
   patch -Np1 -i "${srcdir}/0002-apparmor-af_unix-mediation.patch"
   patch -Np1 -i "${srcdir}/0003-apparmor-fix-use-after-free-in-sk_peer_label.patch"
   patch -Np1 -i "${srcdir}/0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch"
-
-  # https://bugzilla.kernel.org/show_bug.cgi?id=204957
-  patch -Np1 -i "${srcdir}/0001-drm-amdgpu-Add-DC-feature-mask-to-disable-fractional-pwm.patch"
 
   # TODO: remove when AMD properly fixes it!
   # INFO: this is a hack and won't be upstreamed
