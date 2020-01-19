@@ -53,7 +53,7 @@ diff --git a/drivers/platform/x86/Kconfig b/drivers/platform/x86/Kconfig
 index 27d5b40fb717..6013c3b96cfd 100644
 --- a/drivers/platform/x86/Kconfig
 +++ b/drivers/platform/x86/Kconfig
-@@ -1337,6 +1337,16 @@ config PCENGINES_APU2
+@@ -1337,6 +1337,17 @@ config PCENGINES_APU2
  	  To compile this driver as a module, choose M here: the module
  	  will be called pcengines-apuv2.
 
