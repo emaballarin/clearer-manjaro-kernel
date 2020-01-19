@@ -111,7 +111,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         ## POSTFACTUM - O3 ALWAYS ON
         "postfactumothree.patch::https://gitlab.com/post-factum/pf-kernel/commit/cf7a8ad26e0bd6ca8afba89f53d2e9dc43ee2598.patch"
         ## VALVE - MULTIPLE FUTEX
-        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/futex-patches/0001-futex-patches.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/futex-patches-v2/0001-futex-Add-support-for-multiple-keys-at-the-same-time.patch"
         ## CUSTOM PATCHES - STUN
         "https://ballarin.cc/patchwork/00004-manjaro-stun-tickat600.patch"
         "https://ballarin.cc/patchwork/00005-manjaro-stun-tcpcake.patch"
@@ -160,7 +160,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0130-add-workaround-for-binutils-optimization.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0131-nvme-workaround.patch"
         ## SCHEDULER - BMQ
-        "https://gitlab.com/alfredchen/bmq/raw/master/5.4/bmq_v5.4-r1.patch"
+        "https://gitlab.com/alfredchen/bmq/raw/master/5.4/bmq_v5.4-r2.patch"
         ## GRAYSKY2 GCC OPTIMIZATIONS
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v9.1%2B_kernel_v4.13%2B.patch"
         ## Wireguard - Kernel autopatcher
@@ -334,7 +334,7 @@ prepare() {
   patch -Np1 -i ../postfactumothree.patch
 
   ## CLEARER MANJARO: FUTEX WAIT MULTIPLE (VALVE)
-  patch -Np1 -i ../0001-futex-patches.patch
+  patch -Np1 -i ../0001-futex-Add-support-for-multiple-keys-at-the-same-time.patch
 
   ## CLEARER MANJARO: BFQ PATCHES
   patch -Np1 -i ../0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
@@ -459,7 +459,7 @@ prepare() {
   cd "$_prewg_curdir"
 
   ## CLEARER MANJARO: BMQ SCHEDULER
-  patch -Np1 -i ../bmq_v5.4-r1.patch
+  patch -Np1 -i ../bmq_v5.4-r2.patch
 
   ## CLEARER MANJARO: GRAYSKY2 GCC OPTIMIZATIONS
   patch -Np1 -i ../grayskygcc.patch
