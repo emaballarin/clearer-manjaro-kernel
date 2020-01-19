@@ -415,7 +415,7 @@ prepare() {
 #  patch -Np1 -i ../CVE-2019-19053.patch
   patch -Np1 -i ../CVE-2019-19054.patch
 #  patch -Np1 -i ../CVE-2019-19056.patch
-  patch -Np1 -i ../CVE-2019-19064.patch
+#  patch -Np1 -i ../CVE-2019-19064.patch
 #  patch -Np1 -i ../CVE-2019-19066.patch
 #  patch -Np1 -i ../CVE-2019-19068.patch
 #  patch -Np1 -i ../CVE-2019-19078.patch
