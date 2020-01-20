@@ -13,9 +13,9 @@ _basekernel=5.5
 _basever=55
 _aufs=20191021
 _sub=0
-_rc=rc6
-_commit=b3a987b0264d3ddbb24293ebff10eddfc472f653
-_shortcommit=${_rc}.d0112.g${_commit:0:7}
+_rc=rc7
+_commit=def9d2780727cec3313ed3522d0123158d87224d
+_shortcommit=${_rc}.d0119.g${_commit:0:7}
 pkgver=${_basekernel}${_shortcommit}
 #pkgver=${_basekernel}.${_sub}
 pkgrel=1
@@ -67,7 +67,7 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('78e24f7d2c1b6293627591def5175fe6cff48ce07d2a53f1099288b165755b92'
+sha256sums=('9011c7459d4df3b1f569c97ab8bce8faf17458fe00727fd7eb562054d3b3c13a'
             '9bb5d1bf68645058a744c87ffbfc04a01ddaf4a8ded11770098ab6ea6e65077e'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
