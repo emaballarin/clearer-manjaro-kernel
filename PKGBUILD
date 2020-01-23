@@ -12,8 +12,8 @@ _kernelname=-MANJARO
 _basekernel=5.4
 _basever=54
 _aufs=20191223
-pkgver=5.4.13
-pkgrel=3
+pkgver=5.4.14
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -48,7 +48,6 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0012-revert-iwlwifi-mvm-fix-scan-config-command-size.patch'
         '0013-Revert-e1000e-make-watchdog-use-delayed-work.patch'
         '0014-drm-amdgpu-add-dc-feature-mask-to-disable-fractional-pwm.patch'
-        '0015-ptp-free-ptp-device-pin-descriptors-properly.patch'
         # MANJARO Patches
         '0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch'
         '0002-apparmor-af_unix-mediation.patch'
@@ -57,7 +56,6 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0001-nonupstream-navi10-vfio-reset.patch'
         '0001-i2c-nuvoton-nc677x-hwmon-driver.patch'
         '0001-revert-drm-i915-cmdparser-use-explicit-goto-for-error-paths.patch'
-        '0001-drm-amdgpu-allow-direct-upload-save-restore-list-for.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -73,7 +71,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
 sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
-            '40f429d1a47db11033179f4ac3306d72c72556a6727ead7a29dc0f4412a697d1'
+            'ac9cd861c45d9abb18b3a96655f809132453408d2493b86fdafa7fb1e07c8d06'
             '8e6dc31f5b76de3c398eef312b5c3423039b4bd1b3e7776542c409fd26d60a3c'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -99,7 +97,6 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '11a29c93dad7f0eb54e18e3420b37fb4dc24a4053a982650d014797d6e27c6b1'
             '0f11af2c5c10e029ad5ac3e25dfaf1348cdfa398e8c62938937ee85eeb9d015b'
             'cba63c224af57d6b9432bb5f507121148d02b313c5f87c55504f49632a3a6062'
-            'b8b878b0bb2c25f3f9e8250e8ecf5d05cd5a0b8c0ffa7ab55fbdbd74042d8878'
             '98202b8ad70d02d86603294bae967874fa7b18704b5c7b867568b0fd33a08921'
             '5cbbf3db9ea3205e9b89fe3049bea6dd626181db0cb0dc461e4cf5a400c68dd6'
             'c7dbec875d0c1d6782c037a1dcefff2e5bdb5fc9dffac1beea07dd8c1bdef1d7'
@@ -107,7 +104,6 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '7a2758f86dd1339f0f1801de2dbea059b55bf3648e240878b11e6d6890d3089c'
             '0556859a8168c8f7da9af8e2059d33216d9e5378d2cac70ca54c5ff843fa5add'
             '35f351e0b10c0c8ce1e11d98f0d9941593e914fc04c98aaf46ffaf5b285f9368'
-            '835c1cf98281df44ead1fc76261a50ef322bb1809973d7ed166390cc6a200279'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -140,10 +136,6 @@ prepare() {
   patch -Np1 -i '../0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch'
   patch -Np1 -i '../0003-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch'
 
-
-  # https://gitlab.freedesktop.org/drm/amd/issues/1013
-  patch -Np1 -i '../0001-drm-amdgpu-allow-direct-upload-save-restore-list-for.patch'
-
   # https://twitter.com/vskye11/status/1216240051639791616
   patch -Np1 -i '../0001-i2c-nuvoton-nc677x-hwmon-driver.patch'
 
@@ -159,7 +151,6 @@ prepare() {
   patch -Np1 -i '../0012-revert-iwlwifi-mvm-fix-scan-config-command-size.patch'
   patch -Np1 -i '../0013-Revert-e1000e-make-watchdog-use-delayed-work.patch'
   patch -Np1 -i '../0014-drm-amdgpu-add-dc-feature-mask-to-disable-fractional-pwm.patch'
-  patch -Np1 -i '../0015-ptp-free-ptp-device-pin-descriptors-properly.patch'
 
   # https://bbs.archlinux.org/viewtopic.php?pid=1883376#p1883376
   patch -Np1 -i '../0001-revert-drm-i915-cmdparser-use-explicit-goto-for-error-paths.patch'
