@@ -20,8 +20,8 @@ _aufs=20191223
 _wireguard=0.0.20200105
 _ALREADYMERGED=1
 _CLEARERrel=9
-pkgver=5.4.13
-pkgrel=2
+pkgver=5.4.14
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -56,7 +56,6 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0012-revert-iwlwifi-mvm-fix-scan-config-command-size.patch'
         '0013-Revert-e1000e-make-watchdog-use-delayed-work.patch'
         '0014-drm-amdgpu-add-dc-feature-mask-to-disable-fractional-pwm.patch'
-        '0015-ptp-free-ptp-device-pin-descriptors-properly.patch'
         # MANJARO Patches
         '0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch'
         '0002-apparmor-af_unix-mediation.patch'
@@ -167,7 +166,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat-${_wireguard}.tar.xz")
 
 sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
-            '40f429d1a47db11033179f4ac3306d72c72556a6727ead7a29dc0f4412a697d1'
+            'ac9cd861c45d9abb18b3a96655f809132453408d2493b86fdafa7fb1e07c8d06'
             # x86_64 config -->
             'SKIP'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
@@ -194,7 +193,6 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '11a29c93dad7f0eb54e18e3420b37fb4dc24a4053a982650d014797d6e27c6b1'
             '0f11af2c5c10e029ad5ac3e25dfaf1348cdfa398e8c62938937ee85eeb9d015b'
             'cba63c224af57d6b9432bb5f507121148d02b313c5f87c55504f49632a3a6062'
-            'b8b878b0bb2c25f3f9e8250e8ecf5d05cd5a0b8c0ffa7ab55fbdbd74042d8878'
             '98202b8ad70d02d86603294bae967874fa7b18704b5c7b867568b0fd33a08921'
             '5cbbf3db9ea3205e9b89fe3049bea6dd626181db0cb0dc461e4cf5a400c68dd6'
             'c7dbec875d0c1d6782c037a1dcefff2e5bdb5fc9dffac1beea07dd8c1bdef1d7'
@@ -364,7 +362,6 @@ prepare() {
   patch -Np1 -i '../0012-revert-iwlwifi-mvm-fix-scan-config-command-size.patch'
   patch -Np1 -i '../0013-Revert-e1000e-make-watchdog-use-delayed-work.patch'
   patch -Np1 -i '../0014-drm-amdgpu-add-dc-feature-mask-to-disable-fractional-pwm.patch'
-  patch -Np1 -i '../0015-ptp-free-ptp-device-pin-descriptors-properly.patch'
 
   # https://bbs.archlinux.org/viewtopic.php?pid=1883376#p1883376
   patch -Np1 -i '../0001-revert-drm-i915-cmdparser-use-explicit-goto-for-error-paths.patch'
