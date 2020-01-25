@@ -110,15 +110,8 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/zen-patches-v8-sep/0006-ZEN-intel-pstate-Implement-enable-parameter.patch"
         ## CLEAR CVEs
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-12379.patch"
-#        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19043.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19046.patch"
-#        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19053.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19054.patch"
-#        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19056.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19064.patch"
-#        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19066.patch"
-#        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19068.patch"
-#        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19078.patch"
         ## CLEAR SERIES
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0051-rcu-nocb-Fix-dump_tree-hierarchy-print-always-active.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0101-i8042-decrease-debug-message-level-to-info.patch"
@@ -144,7 +137,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0127-x86-microcode-Force-update-a-uCode-even-if-the-rev-i.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0128-x86-microcode-echo-2-reload-to-force-load-ucode.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0129-fix-bug-in-ucode-force-reload-revision-check.patch"
-        #"https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0130-add-workaround-for-binutils-optimization.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0130-add-workaround-for-binutils-optimization.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0131-nvme-workaround.patch"
         ## SCHEDULER - BMQ
         "https://gitlab.com/alfredchen/bmq/raw/master/5.4/bmq_v5.4-r2.patch"
@@ -202,6 +195,11 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
             ##
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -370,15 +368,8 @@ prepare() {
 
   ## CLEARER MANJARO: CLEAR CVE FIXES
   patch -Np1 -i ../CVE-2019-12379.patch
-#  patch -Np1 -i ../CVE-2019-19043.patch
   patch -Np1 -i ../CVE-2019-19046.patch
-#  patch -Np1 -i ../CVE-2019-19053.patch
   patch -Np1 -i ../CVE-2019-19054.patch
-#  patch -Np1 -i ../CVE-2019-19056.patch
-#  patch -Np1 -i ../CVE-2019-19064.patch
-#  patch -Np1 -i ../CVE-2019-19066.patch
-#  patch -Np1 -i ../CVE-2019-19068.patch
-#  patch -Np1 -i ../CVE-2019-19078.patch
 
   ## CLEARER MANJARO: CLEAR SERIES PATCHES
   patch -Np1 -i ../0051-rcu-nocb-Fix-dump_tree-hierarchy-print-always-active.patch
