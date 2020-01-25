@@ -18,7 +18,7 @@ _basekernel=5.4
 _basever=54
 _aufs=20191223
 _wireguard=0.0.20200121
-_ALREADYMERGED=1
+_ALREADYMERGED=0
 _CLEARERrel=10
 pkgver=5.4.14
 pkgrel=1
@@ -81,7 +81,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         ## NVIDIA MEMORY COMPACTION PATCH (11/2019)
         'mmgupta.patch'
         ## Samsung exFAT
-        "https://github.com/sirlucjan/kernel-patches/blob/master/5.4/exfat-patches/0001-exfat-patches.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/exfat-patches/0001-exfat-patches.patch"
         ## Intel Uncore Frequency driver
         'inteluf_01_edited.patch'
         'inteluf_02.patch'
@@ -250,9 +250,11 @@ prepare() {
   cd "${srcdir}/linux-${_basekernel}"
 
   ### START OF PATCHES ###
-
+  echo " "
+  echo "PATCH: Kernel upstream"
   # add upstream patch
   patch -p1 -i "${srcdir}/patch-${pkgver}"
+  echo " "
 
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
@@ -260,46 +262,81 @@ prepare() {
   #patch -Np1 -i "${srcdir}/prepatch-${_basekernel}.patch"
 
   ## CLEARER MANJARO: New exFAT drivers by Samsung
+  echo " "
+  echo "PATCH: Samsung exFAT drivers"
   patch -Np1 -i ../0001-exfat-patches.patch
+  echo " "
 
   ## Intel ISST fixes
-  patch -Np1 -i ../isst_01.patch
-  patch -Np1 -i ../isst_02.patch
-  patch -Np1 -i ../isst_03.patch
-  patch -Np1 -i ../isst_04.patch
-  patch -Np1 -i ../isst_05.patch
+#  echo " "
+#  echo "PATCH: Intel ISST fixes"
+#  patch -Np1 -i ../isst_01.patch
+#  patch -Np1 -i ../isst_02.patch
+#  patch -Np1 -i ../isst_03.patch
+#  patch -Np1 -i ../isst_04.patch
+#  patch -Np1 -i ../isst_05.patch
+#  echo " "
 
   ## Zen Lucjan
+  echo " "
+  echo "PATCH: Explicit PSTATE parameter"
   patch -Np1 -i ../0006-ZEN-intel-pstate-Implement-enable-parameter.patch
+  echo " "
 
   ## Intel Uncore Frequency driver
+  echo " "
+  echo "PATCH: Intel UnCore frequency driver"
   patch -Np1 -i ../inteluf_01_edited.patch
   patch -Np1 -i ../inteluf_02.patch
+  echo " "
 
   ## CLEARER MANJARO: PIECES OF XANMOD
+  echo " "
+  echo "PATCH: Pieces of XanMod"
   patch -Np1 -i ../pieces_of_xanmod.patch
+  echo " "
 
   ## CLEARER MANJARO: STUN PATCHES
+  echo " "
+  echo "PATCH: STUN patches"
   patch -Np1 -i ../00004-manjaro-stun-tickat600.patch
   patch -Np1 -i ../00005-manjaro-stun-tcpcake.patch
+  echo " "
 
   ## CLEARER MANJARO - MMGUPTA MEMORY MERGING
+  echo " "
+  echo "PATCH: Proactive memory compaction"
   patch -Np1 -i ../mmgupta.patch
+  echo " "
 
   ## CLEARER MANJARO - KSM (NATALENKO)
+  echo " "
+  echo "PATCH: PostFactum KSM"
   patch -Np1 -i ../0001-ksm-patches.patch
+  echo " "
 
   ## CLEARER MANJARO: POSTFACTUM O3 ALWAYS ON
+  echo " "
+  echo "PATCH: Always-on -O3"
   patch -Np1 -i ../postfactumothree.patch
+  echo " "
 
   ## CLEARER MANJARO: FUTEX WAIT MULTIPLE (VALVE)
+  echo " "
+  echo "PATCH: Multiple FutEx"
   patch -Np1 -i ../0001-futex-Add-support-for-multiple-keys-at-the-same-time.patch
+  echo " "
 
   ## CLEARER MANJARO: BFQ PATCHES
+  echo " "
+  echo "PATCH: BFQ development branch"
   patch -Np1 -i ../0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
   patch -Np1 -i ../0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
   patch -Np1 -i ../5.4-bfq-dev-lucjan-v11-r2K191206.patch
+  echo " "
 
+  echo " "
+  echo "PATCH: Manjaro defaults"
   # disable USER_NS for non-root users by default
   patch -Np1 -i ../0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
 
@@ -365,13 +402,19 @@ prepare() {
   patch -Np1 -i "${srcdir}/aufs5-standalone.patch"
   patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
   patch -Np1 -i "${srcdir}/vfs-ino.patch"
+  echo " "
 
   ## CLEARER MANJARO: CLEAR CVE FIXES
+  echo " "
+  echo "PATCH: CVE fixes from Intel"
   patch -Np1 -i ../CVE-2019-12379.patch
   patch -Np1 -i ../CVE-2019-19046.patch
   patch -Np1 -i ../CVE-2019-19054.patch
+  echo " "
 
   ## CLEARER MANJARO: CLEAR SERIES PATCHES
+  echo " "
+  echo "PATCH: Clear Linux patches"
   patch -Np1 -i ../0051-rcu-nocb-Fix-dump_tree-hierarchy-print-always-active.patch
   patch -Np1 -i ../0101-i8042-decrease-debug-message-level-to-info.patch
   patch -Np1 -i ../0102-Increase-the-ext4-default-commit-age.patch
@@ -398,8 +441,11 @@ prepare() {
   patch -Np1 -i ../0129-fix-bug-in-ucode-force-reload-revision-check.patch
   #patch -Np1 -i ../0130-add-workaround-for-binutils-optimization.patch
   patch -Np1 -i ../0131-nvme-workaround.patch
+  echo " "
 
   # WireGuard AutoPatcher
+  echo " "
+  echo "PATCH: Wireguard"
   _prewg_curdir="$(pwd)"
   cd "${srcdir}/wireguard-linux-compat-${_wireguard}/kernel-tree-scripts/"
   _wg_ker_calldir="$(pwd)"
@@ -408,12 +454,19 @@ prepare() {
   patch -p1 -i ./wgpatch.patch
   rm ./wgpatch.patch
   cd "$_prewg_curdir"
+  echo " "
 
   ## CLEARER MANJARO: BMQ SCHEDULER
+  echo " "
+  echo "PATCH: BMQ scheduler"
   patch -Np1 -i ../bmq_v5.4-r2.patch
+  echo " "
 
   ## CLEARER MANJARO: GRAYSKY2 GCC OPTIMIZATIONS
+  echo " "
+  echo "PATCH: GraySky"
   patch -Np1 -i ../grayskygcc.patch
+  echo " "
 
   ### END OF PATCHES ###
 
