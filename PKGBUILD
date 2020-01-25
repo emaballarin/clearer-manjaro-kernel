@@ -17,9 +17,9 @@ _kernelname=-CLEARER
 _basekernel=5.4
 _basever=54
 _aufs=20191223
-_wireguard=0.0.20200105
+_wireguard=0.0.20200121
 _ALREADYMERGED=1
-_CLEARERrel=9
+_CLEARERrel=10
 pkgver=5.4.14
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -81,28 +81,16 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         ## NVIDIA MEMORY COMPACTION PATCH (11/2019)
         'mmgupta.patch'
         ## Samsung exFAT
-        'v9-01-13-exfat-add-in-memory-and-on-disk-structures-and-headers.patch'
-        'v9-02-13-exfat-add-super-block-operations.patch'
-        'v9-03-13-exfat-add-inode-operations.patch'
-        'v9-04-13-exfat-add-directory-operations.patch'
-        'v9-05-13-exfat-add-file-operations.patch'
-        'v9-06-13-exfat-add-exfat-entry-operations.patch'
-        'v9-07-13-exfat-add-bitmap-operations.patch'
-        'v9-08-13-exfat-add-exfat-cache.patch'
-        'v9-09-13-exfat-add-misc-operations.patch'
-        'v9-10-13-exfat-add-nls-operations.patch'
-        'v9-11-13-exfat-add-Kconfig-and-Makefile.patch'
-        'v9-12-13-exfat-add-exfat-in-fs-Kconfig-and-fs-Makefile.patch'
-        'v9-13-13-MAINTAINERS-add-exfat-filesystem-edited.patch'
+        "https://github.com/sirlucjan/kernel-patches/blob/master/5.4/exfat-patches/0001-exfat-patches.patch"
         ## Intel Uncore Frequency driver
         'inteluf_01_edited.patch'
         'inteluf_02.patch'
         ## Intel ISST fixes
-        #'isst_01.patch'
-        #'isst_02_edited.patch'
-        #'isst_03.patch'
-        #'isst_04.patch'
-        #'isst_05.patch'
+        'isst_01.patch'
+        'isst_02.patch'
+        'isst_03.patch'
+        'isst_04.patch'
+        'isst_05.patch'
         ## POSTFACTUM - EXPOSE KSM INTERFACE
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/ksm-patches/0001-ksm-patches.patch"
         ## CUSTOM PATCHES - PIECES OF XANMOD
@@ -122,7 +110,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/zen-patches-v8-sep/0006-ZEN-intel-pstate-Implement-enable-parameter.patch"
         ## CLEAR CVEs
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-12379.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19043.patch"
+#        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19043.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19046.patch"
 #        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19053.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19054.patch"
@@ -259,19 +247,6 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             'SKIP'
             'SKIP'
             'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
             'SKIP')
 prepare() {
   cd "${srcdir}/linux-${_basekernel}"
@@ -287,26 +262,14 @@ prepare() {
   #patch -Np1 -i "${srcdir}/prepatch-${_basekernel}.patch"
 
   ## CLEARER MANJARO: New exFAT drivers by Samsung
-#   patch -Np1 -i ../v9-01-13-exfat-add-in-memory-and-on-disk-structures-and-headers.patch
-#   patch -Np1 -i ../v9-02-13-exfat-add-super-block-operations.patch
-#   patch -Np1 -i ../v9-03-13-exfat-add-inode-operations.patch
-#   patch -Np1 -i ../v9-04-13-exfat-add-directory-operations.patch
-#   patch -Np1 -i ../v9-05-13-exfat-add-file-operations.patch
-#   patch -Np1 -i ../v9-06-13-exfat-add-exfat-entry-operations.patch
-#   patch -Np1 -i ../v9-07-13-exfat-add-bitmap-operations.patch
-#   patch -Np1 -i ../v9-08-13-exfat-add-exfat-cache.patch
-#   patch -Np1 -i ../v9-09-13-exfat-add-misc-operations.patch
-#   patch -Np1 -i ../v9-10-13-exfat-add-nls-operations.patch
-#   patch -Np1 -i ../v9-11-13-exfat-add-Kconfig-and-Makefile.patch
-#   patch -Np1 -i ../v9-12-13-exfat-add-exfat-in-fs-Kconfig-and-fs-Makefile.patch
-#   patch -Np1 -i ../v9-13-13-MAINTAINERS-add-exfat-filesystem-edited.patch
+  patch -Np1 -i ../0001-exfat-patches.patch
 
   ## Intel ISST fixes
-  #patch -Np1 -i ../isst_01.patch
-  #patch -Np1 -i ../isst_02_edited.patch
-  #patch -Np1 -i ../isst_03.patch
-  #patch -Np1 -i ../isst_04.patch
-  #patch -Np1 -i ../isst_05.patch
+  patch -Np1 -i ../isst_01.patch
+  patch -Np1 -i ../isst_02.patch
+  patch -Np1 -i ../isst_03.patch
+  patch -Np1 -i ../isst_04.patch
+  patch -Np1 -i ../isst_05.patch
 
   ## Zen Lucjan
   patch -Np1 -i ../0006-ZEN-intel-pstate-Implement-enable-parameter.patch
@@ -407,7 +370,7 @@ prepare() {
 
   ## CLEARER MANJARO: CLEAR CVE FIXES
   patch -Np1 -i ../CVE-2019-12379.patch
-  patch -Np1 -i ../CVE-2019-19043.patch
+#  patch -Np1 -i ../CVE-2019-19043.patch
   patch -Np1 -i ../CVE-2019-19046.patch
 #  patch -Np1 -i ../CVE-2019-19053.patch
   patch -Np1 -i ../CVE-2019-19054.patch
