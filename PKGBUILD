@@ -110,7 +110,6 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/zen-patches-v8-sep/0006-ZEN-intel-pstate-Implement-enable-parameter.patch"
         ## CLEAR CVEs
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-12379.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19046.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-19054.patch"
         ## CLEAR SERIES
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0051-rcu-nocb-Fix-dump_tree-hierarchy-print-always-active.patch"
@@ -195,7 +194,6 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
             ##
-            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -409,7 +407,6 @@ prepare() {
   echo " "
   echo "PATCH: CVE fixes from Intel"
   patch -Np1 -i ../CVE-2019-12379.patch
-  patch -Np1 -i ../CVE-2019-19046.patch
   patch -Np1 -i ../CVE-2019-19054.patch
   echo " "
 
