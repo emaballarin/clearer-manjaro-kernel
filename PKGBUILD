@@ -12,7 +12,7 @@ _kernelname=-MANJARO
 _basekernel=5.4
 _basever=54
 _aufs=20191223
-pkgver=5.4.14
+pkgver=5.4.15
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
@@ -55,7 +55,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch'
         '0001-nonupstream-navi10-vfio-reset.patch'
         '0001-i2c-nuvoton-nc677x-hwmon-driver.patch'
-        '0001-revert-drm-i915-cmdparser-use-explicit-goto-for-error-paths.patch'
+        '0001-drm-i915-apply-219d543-till-5f71c84.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -71,7 +71,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
 sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
-            'ac9cd861c45d9abb18b3a96655f809132453408d2493b86fdafa7fb1e07c8d06'
+            'ff95ac79de6d23f5e87184d67f23ee0613707ed84b2fbe4280182ada2945dfda'
             '8e6dc31f5b76de3c398eef312b5c3423039b4bd1b3e7776542c409fd26d60a3c'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
@@ -103,7 +103,7 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '77746aea71ffb06c685e7769b49c78e29af9b2e28209cd245e95d9cbb0dba3c9'
             '7a2758f86dd1339f0f1801de2dbea059b55bf3648e240878b11e6d6890d3089c'
             '0556859a8168c8f7da9af8e2059d33216d9e5378d2cac70ca54c5ff843fa5add'
-            '35f351e0b10c0c8ce1e11d98f0d9941593e914fc04c98aaf46ffaf5b285f9368'
+            '6d01b3eba214c4a17465a2adc2e770b57cbf782f30b291c36e5cd8a8efaa89f2'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -153,7 +153,8 @@ prepare() {
   patch -Np1 -i '../0014-drm-amdgpu-add-dc-feature-mask-to-disable-fractional-pwm.patch'
 
   # https://bbs.archlinux.org/viewtopic.php?pid=1883376#p1883376
-  patch -Np1 -i '../0001-revert-drm-i915-cmdparser-use-explicit-goto-for-error-paths.patch'
+  # https://gitlab.manjaro.org/packages/core/linux54/issues/5
+  patch -Np1 -i '../0001-drm-i915-apply-219d543-till-5f71c84.patch'
 
   # add patches for snapd
   # https://gitlab.com/apparmor/apparmor-kernel/tree/5.2-outoftree
