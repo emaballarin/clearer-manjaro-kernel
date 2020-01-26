@@ -81,7 +81,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         ## NVIDIA MEMORY COMPACTION PATCH (11/2019)
         'mmgupta.patch'
         ## Samsung exFAT
-        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/exfat-patches/0001-exfat-patches.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.4/exfat-patches-v2/0001-exfat-patches.patch"
         ## Intel Uncore Frequency driver
         'inteluf_01_edited.patch'
         'inteluf_02.patch'
