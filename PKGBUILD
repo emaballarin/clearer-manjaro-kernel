@@ -35,19 +35,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         'vfs-ino.patch'
         # ARCH Patches
         '0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch'
-        '0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch'
-        '0003-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch'
-        '0004-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
-        '0005-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
-        '0006-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
-        '0007-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
-        '0008-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
-        '0009-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
-        '0010-drm-i915-limit-audio-CDCLK-constraint-back-to-GLK-only.patch'
-        '0011-pinctrl-sunrisepoint-add-missing-interrupt-status-register-offset.patch'
-        '0012-revert-iwlwifi-mvm-fix-scan-config-command-size.patch'
-        '0013-Revert-e1000e-make-watchdog-use-delayed-work.patch'
-        '0014-drm-amdgpu-add-dc-feature-mask-to-disable-fractional-pwm.patch'
+        '0002-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
         # MANJARO Patches
         '0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch'
         '0002-apparmor-af_unix-mediation.patch'
@@ -70,7 +58,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
 sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
-            '8e6dc31f5b76de3c398eef312b5c3423039b4bd1b3e7776542c409fd26d60a3c'
+            'c90826a938e188372b2fb1bf036f8dad8e220f278ef9381461b2d76d51ebf58a'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             '5140f290d76b35a06e13b431f72f7049c07c46cd12f985777e0b0bcb613f1104'
@@ -82,19 +70,7 @@ sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
             'c9796feddec29b332602bee218e8d3e5b629523b40314eeab078f415b96d1322'
             'c95cc6bc798978e29125c49ab613959c939ab7cf505142e968025373f4ffb9d5'
             '7685d526bbdbfa795986591a70071c960ff572f56d3501774861728a9df8664c'
-            '7baea65989ef0d29ab4eb8296759193b8f93c31248d08e944e1bdf0059ccdfdd'
-            'abcf6043c594d5514118124a8f2cf8787557a95338fa0ff7f28a142567bafed0'
-            '2431629465ca508a203df31ee14f614c061f6efc128ec858cecb4a3a2ee5f1d0'
-            '25d72c2c88088d78afa1658fc16c8d4ad98f4140ec69fa0ade49abfe27e8f722'
             'fcb9e515bf0816db05446fd8ced7468756bea3cf01b060504bace41b2e7f5f74'
-            'e2084feabc3abeed37579ff515c367014356a652b85794b1612fea4daabe85d3'
-            '988ffbb96d85564a9d96145e5973339a8f78ae95d919efb2ee7bb50f7a8e8fc9'
-            '5257159e20a5fcb102a3b3ee6de33882a9e132e7f1d4345b8730effdd0240bb6'
-            '763cd8e7d5b4a5c24f7a82f24c64ec5503ea5c81dfb42fa74150136c0ca066fd'
-            '33ec2170ace6b4f7dbc1cc751110d325d8619202d0f312587adbc4bef7a045ce'
-            '11a29c93dad7f0eb54e18e3420b37fb4dc24a4053a982650d014797d6e27c6b1'
-            '0f11af2c5c10e029ad5ac3e25dfaf1348cdfa398e8c62938937ee85eeb9d015b'
-            'cba63c224af57d6b9432bb5f507121148d02b313c5f87c55504f49632a3a6062'
             '98202b8ad70d02d86603294bae967874fa7b18704b5c7b867568b0fd33a08921'
             '5cbbf3db9ea3205e9b89fe3049bea6dd626181db0cb0dc461e4cf5a400c68dd6'
             'c7dbec875d0c1d6782c037a1dcefff2e5bdb5fc9dffac1beea07dd8c1bdef1d7'
@@ -115,8 +91,6 @@ sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef')
 prepare() {
-  #mv "${srcdir}/linux-stable-rc-${_commit}" "${srcdir}/linux-${_basekernel}"
-  mv "${srcdir}/linux-${_commit}" "${srcdir}/linux-${_basekernel}"
   cd "${srcdir}/linux-${_basekernel}"
 
   # add upstream patch
@@ -130,26 +104,8 @@ prepare() {
   # disable USER_NS for non-root users by default
   patch -Np1 -i ../0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
 
-  # fix dell xps 13 2-in-1 issue
-  # https://lkml.org/lkml/2019/10/16/1230
-  patch -Np1 -i '../0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch'
-  patch -Np1 -i '../0003-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch'
-
-  # https://twitter.com/vskye11/status/1216240051639791616
-  patch -Np1 -i '../0001-i2c-nuvoton-nc677x-hwmon-driver.patch'
-
   # other fixes by Arch
-  patch -Np1 -i '../0004-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
-  patch -Np1 -i '../0005-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
-  patch -Np1 -i '../0006-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
-  patch -Np1 -i '../0007-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
-  patch -Np1 -i '../0008-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
-  patch -Np1 -i '../0009-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
-  patch -Np1 -i '../0010-drm-i915-limit-audio-CDCLK-constraint-back-to-GLK-only.patch'
-  patch -Np1 -i '../0011-pinctrl-sunrisepoint-add-missing-interrupt-status-register-offset.patch'
-  patch -Np1 -i '../0012-revert-iwlwifi-mvm-fix-scan-config-command-size.patch'
-  patch -Np1 -i '../0013-Revert-e1000e-make-watchdog-use-delayed-work.patch'
-  patch -Np1 -i '../0014-drm-amdgpu-add-dc-feature-mask-to-disable-fractional-pwm.patch'
+  patch -Np1 -i '../0002-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
 
   # add patches for snapd
   # https://gitlab.com/apparmor/apparmor-kernel/tree/5.2-outoftree
@@ -181,7 +137,7 @@ prepare() {
   git apply -p1 < "${srcdir}/0013-bootsplash.patch"
 
   # add aufs5 support
-  patch -Np1 -i "${srcdir}/aufs5.4-${_aufs}.patch"
+  patch -Np1 -i "${srcdir}/aufs5.x-rcN-${_aufs}.patch"
   patch -Np1 -i "${srcdir}/aufs5-base.patch"
   patch -Np1 -i "${srcdir}/aufs5-kbuild.patch"
   patch -Np1 -i "${srcdir}/aufs5-loopback.patch"
@@ -196,7 +152,7 @@ prepare() {
     cat "${srcdir}/config" > ./.config
   fi
 
-#  cat "${srcdir}/config.aufs" >> ./.config
+  cat "${srcdir}/config.aufs" >> ./.config
 
   if [ "${_kernelname}" != "" ]; then
     sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"${_kernelname}\"|g" ./.config
