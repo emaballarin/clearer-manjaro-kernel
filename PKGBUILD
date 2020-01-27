@@ -13,7 +13,7 @@ _basekernel=5.4
 _basever=54
 _aufs=20191223
 pkgver=5.4.15
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -55,7 +55,6 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch'
         '0001-nonupstream-navi10-vfio-reset.patch'
         '0001-i2c-nuvoton-nc677x-hwmon-driver.patch'
-        '0001-drm-i915-apply-219d543-till-5f71c84.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -103,7 +102,6 @@ sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
             '77746aea71ffb06c685e7769b49c78e29af9b2e28209cd245e95d9cbb0dba3c9'
             '7a2758f86dd1339f0f1801de2dbea059b55bf3648e240878b11e6d6890d3089c'
             '0556859a8168c8f7da9af8e2059d33216d9e5378d2cac70ca54c5ff843fa5add'
-            '6d01b3eba214c4a17465a2adc2e770b57cbf782f30b291c36e5cd8a8efaa89f2'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -154,7 +152,7 @@ prepare() {
 
   # https://bbs.archlinux.org/viewtopic.php?pid=1883376#p1883376
   # https://gitlab.manjaro.org/packages/core/linux54/issues/5
-  patch -Np1 -i '../0001-drm-i915-apply-219d543-till-5f71c84.patch'
+  # No patch yet found ...
 
   # add patches for snapd
   # https://gitlab.com/apparmor/apparmor-kernel/tree/5.2-outoftree
