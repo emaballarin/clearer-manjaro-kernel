@@ -11,24 +11,17 @@ pkgname=('linux55' 'linux55-headers')
 _kernelname=-MANJARO
 _basekernel=5.5
 _basever=55
-_aufs=20191021
+_aufs=20200127
 _sub=0
-_rc=rc7
-_commit=def9d2780727cec3313ed3522d0123158d87224d
-_shortcommit=${_rc}.d0119.g${_commit:0:7}
-pkgver=${_basekernel}${_shortcommit}
-#pkgver=${_basekernel}.${_sub}
+pkgver=${_basekernel}.${_sub}
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'elfutils' 'git')
 options=('!strip')
-source=(#"https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.xz"
+source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.xz"
         #"https://www.kernel.org/pub/linux/kernel/v5.x/patch-${pkgver}.xz"
-        #https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git/snapshot/linux-stable-rc-$_commit.tar.gz
-        #"linux-${pkgver}.tar.gz::https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/snapshot/linux-$_commit.tar.gz"
-        "linux-${pkgver}.zip::https://codeload.github.com/torvalds/linux/zip/$_commit"
         # the main kernel config files
         'config.x86_64' 'config' 'config.aufs'
         # AUFS Patches
@@ -41,18 +34,27 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.
         'tmpfs-idr.patch'
         'vfs-ino.patch'
         # ARCH Patches
-        0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
+        '0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch'
+        '0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch'
+        '0003-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch'
+        '0004-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
+        '0005-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
+        '0006-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
+        '0007-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
+        '0008-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
+        '0009-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
+        '0010-drm-i915-limit-audio-CDCLK-constraint-back-to-GLK-only.patch'
+        '0011-pinctrl-sunrisepoint-add-missing-interrupt-status-register-offset.patch'
+        '0012-revert-iwlwifi-mvm-fix-scan-config-command-size.patch'
+        '0013-Revert-e1000e-make-watchdog-use-delayed-work.patch'
+        '0014-drm-amdgpu-add-dc-feature-mask-to-disable-fractional-pwm.patch'
         # MANJARO Patches
-        '0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/6408dbde30855bb9a2af44c9053ba2329db57c7f.patch'
-        '0002-apparmor-af_unix-mediation.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/7a291673471aa583694ee760aa33e5a3f5ae9a9e.patch'
-        '0003-apparmor-fix-use-after-free-in-sk_peer_label.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/9ae046ed7b54b01078e33227fa266282c41f981d.patch'
-        '0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch::https://gitlab.com/apparmor/apparmor-kernel/commit/b6a5dfbaa728854457570bf72b693a89550cc1f8.patch'
-        '0001-v5-xps13-sparc64-implement-ioremap_uc.patch'
-        '0002-v5-xps13-lib-devres-add-a-helper-function-for-ioremap_uc.patch'
-        '0003-v5-xps13-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch'
-        '0004-v5-xps13-docs-driver-model-add-devm_ioremap_uc.patch'
+        '0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch'
+        '0002-apparmor-af_unix-mediation.patch'
+        '0003-apparmor-fix-use-after-free-in-sk_peer_label.patch'
+        '0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch'
         '0001-nonupstream-navi10-vfio-reset.patch'
-        '0001-drm-amdgpu-Add-DC-feature-mask-to-disable-fractional-pwm.patch'
+        '0001-i2c-nuvoton-nc677x-hwmon-driver.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -67,29 +69,38 @@ source=(#"https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
-sha256sums=('9011c7459d4df3b1f569c97ab8bce8faf17458fe00727fd7eb562054d3b3c13a'
-            '9bb5d1bf68645058a744c87ffbfc04a01ddaf4a8ded11770098ab6ea6e65077e'
+sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
+            '8e6dc31f5b76de3c398eef312b5c3423039b4bd1b3e7776542c409fd26d60a3c'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
-            'bf9480b92c5feaf8583785c2f4332df3bfa4fa2eeac8ebd85da24c6a88dac58c'
-            '7ff57fd146dc4c8f5fd37062e44cbf7e70164df5a684d3b4bb3e8a787c060503'
-            '789a933080a85120dbeb12de2f243498b5e454128f2cf77dd16d47a27b235f79'
-            '16e981ac6beedd3bc264e03c1e8d25681d8ad9e5ad469e3630b3e2e6ba76e8ec'
-            'a44fb19196c2e63e2733a210358afb309f598d8155488424a8620ec7f309de08'
-            '1060cceb84a7d178d4a0e1946d06055ddab0b5b110d385e9d087557143c6659f'
-            '55dc8df3a3d3e248eb93f5878f567428f77acb72f6243934bd6980cfede3b6ca'
-            'e2d75e11a2c220e5d3a450bb226e7e19d62a871764da5f76034fbc135fe6c749'
+            '5140f290d76b35a06e13b431f72f7049c07c46cd12f985777e0b0bcb613f1104'
+            'd23d429e2a843d8b1c503480b650f59c9e2273e1907e927132e086dfc133616c'
+            'a5533120455c6490a75f06f5fc24b861ed2df503c980fa5548b5caa2f7984f13'
+            '02211d7d11883e30a7a90fc4e1eb4c4d9391fa636f717fb7061ba48d26630ac4'
+            '9bd2ec4fd05a993f140720d51d02ff7032c824fafcfb8d5dbd47272187534656'
+            '32caef5516e4d1d70cdb98a66011d70b5955aea0a19b525c46d914d7a35de0d5'
+            'c9796feddec29b332602bee218e8d3e5b629523b40314eeab078f415b96d1322'
+            'c95cc6bc798978e29125c49ab613959c939ab7cf505142e968025373f4ffb9d5'
             '7685d526bbdbfa795986591a70071c960ff572f56d3501774861728a9df8664c'
-            'af4876533afa8b2b76e7a040cf4028c5fe16f9eda0a6d62a3a66ecf9fdfec812'
-            'd2b06218c5365cf401caba8f295e2b5b408f09608c7a02edc5d158f48378f660'
-            '167b975175be23a03b184a28ce088e18fd31e2ac0f627a7b1d1d975b013f7ce3'
-            '2d3d30ef8d4a2868082fe5af75b6ce832b353c156751812dd96e64ce41bfc520'
-            'f196cf64384cc4c35f9b82615bd62aca538653fa1e8d2ee82cd021697daa27b2'
-            '62539558ec5b5f87f1740f5e4e84a3740528afb8bec6335d2de721a3c8b93531'
-            '267a28e932095238604e4e23062d142fa1e2836b629190e673614159968dbec7'
-            'e82c72cd391261e79ae25330848877c451b4fa60cabed9c16898983eab269c89'
+            '7baea65989ef0d29ab4eb8296759193b8f93c31248d08e944e1bdf0059ccdfdd'
+            'abcf6043c594d5514118124a8f2cf8787557a95338fa0ff7f28a142567bafed0'
+            '2431629465ca508a203df31ee14f614c061f6efc128ec858cecb4a3a2ee5f1d0'
+            '25d72c2c88088d78afa1658fc16c8d4ad98f4140ec69fa0ade49abfe27e8f722'
+            'fcb9e515bf0816db05446fd8ced7468756bea3cf01b060504bace41b2e7f5f74'
+            'e2084feabc3abeed37579ff515c367014356a652b85794b1612fea4daabe85d3'
+            '988ffbb96d85564a9d96145e5973339a8f78ae95d919efb2ee7bb50f7a8e8fc9'
+            '5257159e20a5fcb102a3b3ee6de33882a9e132e7f1d4345b8730effdd0240bb6'
+            '763cd8e7d5b4a5c24f7a82f24c64ec5503ea5c81dfb42fa74150136c0ca066fd'
+            '33ec2170ace6b4f7dbc1cc751110d325d8619202d0f312587adbc4bef7a045ce'
+            '11a29c93dad7f0eb54e18e3420b37fb4dc24a4053a982650d014797d6e27c6b1'
+            '0f11af2c5c10e029ad5ac3e25dfaf1348cdfa398e8c62938937ee85eeb9d015b'
+            'cba63c224af57d6b9432bb5f507121148d02b313c5f87c55504f49632a3a6062'
+            '98202b8ad70d02d86603294bae967874fa7b18704b5c7b867568b0fd33a08921'
+            '5cbbf3db9ea3205e9b89fe3049bea6dd626181db0cb0dc461e4cf5a400c68dd6'
+            'c7dbec875d0c1d6782c037a1dcefff2e5bdb5fc9dffac1beea07dd8c1bdef1d7'
+            '77746aea71ffb06c685e7769b49c78e29af9b2e28209cd245e95d9cbb0dba3c9'
             '7a2758f86dd1339f0f1801de2dbea059b55bf3648e240878b11e6d6890d3089c'
-            '1fd4518cb0518d68f8db879f16ce16455fdc2200ed232f9e27fb5f1f3b5e4906'
+            '0556859a8168c8f7da9af8e2059d33216d9e5378d2cac70ca54c5ff843fa5add'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -114,106 +125,70 @@ prepare() {
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
   # enable only if you have "gen-stable-queue-patch.sh" executed before
-  #patch -Np1 -i "${srcdir}/prepatch-${_basekernel}`date +%Y%m%d`"
+  #patch -Np1 -i "${srcdir}/prepatch-${_basekernel}.patch"
 
   # disable USER_NS for non-root users by default
-  echo "PATCH: 0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER"
   patch -Np1 -i ../0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
-  echo "-------------------------------------------------------------------------------------------------------"
-  # add patches for snapd
-  # https://gitlab.com/apparmor/apparmor-kernel/tree/5.2-outoftree
-  echo "PATCH: 0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules"
-  patch -Np1 -i "${srcdir}/0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0002-apparmor-af_unix-mediation"
-  patch -Np1 -i "${srcdir}/0002-apparmor-af_unix-mediation.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0003-apparmor-fix-use-after-free-in-sk_peer_label"
-  patch -Np1 -i "${srcdir}/0003-apparmor-fix-use-after-free-in-sk_peer_label.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets"
-  patch -Np1 -i "${srcdir}/0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
 
   # fix dell xps 13 2-in-1 issue
   # https://lkml.org/lkml/2019/10/16/1230
-#  echo "PATCH: 0001-v5-xps13-sparc64-implement-ioremap_uc"
-#  patch -Np1 -i "${srcdir}/0001-v5-xps13-sparc64-implement-ioremap_uc.patch"
-#  echo "-------------------------------------------------------------------------------------------------------"
-#  echo "PATCH: 0002-v5-xps13-lib-devres-add-a-helper-function-for-ioremap_uc"
-#  patch -Np1 -i "${srcdir}/0002-v5-xps13-lib-devres-add-a-helper-function-for-ioremap_uc.patch"
-#  echo "-------------------------------------------------------------------------------------------------------"
-#  echo "PATCH: 0003-v5-xps13-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO"
-#  patch -Np1 -i "${srcdir}/0003-v5-xps13-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch"
-#  echo "-------------------------------------------------------------------------------------------------------"
-#  echo "PATCH: 0004-v5-xps13-docs-driver-model-add-devm_ioremap_u"
-#  patch -Np1 -i "${srcdir}/0004-v5-xps13-docs-driver-model-add-devm_ioremap_uc.patch"
-#  echo "-------------------------------------------------------------------------------------------------------"
+  patch -Np1 -i '../0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch'
+  patch -Np1 -i '../0003-mfd-intel-lpss-use-devm_ioremap_uc-for-MMIO.patch'
 
-  # https://bugzilla.kernel.org/show_bug.cgi?id=204957
-#  echo "PATCH: 0001-drm-amdgpu-Add-DC-feature-mask-to-disable-fractional-pwm"
-#  patch -Np1 -i "${srcdir}/0001-drm-amdgpu-Add-DC-feature-mask-to-disable-fractional-pwm.patch"
-#  echo "-------------------------------------------------------------------------------------------------------"
+  # https://twitter.com/vskye11/status/1216240051639791616
+  patch -Np1 -i '../0001-i2c-nuvoton-nc677x-hwmon-driver.patch'
+
+  # other fixes by Arch
+  patch -Np1 -i '../0004-PCI-pciehp-prevent-deadlock-on-disconnect.patch'
+  patch -Np1 -i '../0005-ACPI-PM-s2idle-rework-ACPI-events-sync.patch'
+  patch -Np1 -i '../0006-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
+  patch -Np1 -i '../0007-drm-i915-save-AUD_FREQ_CNTRL-state-at-audio-domain-suspend.patch'
+  patch -Np1 -i '../0008-drm-i915-Fix-audio-power-up-sequence-for-gen10-display.patch'
+  patch -Np1 -i '../0009-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more-platforms.patch'
+  patch -Np1 -i '../0010-drm-i915-limit-audio-CDCLK-constraint-back-to-GLK-only.patch'
+  patch -Np1 -i '../0011-pinctrl-sunrisepoint-add-missing-interrupt-status-register-offset.patch'
+  patch -Np1 -i '../0012-revert-iwlwifi-mvm-fix-scan-config-command-size.patch'
+  patch -Np1 -i '../0013-Revert-e1000e-make-watchdog-use-delayed-work.patch'
+  patch -Np1 -i '../0014-drm-amdgpu-add-dc-feature-mask-to-disable-fractional-pwm.patch'
+
+  # add patches for snapd
+  # https://gitlab.com/apparmor/apparmor-kernel/tree/5.2-outoftree
+  patch -Np1 -i "${srcdir}/0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch"
+  patch -Np1 -i "${srcdir}/0002-apparmor-af_unix-mediation.patch"
+  patch -Np1 -i "${srcdir}/0003-apparmor-fix-use-after-free-in-sk_peer_label.patch"
+  patch -Np1 -i "${srcdir}/0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch"
 
   # TODO: remove when AMD properly fixes it!
   # INFO: this is a hack and won't be upstreamed
   # https://forum.level1techs.com/t/145666/86
   # https://forum.manjaro.org/t/107820/11
-  echo "PATCH: 0001-nonupstream-navi10-vfio-reset"
   patch -Np1 -i "${srcdir}/0001-nonupstream-navi10-vfio-reset.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
 
   # Add bootsplash - http://lkml.iu.edu/hypermail/linux/kernel/1710.3/01542.html
-  echo "PATCH: 0001-bootsplash"
   patch -Np1 -i "${srcdir}/0001-bootsplash.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0002-bootsplash"
   patch -Np1 -i "${srcdir}/0002-bootsplash.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0003-bootsplash"
   patch -Np1 -i "${srcdir}/0003-bootsplash.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0004-bootsplash"
   patch -Np1 -i "${srcdir}/0004-bootsplash.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0005-bootsplash"
   patch -Np1 -i "${srcdir}/0005-bootsplash.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0006-bootsplash"
   patch -Np1 -i "${srcdir}/0006-bootsplash.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0007-bootsplash"
   patch -Np1 -i "${srcdir}/0007-bootsplash.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0008-bootsplash"
   patch -Np1 -i "${srcdir}/0008-bootsplash.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0009-bootsplash"
   patch -Np1 -i "${srcdir}/0009-bootsplash.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0010-bootsplash"
   patch -Np1 -i "${srcdir}/0010-bootsplash.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0011-bootsplash"
   patch -Np1 -i "${srcdir}/0011-bootsplash.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "PATCH: 0012-bootsplash"
   patch -Np1 -i "${srcdir}/0012-bootsplash.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
   # use git-apply to add binary files
-  echo "PATCH: 0013-bootsplash"
   git apply -p1 < "${srcdir}/0013-bootsplash.patch"
-  echo "-------------------------------------------------------------------------------------------------------"
 
   # add aufs5 support
-#  patch -Np1 -i "${srcdir}/aufs5.x-rcN-${_aufs}.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-base.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-kbuild.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-loopback.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-mmap.patch"
-#  patch -Np1 -i "${srcdir}/aufs5-standalone.patch"
-#  patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
-#  patch -Np1 -i "${srcdir}/vfs-ino.patch"
+  patch -Np1 -i "${srcdir}/aufs5.4-${_aufs}.patch"
+  patch -Np1 -i "${srcdir}/aufs5-base.patch"
+  patch -Np1 -i "${srcdir}/aufs5-kbuild.patch"
+  patch -Np1 -i "${srcdir}/aufs5-loopback.patch"
+  patch -Np1 -i "${srcdir}/aufs5-mmap.patch"
+  patch -Np1 -i "${srcdir}/aufs5-standalone.patch"
+  patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
+  patch -Np1 -i "${srcdir}/vfs-ino.patch"
 
   if [ "${CARCH}" = "x86_64" ]; then
     cat "${srcdir}/config.x86_64" > ./.config
@@ -227,9 +202,6 @@ prepare() {
     sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"${_kernelname}\"|g" ./.config
     sed -i "s|CONFIG_LOCALVERSION_AUTO=.*|CONFIG_LOCALVERSION_AUTO=n|" ./.config
   fi
-
-  # set patchlevel to 5
-  sed -ri "s|^(PATCHLEVEL =).*|\1 5|" Makefile
 
   # set extraversion to pkgrel
   sed -ri "s|^(EXTRAVERSION =).*|\1 -${pkgrel}|" Makefile
