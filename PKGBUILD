@@ -1,18 +1,26 @@
+# Based on the file created for Manjaro Linux by:
+# Philip Müller (x86_64) <philm@manjaro.org>
+# Jonathon Fernyhough (i686) <jonathon@manjaro.org>
+# Helmut Stult <helmut[at]manjaro[dot]org>
+
 # Based on the file created for Arch Linux by:
 # Tobias Powalowski <tpowa@archlinux.org>
 # Thomas Baechler <thomas@archlinux.org>
 
-# Maintainer: Philip Müller (x86_64) <philm@manjaro.org>
-# Maintainer: Jonathon Fernyhough (i686) <jonathon@manjaro.org>
-# Contributor: Helmut Stult <helmut[at]manjaro[dot]org>
+# Maintainer: Emanuele Ballarin (Clearer Manjaro x86_64) <emanuele@ballarin.cc>
+# And many other contributors (patches, suggestions, development, testing, ...)
 
-pkgbase=linux55
-pkgname=('linux55' 'linux55-headers')
-_kernelname=-MANJARO
+
+pkgbase=linux55-CLEARER
+pkgname=('linux55-CLEARER' 'linux55-CLEARER-headers')
+_kernelname=-CLEARER
 _basekernel=5.5
 _basever=55
 _aufs=20200127
 _sub=0
+_wireguard=0.0.20200121
+_ALREADYMERGED=0
+_CLEARERrel=11
 pkgver=${_basekernel}.${_sub}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -56,9 +64,79 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0010-bootsplash.patch'
         '0011-bootsplash.patch'
         '0012-bootsplash.patch'
-        '0013-bootsplash.patch')
+        '0013-bootsplash.patch'
+        ## NVIDIA MEMORY COMPACTION PATCH (11/2019)
+        'mmgupta.patch'
+        ## Samsung exFAT
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/exfat-patches/0001-exfat-patches.patch"
+        ## Intel Uncore Frequency driver
+        'inteluf_01.patch'
+        'inteluf_02.patch'
+        ## Intel ISST fixes
+        'isst_01.patch'
+        'isst_02.patch'
+        'isst_03.patch'
+        'isst_04.patch'
+        'isst_05.patch'
+        ## POSTFACTUM - EXPOSE KSM INTERFACE
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/ksm-patches/0001-ksm-patches.patch"
+        ## CUSTOM PATCHES - PIECES OF XANMOD
+        "https://ballarin.cc/patchwork/pieces_of_xanmod.patch"
+        ## POSTFACTUM - O3 ALWAYS ON
+        "postfactumothree.patch::https://gitlab.com/post-factum/pf-kernel/commit/cf7a8ad26e0bd6ca8afba89f53d2e9dc43ee2598.patch"
+        ## VALVE - MULTIPLE FUTEX
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/futex-patches/0001-futex-patches.patch"
+        ## CUSTOM PATCHES - STUN
+        "https://ballarin.cc/patchwork/00004-manjaro-stun-tickat600.patch"
+        "https://ballarin.cc/patchwork/00005-manjaro-stun-tcpcake.patch"
+        ## BFQ Lucjan
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/block-patches-sep/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/block-patches-sep/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/bfq-dev-lucjan/5.5-bfq-dev-lucjan-v11-r2K200127.patch"
+        ## Zen Lucjan
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/zen-patches-sep/0002-ZEN-intel-pstate-Implement-enable-parameter.patch"
+        ## CLEAR CVEs
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/CVE-2019-12379.patch"
+        ## SCSI LUCJAN
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/scsi-patches-sep/0001-scsi-sd-block-Fix-regressions-in-read-only-block-dev.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/scsi-patches-sep/0002-scsi-sd-block-Update-fix-regressions-in-read-only-bl.patch"
+        ## CLEAR SERIES
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0051-rcu-nocb-Fix-dump_tree-hierarchy-print-always-active.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0101-i8042-decrease-debug-message-level-to-info.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0102-Increase-the-ext4-default-commit-age.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0103-silence-rapl.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0104-pci-pme-wakeups.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0105-ksm-wakeups.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0106-intel_idle-tweak-cpuidle-cstates.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0108-smpboot-reuse-timer-calibration.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0109-raid6-add-Kconfig-option-to-skip-raid6-benchmarking.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0110-Initialize-ata-before-graphics.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0111-give-rdrand-some-credit.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0112-ipv4-tcp-allow-the-memory-tuning-for-tcp-to-go-a-lit.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0113-kernel-time-reduce-ntp-wakeups.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0114-init-wait-for-partition-and-retry-scan.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0118-Migrate-some-systemd-defaults-to-the-kernel-defaults.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0119-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0120-add-scheduler-turbo3-patch.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0121-use-lfence-instead-of-rep-and-nop.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0122-do-accept-in-LIFO-order-for-cache-efficiency.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0124-locking-rwsem-spin-faster.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0125-ata-libahci-ignore-staggered-spin-up.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0127-x86-microcode-Force-update-a-uCode-even-if-the-rev-i.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0128-x86-microcode-echo-2-reload-to-force-load-ucode.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0129-fix-bug-in-ucode-force-reload-revision-check.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0130-add-workaround-for-binutils-optimization.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0131-nvme-workaround.patch"
+        ## SCHEDULER - BMQ
+        "https://gitlab.com/alfredchen/bmq/raw/master/5.5/bmq_v5.5-r0.patch"
+        ## GRAYSKY2 GCC OPTIMIZATIONS
+        "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v9.1%2B_kernel_v5.5%2B.patch"
+        ## Wireguard - Kernel autopatcher
+        "https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat-${_wireguard}.tar.xz")
+
 sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
-            '32558d7e08983f539519e0e9692488650283b5bbe7e2601c516f88bfc0b01a27'
+            # x86_64 config -->
+            'SKIP'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             '5140f290d76b35a06e13b431f72f7049c07c46cd12f985777e0b0bcb613f1104'
@@ -89,18 +167,150 @@ sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
             'e9f22cbb542591087d2d66dc6dc912b1434330ba3cd13d2df741d869a2c31e89'
             '27471eee564ca3149dd271b0817719b5565a9594dc4d884fe3dc51a5f03832bc'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
-            '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef')
+            '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
+            ##
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP')
 prepare() {
   cd "${srcdir}/linux-${_basekernel}"
 
+  ### START OF PATCHES ###
+  echo " "
+  echo "PATCH: Kernel upstream"
   # add upstream patch
   #patch -p1 -i "${srcdir}/patch-${pkgver}"
+  echo " "
 
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
   # enable only if you have "gen-stable-queue-patch.sh" executed before
   #patch -Np1 -i "${srcdir}/prepatch-${_basekernel}.patch"
 
+  ## CLEARER MANJARO: New exFAT drivers by Samsung
+  echo " "
+  echo "PATCH: Samsung exFAT drivers"
+  patch -Np1 -i ../0001-exfat-patches.patch
+  echo " "
+
+  ## Intel ISST fixes
+  echo " "
+  echo "PATCH: Intel ISST fixes"
+  patch -Np1 -i ../isst_01.patch
+  patch -Np1 -i ../isst_02.patch
+  patch -Np1 -i ../isst_03.patch
+  patch -Np1 -i ../isst_04.patch
+  patch -Np1 -i ../isst_05.patch
+  echo " "
+
+  ## Zen Lucjan
+  echo " "
+  echo "PATCH: Explicit PSTATE parameter"
+  patch -Np1 -i ../0002-ZEN-intel-pstate-Implement-enable-parameter.patch
+  echo " "
+
+  ## Intel Uncore Frequency driver
+  echo " "
+  echo "PATCH: Intel UnCore frequency driver"
+  patch -Np1 -i ../inteluf_01.patch
+  patch -Np1 -i ../inteluf_02.patch
+  echo " "
+
+  ## CLEARER MANJARO: PIECES OF XANMOD
+  echo " "
+  echo "PATCH: Pieces of XanMod"
+  patch -Np1 -i ../pieces_of_xanmod.patch
+  echo " "
+
+  ## CLEARER MANJARO: STUN PATCHES
+  echo " "
+  echo "PATCH: STUN patches"
+  patch -Np1 -i ../00004-manjaro-stun-tickat600.patch
+  patch -Np1 -i ../00005-manjaro-stun-tcpcake.patch
+  echo " "
+
+  ## CLEARER MANJARO - MMGUPTA MEMORY MERGING
+  echo " "
+  echo "PATCH: Proactive memory compaction"
+  patch -Np1 -i ../mmgupta.patch
+  echo " "
+
+  ## CLEARER MANJARO - KSM (NATALENKO)
+  echo " "
+  echo "PATCH: PostFactum KSM"
+  patch -Np1 -i ../0001-ksm-patches.patch
+  echo " "
+
+  ## CLEARER MANJARO: POSTFACTUM O3 ALWAYS ON
+  echo " "
+  echo "PATCH: Always-on -O3"
+  patch -Np1 -i ../postfactumothree.patch
+  echo " "
+
+  ## CLEARER MANJARO: FUTEX WAIT MULTIPLE (VALVE)
+  echo " "
+  echo "PATCH: Multiple FutEx"
+  patch -Np1 -i ../0001-futex-patches.patch
+  echo " "
+
+  ## CLEARER MANJARO: BFQ PATCHES
+  echo " "
+  echo "PATCH: BFQ development branch"
+  patch -Np1 -i ../0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
+  patch -Np1 -i ../0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
+  patch -Np1 -i ../5.5-bfq-dev-lucjan-v11-r2K200127.patch
+  echo " "
+
+  echo " "
+  echo "PATCH: Manjaro defaults"
   # disable USER_NS for non-root users by default
   patch -Np1 -i ../0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
 
@@ -145,6 +355,78 @@ prepare() {
   patch -Np1 -i "${srcdir}/aufs5-standalone.patch"
   patch -Np1 -i "${srcdir}/tmpfs-idr.patch"
   patch -Np1 -i "${srcdir}/vfs-ino.patch"
+  echo " "
+
+  ## CLEARER MANJARO: CLEAR CVE FIXES
+  echo " "
+  echo "PATCH: CVE fixes from Intel"
+  patch -Np1 -i ../CVE-2019-12379.patch
+  echo " "
+
+  ## SCSI LUCJAN
+  echo " "
+  echo "PATCH: SCSI Fixes by SirLucjan"
+  patch -Np1 -i ../0001-scsi-sd-block-Fix-regressions-in-read-only-block-dev.patch
+  patch -Np1 -i ../0002-scsi-sd-block-Update-fix-regressions-in-read-only-bl.patch
+  echo " "
+
+  ## CLEARER MANJARO: CLEAR SERIES PATCHES
+  echo " "
+  echo "PATCH: Clear Linux patches"
+  patch -Np1 -i ../0051-rcu-nocb-Fix-dump_tree-hierarchy-print-always-active.patch
+  patch -Np1 -i ../0101-i8042-decrease-debug-message-level-to-info.patch
+  patch -Np1 -i ../0102-Increase-the-ext4-default-commit-age.patch
+  patch -Np1 -i ../0103-silence-rapl.patch
+  patch -Np1 -i ../0104-pci-pme-wakeups.patch
+  patch -Np1 -i ../0105-ksm-wakeups.patch
+  patch -Np1 -i ../0106-intel_idle-tweak-cpuidle-cstates.patch
+  patch -Np1 -i ../0108-smpboot-reuse-timer-calibration.patch
+  patch -Np1 -i ../0109-raid6-add-Kconfig-option-to-skip-raid6-benchmarking.patch
+  patch -Np1 -i ../0110-Initialize-ata-before-graphics.patch
+  patch -Np1 -i ../0111-give-rdrand-some-credit.patch
+  patch -Np1 -i ../0112-ipv4-tcp-allow-the-memory-tuning-for-tcp-to-go-a-lit.patch
+  patch -Np1 -i ../0113-kernel-time-reduce-ntp-wakeups.patch
+  patch -Np1 -i ../0114-init-wait-for-partition-and-retry-scan.patch
+  patch -Np1 -i ../0118-Migrate-some-systemd-defaults-to-the-kernel-defaults.patch
+  patch -Np1 -i ../0119-xattr-allow-setting-user.-attributes-on-symlinks-by-.patch
+  #patch -Np1 -i ../0120-add-scheduler-turbo3-patch.patch # Incompatible
+  patch -Np1 -i ../0121-use-lfence-instead-of-rep-and-nop.patch
+  patch -Np1 -i ../0122-do-accept-in-LIFO-order-for-cache-efficiency.patch
+  patch -Np1 -i ../0124-locking-rwsem-spin-faster.patch
+  patch -Np1 -i ../0125-ata-libahci-ignore-staggered-spin-up.patch
+  patch -Np1 -i ../0127-x86-microcode-Force-update-a-uCode-even-if-the-rev-i.patch
+  patch -Np1 -i ../0128-x86-microcode-echo-2-reload-to-force-load-ucode.patch
+  patch -Np1 -i ../0129-fix-bug-in-ucode-force-reload-revision-check.patch
+  #patch -Np1 -i ../0130-add-workaround-for-binutils-optimization.patch
+  patch -Np1 -i ../0131-nvme-workaround.patch
+  echo " "
+
+  # WireGuard AutoPatcher
+  echo " "
+  echo "PATCH: Wireguard"
+  _prewg_curdir="$(pwd)"
+  cd "${srcdir}/wireguard-linux-compat-${_wireguard}/kernel-tree-scripts/"
+  _wg_ker_calldir="$(pwd)"
+  cd "${srcdir}/linux-${_basekernel}/"
+  "$_wg_ker_calldir/create-patch.sh" > ./wgpatch.patch
+  patch -p1 -i ./wgpatch.patch
+  rm ./wgpatch.patch
+  cd "$_prewg_curdir"
+  echo " "
+
+  ## CLEARER MANJARO: BMQ SCHEDULER
+  echo " "
+  echo "PATCH: BMQ scheduler"
+  patch -Np1 -i ../bmq_v5.5-r0.patch
+  echo " "
+
+  ## CLEARER MANJARO: GRAYSKY2 GCC OPTIMIZATIONS
+  echo " "
+  echo "PATCH: GraySky"
+  patch -Np1 -i ../grayskygcc.patch
+  echo " "
+
+  ### END OF PATCHES ###
 
   if [ "${CARCH}" = "x86_64" ]; then
     cat "${srcdir}/config.x86_64" > ./.config
@@ -166,7 +448,7 @@ prepare() {
   sed -i '2iexit 0' scripts/depmod.sh
 
   # get kernel version
-  make prepare
+  make prepare -j12
 
   # load configuration
   # Configure the kernel. Replace the line below with one of your choice.
@@ -177,31 +459,32 @@ prepare() {
   # ... or manually edit .config
 
   # rewrite configuration
-  yes "" | make config >/dev/null
+  yes "" | make config -j12 >/dev/null
 }
 
 build() {
   cd "${srcdir}/linux-${_basekernel}"
 
   # build!
-  make ${MAKEFLAGS} LOCALVERSION= bzImage modules
+  make ${MAKEFLAGS} -j12 LOCALVERSION= bzImage modules
 }
 
-package_linux55() {
+package_linux55-CLEARER() {
   pkgdesc="The ${pkgbase/linux/Linux} kernel and modules"
   depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=27')
-  optdepends=('crda: to set the correct wireless channels of your country')
-  provides=("linux=${pkgver}")
+  optdepends=('crda: to set the correct wireless channels of your country' 'wireguard-tools: to use the Wireguard module included')
+  provides=("linux55" "linux=${pkgver}" "WIREGUARD-MODULE")
+  conflicts=("linux55")
 
   cd "${srcdir}/linux-${_basekernel}"
 
   KARCH=x86
 
   # get kernel version
-  _kernver="$(make LOCALVERSION= kernelrelease)"
+  _kernver="$(make -j12 LOCALVERSION= kernelrelease)"
 
   mkdir -p "${pkgdir}"/{boot,usr/lib/modules}
-  make LOCALVERSION= INSTALL_MOD_PATH="${pkgdir}/usr" modules_install
+  make -j12 LOCALVERSION= INSTALL_MOD_PATH="${pkgdir}/usr" modules_install
 
   # systemd expects to find the kernel here to allow hibernation
   # https://github.com/systemd/systemd/commit/edda44605f06a41fb86b7ab8128dcf99161d2344
@@ -213,13 +496,13 @@ package_linux55() {
 
   # add kernel version
   if [ "${CARCH}" = "x86_64" ]; then
-     echo "${pkgver}-${pkgrel}-MANJARO x64" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
+     echo "${pkgver}-${pkgrel}-CLEARER x64" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
   else
-     echo "${pkgver}-${pkgrel}-MANJARO x32" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
+     echo "${pkgver}-${pkgrel}-CLEARER x32" > "${pkgdir}/boot/${pkgbase}-${CARCH}.kver"
   fi
 
   # make room for external modules
-  local _extramodules="extramodules-${_basekernel}${_kernelname:--MANJARO}"
+  local _extramodules="extramodules-${_basekernel}${_kernelname:--CLEARER}"
   ln -s "../${_extramodules}" "${pkgdir}/usr/lib/modules/${_kernver}/extramodules"
 
   # add real version for building modules and running depmod from hook
@@ -236,9 +519,10 @@ package_linux55() {
   install -Dt "${pkgdir}/usr/lib/modules/${_kernver}/build" -m644 vmlinux
 }
 
-package_linux55-headers() {
+package_linux55-CLEARER-headers() {
   pkgdesc="Header files and scripts for building modules for ${pkgbase/linux/Linux} kernel"
-  provides=("linux-headers=$pkgver")
+  provides=("linux55-headers" "linux-headers=$pkgver")
+  conflicts=("linux55-headers")
 
   cd "${srcdir}/linux-${_basekernel}"
   local _builddir="${pkgdir}/usr/lib/modules/${_kernver}/build"
