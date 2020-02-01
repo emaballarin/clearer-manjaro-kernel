@@ -48,7 +48,7 @@ cd "$CLEARERMANJARO_TMPDIR"
 git clone --recursive https://github.com/emaballarin/clearer-manjaro-kernel-nvidia.git
 git clone --recursive https://github.com/emaballarin/clearer-manjaro-kernel-acpi-call.git
 git clone --recursive https://gitlab.manjaro.org/packages/extra/linux55-extramodules/virtualbox-modules.git
-git clone --recursive https://gitlab.manjaro.org/packages/extra/linux55-extramodules/spl_zfs.git
+#git clone --recursive https://gitlab.manjaro.org/packages/extra/linux55-extramodules/spl_zfs.git
 
 ###############################
 ## Auto-reconfigure packages ##
@@ -63,15 +63,15 @@ git clone --recursive https://gitlab.manjaro.org/packages/extra/linux55-extramod
 ## sed -i "s/acpi_call\.install\"/acpi_call-CLEARER\.install\"/g" ./PKGBUILD
 
 
-# SPL/ZFS
-cd "$CLEARERMANJARO_TMPDIR/spl_zfs"
-mv ./install ./spl_zfs-CLEARER.install
-sed -i "s/_linuxprefix=.*/_linuxprefix=linux55-CLEARER/g" ./PKGBUILD
-sed -i "s/_extramodules=.*/_extramodules=extramodules-5.5-CLEARER/g" ./PKGBUILD
-sed -i "s/install=install.*/install=spl_zfs-CLEARER\.install/g" ./PKGBUILD
-sed -i "s/install\"/spl_zfs-CLEARER\.install\"/g" ./PKGBUILD
-#sed -i "s/package_linux55-spl/package_linux55-clearer-spl/g" ./PKGBUILD
-sed -i "s/package_linux55-zfs/package_linux55-CLEARER-zfs/g" ./PKGBUILD
+## SPL/ZFS
+#cd "$CLEARERMANJARO_TMPDIR/spl_zfs"
+#mv ./install ./spl_zfs-CLEARER.install
+#sed -i "s/_linuxprefix=.*/_linuxprefix=linux55-CLEARER/g" ./PKGBUILD
+#sed -i "s/_extramodules=.*/_extramodules=extramodules-5.5-CLEARER/g" ./PKGBUILD
+#sed -i "s/install=install.*/install=spl_zfs-CLEARER\.install/g" ./PKGBUILD
+#sed -i "s/install\"/spl_zfs-CLEARER\.install\"/g" ./PKGBUILD
+##sed -i "s/package_linux55-spl/package_linux55-clearer-spl/g" ./PKGBUILD
+#sed -i "s/package_linux55-zfs/package_linux55-CLEARER-zfs/g" ./PKGBUILD
 
 # virtualbox-modules
 cd "$CLEARERMANJARO_TMPDIR/virtualbox-modules"
@@ -99,8 +99,8 @@ makepkg -Csf --noconfirm
 cd "$CLEARERMANJARO_TMPDIR/acpi_call"
 makepkg -Csf --noconfirm
 
-cd "$CLEARERMANJARO_TMPDIR/spl_zfs"
-makepkg -Csf --noconfirm
+#cd "$CLEARERMANJARO_TMPDIR/spl_zfs"
+#makepkg -Csf --noconfirm
 
 ## virtualbox-modules ##
 
@@ -136,8 +136,8 @@ cp ./*.pkg.tar.xz "$CLEARERMANJARO_PKGS"
 cd "$CLEARERMANJARO_TMPDIR/acpi_call"
 cp ./*.pkg.tar.xz "$CLEARERMANJARO_PKGS"
 
-cd "$CLEARERMANJARO_TMPDIR/spl_zfs"
-cp ./*.pkg.tar.xz "$CLEARERMANJARO_PKGS"
+#cd "$CLEARERMANJARO_TMPDIR/spl_zfs"
+#cp ./*.pkg.tar.xz "$CLEARERMANJARO_PKGS"
 
 cd "$CLEARERMANJARO_TMPDIR/virtualbox-modules"
 cp ./*host*.pkg.tar.xz "$CLEARERMANJARO_PKGS"

@@ -20,7 +20,7 @@ _aufs=20200127
 _sub=0
 _wireguard=0.0.20200128
 _ALREADYMERGED=0
-_CLEARERrel=12
+_CLEARERrel=13
 pkgver=${_basekernel}.${_sub}
 pkgrel=2
 arch=('i686' 'x86_64')
@@ -85,14 +85,14 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         ## POSTFACTUM - O3 ALWAYS ON
         "postfactumothree.patch::https://gitlab.com/post-factum/pf-kernel/commit/cf7a8ad26e0bd6ca8afba89f53d2e9dc43ee2598.patch"
         ## VALVE - MULTIPLE FUTEX
-        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/futex-patches/0001-futex-patches.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/futex-patches-v2/0001-futex-Add-support-for-multiple-keys-at-the-same-time.patch"
         ## CUSTOM PATCHES - STUN
         "https://ballarin.cc/patchwork/00004-manjaro-stun-tickat600.patch"
         "https://ballarin.cc/patchwork/00005-manjaro-stun-tcpcake.patch"
         ## BFQ Lucjan
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/block-patches-sep/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/block-patches-sep/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch"
-        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/bfq-dev-lucjan/5.5-bfq-dev-lucjan-v11-r2K200127.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/bfq-dev-lucjan/5.5-bfq-dev-lucjan-v11-r2K200130.patch"
         ## Zen Lucjan
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/zen-patches-sep/0002-ZEN-intel-pstate-Implement-enable-parameter.patch"
         ## CLEAR CVEs
@@ -298,7 +298,7 @@ prepare() {
   ## CLEARER MANJARO: FUTEX WAIT MULTIPLE (VALVE)
   echo " "
   echo "PATCH: Multiple FutEx"
-  patch -Np1 -i ../0001-futex-patches.patch
+  patch -Np1 -i ../0001-futex-Add-support-for-multiple-keys-at-the-same-time.patch
   echo " "
 
   ## CLEARER MANJARO: BFQ PATCHES
@@ -306,7 +306,7 @@ prepare() {
   echo "PATCH: BFQ development branch"
   patch -Np1 -i ../0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
   patch -Np1 -i ../0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
-  patch -Np1 -i ../5.5-bfq-dev-lucjan-v11-r2K200127.patch
+  patch -Np1 -i ../5.5-bfq-dev-lucjan-v11-r2K200130.patch
   echo " "
 
   echo " "
