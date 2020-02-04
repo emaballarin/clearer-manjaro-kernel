@@ -309,7 +309,7 @@ prepare() {
   echo "PATCH: BFQ development branch"
   patch -Np1 -i ../0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
   patch -Np1 -i ../0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
-  patch -Np1 -i ../5.5-bfq-dev-lucjan-v11-r2K200130.patch
+  patch -Np1 -i ../5.5-bfq-dev-lucjan-v11-r2K200203.patch
   echo " "
 
   echo " "
