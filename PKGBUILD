@@ -128,8 +128,14 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0129-fix-bug-in-ucode-force-reload-revision-check.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0130-add-workaround-for-binutils-optimization.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0131-nvme-workaround.patch"
+        ## LUCJAN MISC
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/zen-patches-sep/0001-ZEN-Add-VHBA-driver.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/hwmon-patches/0001-hwmon-Driver-for-disk-and-solid-state-drives-with-te.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v4-sep/0002-infiniband-Fix-__read_overflow2-error-with-O3-inlini.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v4-sep/0005-kbuild-reuse-intermediate-linker-scripts-in-the-fina.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v4-sep/0007-ALSA-hda-Fix-DP-MST-support-for-NVIDIA-codecs.patch"
         ## SCHEDULER - BMQ
-        "https://gitlab.com/alfredchen/bmq/raw/master/5.5/bmq_v5.5-r0.patch"
+        "https://gitlab.com/alfredchen/bmq/raw/master/5.5/bmq_v5.5-r1.patch"
         ## GRAYSKY2 GCC OPTIMIZATIONS
         "grayskygcc.patch::https://raw.githubusercontent.com/graysky2/kernel_gcc_patch/master/enable_additional_cpu_optimizations_for_gcc_v9.1%2B_kernel_v5.5%2B.patch"
         ## Wireguard - Kernel autopatcher
@@ -172,6 +178,11 @@ sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
             ##
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -367,6 +378,16 @@ prepare() {
   patch -Np1 -i ../CVE-2019-12379.patch
   echo " "
 
+  ## LUCJAN MISC
+  echo " "
+  echo "PATCH: Miscellaneous Fixes by SirLucjan"
+  patch -Np1 -i ../0001-ZEN-Add-VHBA-driver.patch
+  patch -Np1 -i ../0001-hwmon-Driver-for-disk-and-solid-state-drives-with-te.patch
+  patch -Np1 -i ../0002-infiniband-Fix-__read_overflow2-error-with-O3-inlini.patch
+  patch -Np1 -i ../0005-kbuild-reuse-intermediate-linker-scripts-in-the-fina.patch
+  patch -Np1 -i ../0007-ALSA-hda-Fix-DP-MST-support-for-NVIDIA-codecs.patch
+  echo " "
+
   ## SCSI LUCJAN
   echo " "
   echo "PATCH: SCSI Fixes by SirLucjan"
@@ -421,7 +442,7 @@ prepare() {
   ## CLEARER MANJARO: BMQ SCHEDULER
   echo " "
   echo "PATCH: BMQ scheduler"
-  patch -Np1 -i ../bmq_v5.5-r0.patch
+  patch -Np1 -i ../bmq_v5.5-r1.patch
   echo " "
 
   ## CLEARER MANJARO: GRAYSKY2 GCC OPTIMIZATIONS
