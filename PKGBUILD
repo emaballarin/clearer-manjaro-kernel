@@ -17,7 +17,7 @@ _kernelname=-CLEARER
 _basekernel=5.5
 _basever=55
 _aufs=20200127
-_sub=1
+_sub=2
 _wireguard=0.0.20200128
 _ALREADYMERGED=1
 _CLEARERrel=14
@@ -136,7 +136,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat-${_wireguard}.tar.xz")
 
 sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
-            'db575e6dfabeb2ab409e2c56f826a6d52d56b8a3b0c004ae261cabd5af220688'
+            '07cbd21a049b0bf5a96d7e0b8272db8e53e9947f0eff06fa2a765bb3b34bc8fa'
             # x86_64 config -->
             'SKIP'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
