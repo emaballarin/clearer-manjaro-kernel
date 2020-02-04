@@ -19,8 +19,8 @@ _basever=55
 _aufs=20200127
 _sub=1
 _wireguard=0.0.20200128
-_ALREADYMERGED=0
-_CLEARERrel=13
+_ALREADYMERGED=1
+_CLEARERrel=14
 pkgver=${_basekernel}.${_sub}
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -93,7 +93,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         ## BFQ Lucjan
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/block-patches-sep/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/block-patches-sep/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch"
-        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/bfq-dev-lucjan/5.5-bfq-dev-lucjan-v11-r2K200130.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/bfq-dev-lucjan/5.5-bfq-dev-lucjan-v11-r2K200203.patch"
         ## Zen Lucjan
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/zen-patches-sep/0002-ZEN-intel-pstate-Implement-enable-parameter.patch"
         ## CLEAR CVEs
