@@ -14,7 +14,7 @@ _basever=55
 _aufs=20200127
 _sub=2
 pkgver=${_basekernel}.${_sub}
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -37,6 +37,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch'
         '0002-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
         '0003-btrfs-send-fix-emission-of-invalid-clone-operations-within-the-same-file.patch'
+        '0004-iwlwifi-mvm-Do-not-require-PHY_SKU-NVM-section-for-3168-devices.patch'
         # MANJARO Patches
         '0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch'
         '0002-apparmor-af_unix-mediation.patch'
@@ -44,6 +45,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0004-apparmor-fix-apparmor-mediating-locking-non-fs-unix-sockets.patch'
         '0001-nonupstream-navi10-vfio-reset.patch'
         '0001-i2c-nuvoton-nc677x-hwmon-driver.patch'
+        '0001-drm-i915-execlists-Always-force-a-context-reload-when-rewinding-RING_TAIL.patch'
         # Bootsplash
         '0001-bootsplash.patch'
         '0002-bootsplash.patch'
@@ -74,12 +76,14 @@ sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
             '7685d526bbdbfa795986591a70071c960ff572f56d3501774861728a9df8664c'
             'fcb9e515bf0816db05446fd8ced7468756bea3cf01b060504bace41b2e7f5f74'
             '8edcc9a2623babfc0e4c808a18592bdd1c250f3e638217800b2aa9823ae52dc7'
+            '00297708583550422a325161822fbdd046b1d198b4fcf28e308ddbe0171e9696'
             '98202b8ad70d02d86603294bae967874fa7b18704b5c7b867568b0fd33a08921'
             '5cbbf3db9ea3205e9b89fe3049bea6dd626181db0cb0dc461e4cf5a400c68dd6'
             'c7dbec875d0c1d6782c037a1dcefff2e5bdb5fc9dffac1beea07dd8c1bdef1d7'
             '77746aea71ffb06c685e7769b49c78e29af9b2e28209cd245e95d9cbb0dba3c9'
             '7a2758f86dd1339f0f1801de2dbea059b55bf3648e240878b11e6d6890d3089c'
             '0556859a8168c8f7da9af8e2059d33216d9e5378d2cac70ca54c5ff843fa5add'
+            'd777bf32418c1d790becc3d38cea3e617069419f0a1c15bc56358280ffde8b17'
             'a504f6cf84094e08eaa3cc5b28440261797bf4f06f04993ee46a20628ff2b53c'
             'e096b127a5208f56d368d2cb938933454d7200d70c86b763aa22c38e0ddb8717'
             '8c1c880f2caa9c7ae43281a35410203887ea8eae750fe8d360d0c8bf80fcc6e0'
@@ -110,6 +114,7 @@ prepare() {
   # other fixes by Arch
   patch -Np1 -i '../0002-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
   patch -Np1 -i '../0003-btrfs-send-fix-emission-of-invalid-clone-operations-within-the-same-file.patch'
+  patch -Np1 -i '../0004-iwlwifi-mvm-Do-not-require-PHY_SKU-NVM-section-for-3168-devices.patch'
 
   # add patches for snapd
   # https://gitlab.com/apparmor/apparmor-kernel/tree/5.2-outoftree
@@ -123,6 +128,9 @@ prepare() {
   # https://forum.level1techs.com/t/145666/86
   # https://forum.manjaro.org/t/107820/11
   patch -Np1 -i "${srcdir}/0001-nonupstream-navi10-vfio-reset.patch"
+
+  # https://gitlab.manjaro.org/packages/core/linux54/issues/5
+  patch -Np1 -i "${srcdir}/0001-drm-i915-execlists-Always-force-a-context-reload-when-rewinding-RING_TAIL.patch"
 
   # Add bootsplash - http://lkml.iu.edu/hypermail/linux/kernel/1710.3/01542.html
   patch -Np1 -i "${srcdir}/0001-bootsplash.patch"
