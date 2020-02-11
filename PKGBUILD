@@ -11,10 +11,10 @@ pkgname=('linux55' 'linux55-headers')
 _kernelname=-MANJARO
 _basekernel=5.5
 _basever=55
-_aufs=20200127
-_sub=2
+_aufs=20200203
+_sub=3
 pkgver=${_basekernel}.${_sub}
-pkgrel=2
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -61,12 +61,12 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
 sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
-            '07cbd21a049b0bf5a96d7e0b8272db8e53e9947f0eff06fa2a765bb3b34bc8fa'
+            '49a9de13452eec4807a8b55d054318ac552625d4285bec74f3d669bb0eb3a074'
             '3968c459d5818b1817d1cde19aa0708b0b2d1b52339fcb31a5d4c537d51c8b49'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
-            '5140f290d76b35a06e13b431f72f7049c07c46cd12f985777e0b0bcb613f1104'
-            'd23d429e2a843d8b1c503480b650f59c9e2273e1907e927132e086dfc133616c'
+            'b6de91baa9190b2b682304c393662af4a632ffb8a9102999d2fe3c3f4a561712'
+            '15be5f67f3579c9cc4837d017a7148041799a99466dcee714b19cc07f9648558'
             'a5533120455c6490a75f06f5fc24b861ed2df503c980fa5548b5caa2f7984f13'
             '02211d7d11883e30a7a90fc4e1eb4c4d9391fa636f717fb7061ba48d26630ac4'
             '9bd2ec4fd05a993f140720d51d02ff7032c824fafcfb8d5dbd47272187534656'
