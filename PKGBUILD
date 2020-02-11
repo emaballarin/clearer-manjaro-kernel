@@ -109,6 +109,7 @@ prepare() {
 
   # other fixes by Arch
   patch -Np1 -i '../0002-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch'
+  patch -Np1 -i '../0003-btrfs-send-fix-emission-of-invalid-clone-operations-within-the-same-file.patch'
   patch -Np1 -i '../0004-iwlwifi-mvm-Do-not-require-PHY_SKU-NVM-section-for-3168-devices.patch'
 
   # add patches for snapd
