@@ -11,10 +11,10 @@ pkgname=('linux55' 'linux55-headers')
 _kernelname=-MANJARO
 _basekernel=5.5
 _basever=55
-_aufs=20200127
-_sub=3
+_aufs=20200203
+_sub=4
 pkgver=${_basekernel}.${_sub}
-pkgrel=2
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -25,7 +25,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         # the main kernel config files
         'config.x86_64' 'config' 'config.aufs'
         # AUFS Patches
-        "aufs5.x-rcN-${_aufs}.patch"
+        "aufs5.5-${_aufs}.patch"
         'aufs5-base.patch'
         'aufs5-kbuild.patch'
         'aufs5-loopback.patch'
@@ -41,6 +41,13 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0005-drm-i915-wean-off-drm_pci_alloc-drm_pci_free.patch'
         '0006-drm-remove-PageReserved-manipulation-from-drm_pci_alloc.patch'
         '0007-drm-i915-execlists-always-force-a-context-reload-when-rewinding-RING_TAIL.patch'
+        '0008-drm-i915-serialise-i915_active_acquire()with__active_retire().patch'
+        '0009-drm-i915-gem-take-runtime-pm-wakeref-prior-to-unbinding.patch'
+        '0010-drm-i915-gem-avoid-parking-the-vma-as-we-unbind.patch'
+        '0011-drm-i915-gem-try-to-flush-pending-unbind-events.patch'
+        '0012-drm-i915-gem-reinitialise-the-local-list-before-repeating.patch'
+        '0013-drm-i915-add-a-simple-is-bound-check-before-unbinding.patch'
+        '0014-drm-i915-introduce-a-vma.kref.patch'
         # MANJARO Patches
         '0001-apparmor-patch-to-provide-compatibility-with-v2-net-rules.patch'
         '0002-apparmor-af_unix-mediation.patch'
@@ -63,16 +70,16 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         '0012-bootsplash.patch'
         '0013-bootsplash.patch')
 sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
-            '49a9de13452eec4807a8b55d054318ac552625d4285bec74f3d669bb0eb3a074'
+            'cf640d75bdf4211446aa699a562c7bbd6d0360c6bc11e9ca22e8032de14697db'
             '759a46cd52f0f7267182c37126db497cffc65065de51ba4d26985b8cb664ba3d'
             'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
-            '5140f290d76b35a06e13b431f72f7049c07c46cd12f985777e0b0bcb613f1104'
-            'd23d429e2a843d8b1c503480b650f59c9e2273e1907e927132e086dfc133616c'
-            'a5533120455c6490a75f06f5fc24b861ed2df503c980fa5548b5caa2f7984f13'
-            '02211d7d11883e30a7a90fc4e1eb4c4d9391fa636f717fb7061ba48d26630ac4'
-            '9bd2ec4fd05a993f140720d51d02ff7032c824fafcfb8d5dbd47272187534656'
-            '32caef5516e4d1d70cdb98a66011d70b5955aea0a19b525c46d914d7a35de0d5'
+            '2f7bf415269853fb807aafe850e723321e25a8250d2eaa8fa0a890af74d05ef0'
+            '9fa21f968b39c773bd81a699344d5d804bee17e02689d34a279eedfc550314c9'
+            '8d13ad211226851a090f27cef8d29a80b8776e40396a880e970d3649780b7964'
+            'c02a56c85f93752538caaf303d5e55f642edfaac7111defb831e74b570b95750'
+            '5dad02ae9c6df0e62c1030cde906863a5b0cfb4e67cadf37463ec180706aa693'
+            '902c195313a52a84a40faad9e22c41ae0816a0ac58fbb1af71c6aeebfb2b438e'
             'c9796feddec29b332602bee218e8d3e5b629523b40314eeab078f415b96d1322'
             'c95cc6bc798978e29125c49ab613959c939ab7cf505142e968025373f4ffb9d5'
             '7685d526bbdbfa795986591a70071c960ff572f56d3501774861728a9df8664c'
@@ -82,6 +89,13 @@ sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
             '7ba2fb9c8387bb9ddeab388e95283bdae285add6543e7e121053bff55f84bf47'
             'c39011b7aef8e3f06c5a2fb4e5a0ea4ee6c452eb26518d05fbb7889a40487892'
             'c6c6ecd29540444fec6320a723f194159e993f7b4e7d9f2f427f7194f0b00890'
+            '9653c9310468c38fce09d5c6450965359f453c9ec64d04b8647aad3759539d06'
+            '6b8c563287b694efff91a65cff7fc3924e0468e6874b62dd5ace629e96c1394b'
+            '2fac1c411f5c33405226b294081107ec1d0e24c52f02651c6e674b9b34f08431'
+            '1e3ad73ede2a80e1052b7e66dcc2adec7f909038c77195c3ad59ad4e8f731f6c'
+            '277596368b8fe02704e5291a1ad043adad279e98216eb78d2c4f38c4a047a63b'
+            '6a9de6902bc97f201a5c32768e8a68a0e8f2639d2e1cfe86d8f01bc6fda1f221'
+            'dc46801624696fb8df0e9e5aed0f66e55e48dd03a5dfe6b04281ba810c79ce70'
             '98202b8ad70d02d86603294bae967874fa7b18704b5c7b867568b0fd33a08921'
             '5cbbf3db9ea3205e9b89fe3049bea6dd626181db0cb0dc461e4cf5a400c68dd6'
             'c7dbec875d0c1d6782c037a1dcefff2e5bdb5fc9dffac1beea07dd8c1bdef1d7'
@@ -121,6 +135,13 @@ prepare() {
   patch -Np1 -i '../0005-drm-i915-wean-off-drm_pci_alloc-drm_pci_free.patch'
   patch -Np1 -i '../0006-drm-remove-PageReserved-manipulation-from-drm_pci_alloc.patch'
   patch -Np1 -i '../0007-drm-i915-execlists-always-force-a-context-reload-when-rewinding-RING_TAIL.patch'
+  patch -Np1 -i '../0008-drm-i915-serialise-i915_active_acquire()with__active_retire().patch'
+  patch -Np1 -i '../0009-drm-i915-gem-take-runtime-pm-wakeref-prior-to-unbinding.patch'
+  patch -Np1 -i '../0010-drm-i915-gem-avoid-parking-the-vma-as-we-unbind.patch'
+  patch -Np1 -i '../0011-drm-i915-gem-try-to-flush-pending-unbind-events.patch'
+  patch -Np1 -i '../0012-drm-i915-gem-reinitialise-the-local-list-before-repeating.patch'
+  patch -Np1 -i '../0013-drm-i915-add-a-simple-is-bound-check-before-unbinding.patch'
+  patch -Np1 -i '../0014-drm-i915-introduce-a-vma.kref.patch'
 
   # add patches for snapd
   # https://gitlab.com/apparmor/apparmor-kernel/tree/5.2-outoftree
@@ -152,7 +173,7 @@ prepare() {
   git apply -p1 < "${srcdir}/0013-bootsplash.patch"
 
   # add aufs5 support
-  patch -Np1 -i "${srcdir}/aufs5.x-rcN-${_aufs}.patch"
+  patch -Np1 -i "${srcdir}/aufs5.5-${_aufs}.patch"
   patch -Np1 -i "${srcdir}/aufs5-base.patch"
   patch -Np1 -i "${srcdir}/aufs5-kbuild.patch"
   patch -Np1 -i "${srcdir}/aufs5-loopback.patch"

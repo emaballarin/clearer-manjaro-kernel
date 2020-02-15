@@ -1,5 +1,5 @@
 SPDX-License-Identifier: GPL-2.0
-aufs5.x-rcN base patch
+aufs5.5 base patch
 
 diff --git a/MAINTAINERS b/MAINTAINERS
 index 56765f542244..edbd784b8a87 100644
