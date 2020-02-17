@@ -6,6 +6,7 @@
 # Maintainer: Jonathon Fernyhough (i686) <jonathon@manjaro.org>
 # Contributor: Helmut Stult <helmut[at]manjaro[dot]org>
 
+
 pkgbase=linux55
 pkgname=('linux55' 'linux55-headers')
 _kernelname=-MANJARO
