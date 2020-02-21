@@ -147,6 +147,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v6-sep/0001-mm-Stop-kswapd-early-when-nothing-s-waiting-for-it-t.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v6-sep/0007-pipe-use-exclusive-waits-when-reading-or-writing.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v6-sep/0008-mm-Stop-kswapd-early-when-nothing-s-waiting-for-it-t.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/ll-patches/0002-LL-elevator-set-default-scheduler-to-bfq-for-blk-mq.patch"
 
         ## SCHEDULER - BMQ
         "https://gitlab.com/alfredchen/bmq/raw/master/5.5/bmq_v5.5-r1.patch"
@@ -159,7 +160,8 @@ sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
             '591340b56c24fd02db6b65542a14b7c3f50be8e1e224f2cc18c5da14ab5fc869'
             # x86_64 config -->
             'SKIP'
-            'bfe52746bfc04114627b6f1e0dd94bc05dd94abe8f6dbee770f78d6116e315e8'
+            # x86_32 config -->
+            'SKIP'
             'b44d81446d8b53d5637287c30ae3eb64cae0078c3fbc45fcf1081dd6699818b5'
             '2f7bf415269853fb807aafe850e723321e25a8250d2eaa8fa0a890af74d05ef0'
             '9fa21f968b39c773bd81a699344d5d804bee17e02689d34a279eedfc550314c9'
@@ -203,6 +205,7 @@ sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
             ##
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -427,6 +430,7 @@ prepare() {
   patch -Np1 -i ../0001-mm-Stop-kswapd-early-when-nothing-s-waiting-for-it-t.patch
   patch -Np1 -i ../0007-pipe-use-exclusive-waits-when-reading-or-writing.patch
   patch -Np1 -i ../0008-mm-Stop-kswapd-early-when-nothing-s-waiting-for-it-t.patch
+  patch -Np1 -i ../0002-LL-elevator-set-default-scheduler-to-bfq-for-blk-mq.patch
   echo " "
 
   ## SCSI LUCJAN
