@@ -17,8 +17,7 @@ _kernelname=-CLEARER
 _basekernel=5.5
 _basever=55
 _aufs=20200203
-_sub=5
-_wireguard=0.0.20200128
+_wireguard=0.0.20200215
 _ALREADYMERGED=1
 _CLEARERrel=14
 pkgver=5.5.5
@@ -97,14 +96,15 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         ## POSTFACTUM - O3 ALWAYS ON
         "postfactumothree.patch::https://gitlab.com/post-factum/pf-kernel/commit/cf7a8ad26e0bd6ca8afba89f53d2e9dc43ee2598.patch"
         ## VALVE - MULTIPLE FUTEX
-        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/futex-patches-v2/0001-futex-Add-support-for-multiple-keys-at-the-same-time.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/futex-patches-v4/0001-futex-patches.patch"
         ## CUSTOM PATCHES - STUN
         "https://ballarin.cc/patchwork/00004-manjaro-stun-tickat600.patch"
         "https://ballarin.cc/patchwork/00005-manjaro-stun-tcpcake.patch"
         ## BFQ Lucjan
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/block-patches-sep/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/block-patches-sep/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch"
-        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/bfq-dev-lucjan/5.5-bfq-dev-lucjan-v11-r2K200203.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/bfq-dev-lucjan/5.5-bfq-dev-lucjan-v11-r2K200211.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/bfq-reverts-sep/0001-Revert-block-bfq-do-not-plug-I-O-for-bfq_queues-with.patch"
         ## Zen Lucjan
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/zen-patches-sep/0002-ZEN-intel-pstate-Implement-enable-parameter.patch"
         ## CLEAR CVEs
@@ -140,11 +140,14 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0130-add-workaround-for-binutils-optimization.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0131-nvme-workaround.patch"
         ## LUCJAN MISC
+        "https://github.com/sirlucjan/kernel-patches/blob/master/5.5/hwmon-patches-v2/0001-hwmon-applesmc-fix-UB-and-udelay-overflow.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/zen-patches-sep/0001-ZEN-Add-VHBA-driver.patch"
-        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/hwmon-patches/0001-hwmon-Driver-for-disk-and-solid-state-drives-with-te.patch"
-        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v4-sep/0002-infiniband-Fix-__read_overflow2-error-with-O3-inlini.patch"
-        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v4-sep/0005-kbuild-reuse-intermediate-linker-scripts-in-the-fina.patch"
-        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v4-sep/0007-ALSA-hda-Fix-DP-MST-support-for-NVIDIA-codecs.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v6-sep/0002-infiniband-Fix-__read_overflow2-error-with-O3-inlini.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v6-sep/0005-kbuild-reuse-intermediate-linker-scripts-in-the-fina.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v6-sep/0001-mm-Stop-kswapd-early-when-nothing-s-waiting-for-it-t.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v6-sep/0007-pipe-use-exclusive-waits-when-reading-or-writing.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v6-sep/0008-mm-Stop-kswapd-early-when-nothing-s-waiting-for-it-t.patch"
+
         ## SCHEDULER - BMQ
         "https://gitlab.com/alfredchen/bmq/raw/master/5.5/bmq_v5.5-r1.patch"
         ## GRAYSKY2 GCC OPTIMIZATIONS
@@ -200,6 +203,9 @@ sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
             ##
+            'SKIP'
+            'SKIP'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -334,7 +340,7 @@ prepare() {
   ## CLEARER MANJARO: FUTEX WAIT MULTIPLE (VALVE)
   echo " "
   echo "PATCH: Multiple FutEx"
-  patch -Np1 -i ../0001-futex-Add-support-for-multiple-keys-at-the-same-time.patch
+  patch -Np1 -i ../0001-futex-patches.patch
   echo " "
 
   ## CLEARER MANJARO: BFQ PATCHES
@@ -342,7 +348,8 @@ prepare() {
   echo "PATCH: BFQ development branch"
   patch -Np1 -i ../0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
   patch -Np1 -i ../0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
-  patch -Np1 -i ../5.5-bfq-dev-lucjan-v11-r2K200203.patch
+  patch -Np1 -i ../5.5-bfq-dev-lucjan-v11-r2K200211.patch
+  patch -Np1 -i ../0001-Revert-block-bfq-do-not-plug-I-O-for-bfq_queues-with.patch
   echo " "
 
   echo " "
@@ -413,11 +420,13 @@ prepare() {
   ## LUCJAN MISC
   echo " "
   echo "PATCH: Miscellaneous Fixes by SirLucjan"
+  patch -Np1 -i ../0001-hwmon-applesmc-fix-UB-and-udelay-overflow.patch
   patch -Np1 -i ../0001-ZEN-Add-VHBA-driver.patch
-  patch -Np1 -i ../0001-hwmon-Driver-for-disk-and-solid-state-drives-with-te.patch
   patch -Np1 -i ../0002-infiniband-Fix-__read_overflow2-error-with-O3-inlini.patch
   patch -Np1 -i ../0005-kbuild-reuse-intermediate-linker-scripts-in-the-fina.patch
-  patch -Np1 -i ../0007-ALSA-hda-Fix-DP-MST-support-for-NVIDIA-codecs.patch
+  patch -Np1 -i ../0001-mm-Stop-kswapd-early-when-nothing-s-waiting-for-it-t.patch
+  patch -Np1 -i ../0007-pipe-use-exclusive-waits-when-reading-or-writing.patch
+  patch -Np1 -i ../0008-mm-Stop-kswapd-early-when-nothing-s-waiting-for-it-t.patch
   echo " "
 
   ## SCSI LUCJAN
