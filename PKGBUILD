@@ -104,7 +104,6 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/block-patches-sep/0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/block-patches-sep/0002-block-Fix-depends-for-BLK_DEV_ZONED.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/bfq-dev-lucjan/5.5-bfq-dev-lucjan-v11-r2K200211.patch"
-        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/bfq-reverts-sep/0001-Revert-block-bfq-do-not-plug-I-O-for-bfq_queues-with.patch"
         ## Zen Lucjan
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/zen-patches-sep/0002-ZEN-intel-pstate-Implement-enable-parameter.patch"
         ## CLEAR CVEs
@@ -352,7 +351,6 @@ prepare() {
   patch -Np1 -i ../0001-block-Kconfig.iosched-set-default-value-of-IOSCHED_B.patch
   patch -Np1 -i ../0002-block-Fix-depends-for-BLK_DEV_ZONED.patch
   patch -Np1 -i ../5.5-bfq-dev-lucjan-v11-r2K200211.patch
-  patch -Np1 -i ../0001-Revert-block-bfq-do-not-plug-I-O-for-bfq_queues-with.patch
   echo " "
 
   echo " "
