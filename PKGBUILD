@@ -137,8 +137,8 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0127-x86-microcode-Force-update-a-uCode-even-if-the-rev-i.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0128-x86-microcode-echo-2-reload-to-force-load-ucode.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0129-fix-bug-in-ucode-force-reload-revision-check.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0130-add-workaround-for-binutils-optimization.patch"
-        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0131-nvme-workaround.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0130-nvme-workaround.patch"
+        "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0131-Don-t-report-an-error-if-PowerClamp-run-on-other-CPU.patch"
         ## LUCJAN MISC
         "https://github.com/sirlucjan/kernel-patches/blob/master/5.5/hwmon-patches-v2/0001-hwmon-applesmc-fix-UB-and-udelay-overflow.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/zen-patches-sep/0001-ZEN-Add-VHBA-driver.patch"
@@ -463,8 +463,8 @@ prepare() {
   patch -Np1 -i ../0127-x86-microcode-Force-update-a-uCode-even-if-the-rev-i.patch
   patch -Np1 -i ../0128-x86-microcode-echo-2-reload-to-force-load-ucode.patch
   patch -Np1 -i ../0129-fix-bug-in-ucode-force-reload-revision-check.patch
-  #patch -Np1 -i ../0130-add-workaround-for-binutils-optimization.patch
-  patch -Np1 -i ../0131-nvme-workaround.patch
+  patch -Np1 -i ../0130-nvme-workaround.patch
+  patch -Np1 -i ../0131-Don-t-report-an-error-if-PowerClamp-run-on-other-CPU.patch
   echo " "
 
   # WireGuard AutoPatcher
