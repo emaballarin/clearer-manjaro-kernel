@@ -145,7 +145,6 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v6-sep/0005-kbuild-reuse-intermediate-linker-scripts-in-the-fina.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v6-sep/0001-mm-Stop-kswapd-early-when-nothing-s-waiting-for-it-t.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v6-sep/0007-pipe-use-exclusive-waits-when-reading-or-writing.patch"
-        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/ll-patches/0002-LL-elevator-set-default-scheduler-to-bfq-for-blk-mq.patch"
 
         ## SCHEDULER - BMQ
         "https://gitlab.com/alfredchen/bmq/raw/master/5.5/bmq_v5.5-r1.patch"
@@ -203,7 +202,6 @@ sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
             '60e295601e4fb33d9bf65f198c54c7eb07c0d1e91e2ad1e0dd6cd6e142cb266d'
             '035ea4b2a7621054f4560471f45336b981538a40172d8f17285910d4e0e0b3ef'
             ##
-            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -424,7 +422,6 @@ prepare() {
   patch -Np1 -i ../0005-kbuild-reuse-intermediate-linker-scripts-in-the-fina.patch
   patch -Np1 -i ../0001-mm-Stop-kswapd-early-when-nothing-s-waiting-for-it-t.patch
   patch -Np1 -i ../0007-pipe-use-exclusive-waits-when-reading-or-writing.patch
-  patch -Np1 -i ../0002-LL-elevator-set-default-scheduler-to-bfq-for-blk-mq.patch
   echo " "
 
   ## SCSI LUCJAN
