@@ -139,7 +139,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v5.x/linux-${_basekernel}.tar.x
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0130-nvme-workaround.patch"
         "https://raw.githubusercontent.com/clearlinux-pkgs/linux/master/0131-Don-t-report-an-error-if-PowerClamp-run-on-other-CPU.patch"
         ## LUCJAN MISC
-        "https://github.com/sirlucjan/kernel-patches/blob/master/5.5/hwmon-patches-v2/0001-hwmon-applesmc-fix-UB-and-udelay-overflow.patch"
+        "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/hwmon-patches-v2/0001-hwmon-applesmc-fix-UB-and-udelay-overflow.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/zen-patches-sep/0001-ZEN-Add-VHBA-driver.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v6-sep/0002-infiniband-Fix-__read_overflow2-error-with-O3-inlini.patch"
         "https://raw.githubusercontent.com/sirlucjan/kernel-patches/master/5.5/fixes-miscellaneous-v6-sep/0005-kbuild-reuse-intermediate-linker-scripts-in-the-fina.patch"
