@@ -262,7 +262,6 @@ sha256sums=('a6fbd4ee903c128367892c2393ee0d9657b6ed3ea90016d4dc6f1f6da20b2330'
             'SKIP'
             'SKIP'
             'SKIP'
-            'SKIP'
             'SKIP')
 prepare() {
   cd "${srcdir}/linux-${_basekernel}"
